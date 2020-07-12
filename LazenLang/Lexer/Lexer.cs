@@ -6,5 +6,6 @@ namespace LazenLang.Lexer
 {
     class Lexer
     {
+
     }
 }
