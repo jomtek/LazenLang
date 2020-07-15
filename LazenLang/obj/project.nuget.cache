@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "77V9ySLSJPxBjVgYDypxqsDzZ643kILtun9jU1pVqMI0mI4YkZNqVimOYueA9/rHUpXu0HqiCigsulEt5DrUXw==",
+  "dgSpecHash": "HbYWLSp2qEUtHTK+tVJwBe2MyYiycfTyN51L9CQiYsfZrSWD2kSUppboxZgRvAf/lRxNUS8mKeG6M3zszOFAog==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mryak\\source\\repos\\LazenLang\\LazenLang\\LazenLang.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\jomtek360\\Documents\\LazenLang\\LazenLang\\LazenLang.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jomtek360\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
   "logs": []
 }
