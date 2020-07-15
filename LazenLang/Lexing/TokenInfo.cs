@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 
-namespace LazenLang.Lexer
+namespace LazenLang.Lexing
 {
-    public class TokenInfo
+    class TokenInfo
     {
         public enum TokenType
         {
@@ -23,11 +23,14 @@ namespace LazenLang.Lexer
             // Other
             SINGLE_LINE_COMMENT,
             MULTI_LINE_COMMENT,
+            SPACE, TAB,
             OTHER
         }
 
         public static List<(string, TokenType)> RegexTable = new List<(string, TokenType)>()
         {
+            (@"^ ",                                   TokenType.SPACE),
+            (@"^\t",                                  TokenType.TAB),
             (@"^\/\/(.*)",                            TokenType.SINGLE_LINE_COMMENT),
             (@"^\/\*((((?!\/\*)(?!\*\/).)|\n)*)\*\/", TokenType.MULTI_LINE_COMMENT),
             (@"^\n",                                  TokenType.EOL),

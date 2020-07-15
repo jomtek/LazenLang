@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Parser\Consumers\" />
-    <Folder Include="Parser\Ast\" />
-    <Folder Include="Typechecker\" />
+    <Folder Include="Parsing\Consumers\" />
+    <Folder Include="Parsing\Ast\" />
+    <Folder Include="Typechecking\" />
   </ItemGroup>
 
 </Project>

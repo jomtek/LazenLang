@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\jomtek360\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\jomtek360\\.nuget\\packages"
+    ]
+  }
+}

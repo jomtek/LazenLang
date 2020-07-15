@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace LazenLang.Lexer
+namespace LazenLang.Lexing
 {
     struct CodePosition
     {
@@ -20,14 +20,25 @@ namespace LazenLang.Lexer
     class Token
     {
         public string Value { get; set;  }
-        public TokenType Type { get; set; }
+        public TokenInfo.TokenType Type { get; set; }
         public CodePosition Pos { get; set; }
 
-        public Token(string value, TokenType type, CodePosition pos)
+        public Token(string value, TokenInfo.TokenType type, CodePosition pos)
         {
             Value = value;
             Type = type;
             Pos = pos;
+        }
+
+        public override string ToString()
+        {
+            if (Type != TokenInfo.TokenType.EOL)
+            {
+                return $"{Type} - {Pos.Line}: {Pos.Column} - value: {Value}";
+            } else
+            {
+                return "EOL";
+            }
         }
     }
 }
