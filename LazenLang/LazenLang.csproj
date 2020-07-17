@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Parsing\Consumers\" />
-    <Folder Include="Parsing\Ast\" />
+    <Compile Remove="Parsing\Consumers\**" />
+    <EmbeddedResource Remove="Parsing\Consumers\**" />
+    <None Remove="Parsing\Consumers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Typechecking\" />
   </ItemGroup>
 
