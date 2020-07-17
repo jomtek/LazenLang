@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
-namespace LazenLang.Parser
+namespace LazenLang.Parsing
 {
     interface ParseErrorContent { }
 

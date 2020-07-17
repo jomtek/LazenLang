@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Parsing\Ast\Statements\" />
     <Folder Include="Typechecking\" />
   </ItemGroup>
 

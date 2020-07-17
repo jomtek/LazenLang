@@ -5,18 +5,18 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast
 {
-    struct InstrNode
+    struct ExprNode
     {
-        public Instr Instruction;
+        public Expr Expression;
         public CodePosition Position;
 
-        public InstrNode(Instr instruction, CodePosition position)
+        public ExprNode(Expr expression, CodePosition position)
         {
-            Instruction = instruction;
+            Expression = expression;
             Position = position;
         }
     }
 
-    abstract class Instr
-    {}
+    abstract class Expr
+    { }
 }
