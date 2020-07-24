@@ -2,20 +2,20 @@
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class StringLit : Literal
+    class Identifier : Literal
     {
         public string Value;
-        
-        public StringLit(string value)
+
+        public Identifier(string value)
         {
             Value = value;
         }
 
         public ExprNode Consume(Parser parser)
         {
-            string literal = parser.Eat(TokenInfo.TokenType.STRING_LIT).Value;
+            string literal = parser.Eat(TokenInfo.TokenType.IDENTIFIER).Value;
             return new ExprNode(
-                new StringLit(literal),
+                new Identifier(literal),
                 parser.cursor
             );
         }
