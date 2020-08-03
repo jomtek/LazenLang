@@ -17,7 +17,16 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
         public new static DoubleLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.DOUBLE_LIT).Value;
-            return new DoubleLit(Convert.ToDouble(literal));
+            try
+            {
+                return new DoubleLit(Convert.ToDouble(literal));
+            } catch (FormatException)
+            {
+                throw new ParserError(
+                    new InvalidDoubleLit(literal),
+                    parser.cursor
+                );
+            }
         }
 
         public new string ToString()

@@ -11,15 +11,6 @@ namespace LazenLang.Parsing
     interface ParserErrorContent { }
 
     // "Parser class" exceptions
-    struct InvalidCharLit : ParserErrorContent
-    {
-        public string Literal { get; }
-        public InvalidCharLit(string literal)
-        {
-            Literal = literal;
-        }
-    }
-
     struct FailedEatToken : ParserErrorContent
     {
         public TokenInfo.TokenType TokenType { get; }
@@ -38,10 +29,28 @@ namespace LazenLang.Parsing
     // "Real" exceptions
     struct UnexpectedTokenException : ParserErrorContent
     {
-        public TokenInfo.TokenType TokenType { get;  }
+        public TokenInfo.TokenType TokenType { get; }
         public UnexpectedTokenException(TokenInfo.TokenType tokenType)
         {
             TokenType = tokenType;
+        }
+    }
+
+    struct InvalidDoubleLit : ParserErrorContent
+    {
+        public string Value { get; }
+        public InvalidDoubleLit(string value)
+        {
+            Value = value;
+        }
+    }
+
+    struct InvalidCharLit : ParserErrorContent
+    {
+        public string Value { get; }
+        public InvalidCharLit(string value)
+        {
+            Value = value;
         }
     }
 
@@ -59,8 +68,7 @@ namespace LazenLang.Parsing
 
         public bool IsErrorFromParserClass()
         {
-            return Content is InvalidCharLit ||
-                   Content is FailedEatToken ||
+            return Content is FailedEatToken ||
                    Content is NoTokenLeft ||
                    Content is FailedConsumer;
         }
