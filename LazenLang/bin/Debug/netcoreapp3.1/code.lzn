@@ -1,3 +1,1 @@
-func main() {
-	println("coucou")
-}
+"a" + 851 * "c"

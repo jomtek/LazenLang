@@ -11,13 +11,15 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public static StringLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.STRING_LIT).Value;
-            return new ExprNode(
-                new StringLit(literal),
-                parser.cursor
-            );
+            return new StringLit(literal);
+        }
+
+        public new string ToString()
+        {
+            return $"StringLit(\"{Value}\")";
         }
     }
 }

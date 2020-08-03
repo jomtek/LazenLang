@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
+using LazenLang.Parsing.Ast;
 
 namespace LazenLang
 {
@@ -16,6 +17,8 @@ namespace LazenLang
                                                
             foreach (Token token in tokens)
                 Console.WriteLine(token.ToString());
+
+            ExprNode.ParseBinOpSeq(parser);
         }
     }
 }

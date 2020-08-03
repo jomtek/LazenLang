@@ -14,13 +14,15 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public new static DoubleLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.DOUBLE_LIT).Value;
-            return new ExprNode(
-                new DoubleLit(Convert.ToDouble(literal)),
-                parser.cursor
-            );
+            return new DoubleLit(Convert.ToDouble(literal));
+        }
+
+        public new string ToString()
+        {
+            return $"DoubleLit({Value})"; 
         }
     }
 }

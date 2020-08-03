@@ -14,13 +14,16 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public new static BooleanLit Consume(Parser parser)
         {
             string value = parser.Eat(TokenInfo.TokenType.BOOLEAN_LIT).Value;
-            return new ExprNode(
-                new BooleanLit(Convert.ToBoolean(value)),
-                parser.cursor
-            );
+            return new BooleanLit(Convert.ToBoolean(value));
+        }
+
+        public new string ToString()
+        {
+            string literal = Value ? "true" : "false";
+            return $"BooleanLit({literal})";
         }
     }
 }

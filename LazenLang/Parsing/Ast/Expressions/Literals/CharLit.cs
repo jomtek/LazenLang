@@ -14,17 +14,19 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public new static CharLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.CHAR_LIT).Value;
 
             if (literal.Length != 1)
                 throw new ParserError(new InvalidCharLit(literal), parser.cursor);
 
-            return new ExprNode(
-                new CharLit(literal[0]),
-                parser.cursor
-            );
+            return new CharLit(literal[0]);
+        }
+
+        public new string ToString()
+        {
+            return $"CharLit('{Value}')";
         }
     }
 }

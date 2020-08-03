@@ -12,13 +12,15 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public new static IntegerLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.INTEGER_LIT).Value;
-            return new ExprNode(
-                new IntegerLit(Convert.ToInt32(literal)),
-                parser.cursor
-            );
+            return new IntegerLit(Convert.ToInt32(literal));
+        }
+
+        public new string ToString()
+        {
+            return $"IntegerLit({Value})";
         }
     }
 }

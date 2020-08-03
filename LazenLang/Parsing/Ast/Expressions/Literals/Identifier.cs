@@ -11,13 +11,15 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public ExprNode Consume(Parser parser)
+        public new static Identifier Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.IDENTIFIER).Value;
-            return new ExprNode(
-                new Identifier(literal),
-                parser.cursor
-            );
+            return new Identifier(literal);
+        }
+
+        public new string ToString()
+        {
+            return $"Identifier(`{Value}`)";
         }
     }
 }

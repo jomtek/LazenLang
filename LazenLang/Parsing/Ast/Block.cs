@@ -13,7 +13,7 @@ namespace LazenLang.Parsing.Ast
             this.instructions = instructions;
         }
 
-        public static Block consume(Parser parser)
+        public static Block Consume(Parser parser)
         {
             var instructions = new List<Instr>();
 

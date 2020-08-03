@@ -1,15 +1,17 @@
 ﻿using LazenLang.Lexing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace LazenLang.Parsing
 {
-    interface ParseErrorContent { }
+    interface ParserErrorContent { }
 
-    struct InvalidCharLit : ParseErrorContent
+    // "Parser class" exceptions
+    struct InvalidCharLit : ParserErrorContent
     {
         public string Literal { get; }
         public InvalidCharLit(string literal)
@@ -18,27 +20,49 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct FailedEatToken : ParseErrorContent
+    struct FailedEatToken : ParserErrorContent
     {
         public TokenInfo.TokenType TokenType { get; }
-        public FailedEatToken(TokenInfo.TokenType token)
+        public FailedEatToken(TokenInfo.TokenType tokenType)
         {
-            TokenType = token;
+            TokenType = tokenType;
         }
     }
 
-    struct NoTokenLeft : ParseErrorContent
+    struct FailedConsumer : ParserErrorContent
     {}
 
+    struct NoTokenLeft : ParserErrorContent
+    {}
+
+    // "Real" exceptions
+    struct UnexpectedTokenException : ParserErrorContent
+    {
+        public TokenInfo.TokenType TokenType { get;  }
+        public UnexpectedTokenException(TokenInfo.TokenType tokenType)
+        {
+            TokenType = tokenType;
+        }
+    }
+
+    // ---
     class ParserError : Exception
     {
-        public ParseErrorContent Content;
+        public ParserErrorContent Content;
         public CodePosition Position;
 
-        public ParserError(ParseErrorContent content, CodePosition position)
+        public ParserError(ParserErrorContent content, CodePosition position)
         {
             Content = content;
             Position = position;
+        }
+
+        public bool IsErrorFromParserClass()
+        {
+            return Content is InvalidCharLit ||
+                   Content is FailedEatToken ||
+                   Content is NoTokenLeft ||
+                   Content is FailedConsumer;
         }
     }
 
@@ -53,17 +77,11 @@ namespace LazenLang.Parsing
             cursor = new CodePosition(0, 0);
         }
 
-        public bool IsErrorFromParserClass(ParserError error)
-        {
-            ParseErrorContent content = error.Content;
-            return content is InvalidCharLit ||
-                   content is FailedEatToken ||
-                   content is NoTokenLeft;
-        }
-
         public Token Eat(TokenInfo.TokenType tokenType)
         {
-            var oldTokens = tokens;
+            var oldTokens = new Token[tokens.Count];
+            tokens.CopyTo(oldTokens);
+
             Token token;
 
             try
@@ -72,10 +90,10 @@ namespace LazenLang.Parsing
                 tokens.RemoveAt(0);
                 if (tokens.Count > 0)
                     cursor = tokens[0].Pos;
-            } catch (IndexOutOfRangeException)
+            } catch (ArgumentOutOfRangeException)
             {
-                tokens = oldTokens;
-                throw new ParserError(new NoTokenLeft(), new CodePosition(-1, -1));
+                tokens = oldTokens.ToList();
+                throw new ParserError(new NoTokenLeft(), cursor);
             }
 
             if (token.Type == tokenType)
@@ -83,7 +101,7 @@ namespace LazenLang.Parsing
                 return token;
             } else
             {
-                tokens = oldTokens;
+                tokens = oldTokens.ToList();
                 throw new ParserError(new FailedEatToken(token.Type), token.Pos);
             }
         }
@@ -108,14 +126,15 @@ namespace LazenLang.Parsing
 
         public T TryConsumer<T>(Func<Parser, T> consumer, Parser parser)
         {
-            List<Token> oldTokens = parser.tokens;
+            var oldTokens = new Token[tokens.Count];
+            tokens.CopyTo(oldTokens);
 
             try
             {
                 return consumer(parser);
             } catch (ParserError ex)
             {
-                parser.tokens = oldTokens;
+                parser.tokens = oldTokens.ToList();
                 throw ex;
             }
         }
@@ -124,6 +143,7 @@ namespace LazenLang.Parsing
         {
             ParserError lastError = null;
 
+
             foreach (var consumer in consumers)
             {
                 try
@@ -131,10 +151,14 @@ namespace LazenLang.Parsing
                     return TryConsumer(consumer, parser);
                 } catch (ParserError ex)
                 {
-                    if (IsErrorFromParserClass(ex))
+                    if (ex.IsErrorFromParserClass())
+                    {
                         lastError = ex;
+                    }
                     else
+                    {
                         throw ex;
+                    }
                 }
             }
 
