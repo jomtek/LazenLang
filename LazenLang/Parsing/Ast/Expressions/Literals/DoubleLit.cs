@@ -1,6 +1,7 @@
 ﻿using LazenLang.Lexing;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
@@ -19,8 +20,8 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             string literal = parser.Eat(TokenInfo.TokenType.DOUBLE_LIT).Value;
             try
             {
-                return new DoubleLit(Convert.ToDouble(literal));
-            } catch (FormatException)
+                return new DoubleLit(Double.Parse(literal, CultureInfo.InvariantCulture));
+            } catch (FormatException ex)
             {
                 throw new ParserError(
                     new InvalidDoubleLit(literal),

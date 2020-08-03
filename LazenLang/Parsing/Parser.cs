@@ -36,6 +36,15 @@ namespace LazenLang.Parsing
         }
     }
 
+    struct ExpectedTokenException : ParserErrorContent
+    {
+        public TokenInfo.TokenType TokenType { get; }
+        public ExpectedTokenException(TokenInfo.TokenType tokenType)
+        {
+            TokenType = tokenType;
+        }
+    }
+
     struct InvalidDoubleLit : ParserErrorContent
     {
         public string Value { get; }
