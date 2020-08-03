@@ -88,6 +88,24 @@ namespace LazenLang.Parsing
             }
         }
 
+        public Token TryManyEats(TokenInfo.TokenType[] tokenTypes)
+        {
+            ParserError lastError = null;
+
+            foreach (TokenInfo.TokenType tokType in tokenTypes)
+            {
+                try
+                {
+                    return Eat(tokType);
+                } catch (ParserError ex)
+                {
+                    lastError = ex;
+                }
+            }
+
+            throw lastError;
+        }
+
         public T TryConsumer<T>(Func<Parser, T> consumer, Parser parser)
         {
             List<Token> oldTokens = parser.tokens;

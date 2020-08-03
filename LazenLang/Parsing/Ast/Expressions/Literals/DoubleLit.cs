@@ -17,7 +17,6 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
         public ExprNode Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.DOUBLE_LIT).Value;
-
             return new ExprNode(
                 new DoubleLit(Convert.ToDouble(literal)),
                 parser.cursor
