@@ -77,6 +77,8 @@ namespace LazenLang.Parsing.Ast
             return parser.TryManyConsumers(
                 new Func<Parser, ExprNode>[]{
                     Literal.Consume,
+                    NegExpr.Consume,
+                    NegNum.Consume,
                     ParseParenthesisExpr
                 }
             );

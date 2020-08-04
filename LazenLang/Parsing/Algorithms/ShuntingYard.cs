@@ -11,7 +11,6 @@ namespace LazenLang.Parsing.Algorithms
 {
     class ShuntingYard
     {
-
         private static void FoldLastOperands(ref List<Expr> operands, Token op)
         {
             Expr leftOperand = operands[operands.Count - 2];
@@ -26,11 +25,6 @@ namespace LazenLang.Parsing.Algorithms
 
         public static InfixOp Go(List<Expr> operands, List<Token> operators)
         {
-            foreach (Expr operand in operands)
-                Console.WriteLine("operand : " + operand.ToString());
-            foreach (Token op in operators)
-                Console.WriteLine("operator : " + op.Value);
-
             var operatorPrecedences = new Dictionary<TokenInfo.TokenType, int>()
             {
                 [TokenInfo.TokenType.DOT] = 7,
@@ -100,11 +94,6 @@ namespace LazenLang.Parsing.Algorithms
             foreach (Token op in opStack)
             {
                 FoldLastOperands(ref operandStack, op);
-            }
-
-            foreach (Expr operand in operandStack)
-            {
-                Console.WriteLine("a: " + operand.Pretty());
             }
 
             return (InfixOp)operandStack[0];

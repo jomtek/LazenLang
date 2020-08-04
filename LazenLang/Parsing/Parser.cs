@@ -45,6 +45,15 @@ namespace LazenLang.Parsing
         }
     }
 
+    struct ExpectedElementException : IParserErrorContent
+    {
+        public string Message { get; }
+        public ExpectedElementException(string message)
+        {
+            Message = message;
+        }
+    }
+
     struct InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }
@@ -86,7 +95,8 @@ namespace LazenLang.Parsing
     class Parser
     {
         public List<Token> Tokens { get; set; }
-        public CodePosition Cursor;
+        public Token LastTokenEaten { get; set; }
+        public CodePosition Cursor { get; set; }
 
         public Parser(List<Token> tokens)
         {
@@ -115,6 +125,7 @@ namespace LazenLang.Parsing
 
             if (token.Type == tokenType)
             {
+                LastTokenEaten = token;
                 return token;
             } else
             {
