@@ -4,6 +4,7 @@ using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
 using LazenLang.Parsing.Ast;
+using LazenLang.Parsing.Ast.Statements;
 
 namespace LazenLang
 {
@@ -15,8 +16,8 @@ namespace LazenLang
             List<Token> tokens = new Lexer(code).tokens;
             Parser parser = new Parser(tokens);
 
-            ExprNode expr = ExprNode.Consume(parser);
-            Console.WriteLine(expr.Pretty());
+            Block topLevel = Block.Consume(parser, false);
+            
         }
     }
 }

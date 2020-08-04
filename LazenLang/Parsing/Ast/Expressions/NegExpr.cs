@@ -14,7 +14,7 @@ namespace LazenLang.Parsing.Ast.Expressions
             Value = value;
         }
 
-        public static ExprNode Consume(Parser parser)
+        public static Expr Consume(Parser parser)
         {
             parser.Eat(TokenInfo.TokenType.NEG);
 
@@ -31,10 +31,7 @@ namespace LazenLang.Parsing.Ast.Expressions
                 );
             }
 
-            return new ExprNode(
-                new NegExpr(expression.Value),
-                parser.Cursor
-            );
+            return new NegExpr(expression.Value);
         }
 
         public override string Pretty()

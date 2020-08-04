@@ -5,7 +5,6 @@ using LazenLang.Parsing.Ast.Expressions.Literals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LazenLang.Parsing.Ast
 {
@@ -48,10 +47,10 @@ namespace LazenLang.Parsing.Ast
             Position = position;
         }
 
-        private static ExprNode ParseParenthesisExpr(Parser parser)
+        private static Expr ParseParenthesisExpr(Parser parser)
         {
             Token leftParenthesis = parser.Eat(TokenInfo.TokenType.L_PAREN);
-            ExprNode expr = parser.TryConsumer(Consume);
+            Expr expr = parser.TryConsumer(Consume).Value;
             
             try
             {
@@ -72,10 +71,10 @@ namespace LazenLang.Parsing.Ast
             return parser.TryManyEats(operators);
         }
 
-        private static ExprNode ParseOperand(Parser parser)
+        private static Expr ParseOperand(Parser parser)
         {
             return parser.TryManyConsumers(
-                new Func<Parser, ExprNode>[]{
+                new Func<Parser, Expr>[]{
                     Literal.Consume,
                     NegExpr.Consume,
                     NegNum.Consume,
@@ -93,7 +92,7 @@ namespace LazenLang.Parsing.Ast
             {
                 try
                 {
-                    operands.Add(ParseOperand(parser).Value);
+                    operands.Add(ParseOperand(parser));
                     if (uniOpPrivilege) break;
                     operators.Add(ParseOperator(parser));
                 } catch (ParserError ex)

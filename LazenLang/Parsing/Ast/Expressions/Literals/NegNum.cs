@@ -1,8 +1,5 @@
 ﻿using LazenLang.Lexing;
-using System;
 using System.Collections.Generic;
-using System.Security.Principal;
-using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
@@ -15,11 +12,13 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             Value = value;
         }
 
-        public static ExprNode Consume(Parser parser)
+        public static Expr Consume(Parser parser)
         {
             var blockedBeforeNegSymbol = new List<TokenInfo.TokenType>()
             {
                 TokenInfo.TokenType.IDENTIFIER,
+                TokenInfo.TokenType.MINUS,
+                TokenInfo.TokenType.PLUS,
                 TokenInfo.TokenType.R_BRACKET,
                 TokenInfo.TokenType.R_PAREN,
                 TokenInfo.TokenType.INTEGER_LIT,
@@ -49,13 +48,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             }
 
             if (prefix.Type == TokenInfo.TokenType.MINUS)
-                return new ExprNode(
-                    new NegExpr(expression), parser.Cursor
-                );
+                return new NegExpr(expression);
             else
-                return new ExprNode(
-                    expression, parser.Cursor
-                );
+                return expression;
         }
     }
 }

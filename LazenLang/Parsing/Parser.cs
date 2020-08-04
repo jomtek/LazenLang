@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace LazenLang.Parsing
 {
@@ -54,6 +51,9 @@ namespace LazenLang.Parsing
         }
     }
 
+    struct MysticalLineException : IParserErrorContent
+    {}
+
     struct InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }
@@ -91,7 +91,7 @@ namespace LazenLang.Parsing
                    Content is FailedConsumer;
         }
     }
-
+    
     class Parser
     {
         public List<Token> Tokens { get; set; }
@@ -103,6 +103,9 @@ namespace LazenLang.Parsing
             this.Tokens = tokens;
             Cursor = new CodePosition(0, 0);
         }
+
+        public static Func<Parser, Token> CurryEat(TokenInfo.TokenType tokenType) =>
+            (Parser p) => p.Eat(tokenType);
 
         public Token Eat(TokenInfo.TokenType tokenType)
         {

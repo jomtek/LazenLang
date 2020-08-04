@@ -1,22 +1,36 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Ast.Statements;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast
 {
-    struct InstrNode
+    abstract class Instr
     {
-        public Instr Instruction;
+        public virtual string Pretty()
+        {
+            return "Instr";
+        }
+    }
+
+    class InstrNode
+    {
+        public Instr Value;
         public CodePosition Position;
 
         public InstrNode(Instr instruction, CodePosition position)
         {
-            Instruction = instruction;
+            Value = instruction;
             Position = position;
         }
-    }
 
-    abstract class Instr
-    {}
+        public static Instr Consume(Parser parser)
+        {
+            return parser.TryManyConsumers(new Func<Parser, Instr>[]
+            {
+                ExprInstr.Consume
+            });
+        }
+    }
 }
