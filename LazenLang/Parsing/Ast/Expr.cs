@@ -10,14 +10,20 @@ using System.Text;
 namespace LazenLang.Parsing.Ast
 {
 
-    abstract class Expr { }
+    abstract class Expr
+    {
+        public virtual string Pretty()
+        {
+            return "Expr";
+        }
+    }
 
     class ExprNode
     {
         public Expr Value;
         public CodePosition Position;
 
-        private static TokenInfo.TokenType[] operators = {
+        private readonly static TokenInfo.TokenType[] operators = {
             TokenInfo.TokenType.EQ,
             TokenInfo.TokenType.NOT_EQ,
             TokenInfo.TokenType.BOOLEAN_AND,
@@ -45,7 +51,7 @@ namespace LazenLang.Parsing.Ast
         private static ExprNode ParseParenthesisExpr(Parser parser)
         {
             Token leftParenthesis = parser.Eat(TokenInfo.TokenType.L_PAREN);
-            ExprNode expr = parser.TryConsumer(Consume, parser);
+            ExprNode expr = parser.TryConsumer(Consume);
             
             try
             {
@@ -54,7 +60,7 @@ namespace LazenLang.Parsing.Ast
             {
                 throw new ParserError(
                     new ExpectedTokenException(TokenInfo.TokenType.R_PAREN),
-                    parser.cursor
+                    parser.Cursor
                 );
             }
 
@@ -72,16 +78,14 @@ namespace LazenLang.Parsing.Ast
                 new Func<Parser, ExprNode>[]{
                     Literal.Consume,
                     ParseParenthesisExpr
-                }, 
-                parser
+                }
             );
         }
 
-        public static Expr ParseBinOpSeq(Parser parser, bool uniOpPrivilege = false)
+        private static Expr ParseBinOpSeq(Parser parser, bool uniOpPrivilege = false)
         {
             var operands = new List<Expr>();
             var operators = new List<Token>();
-            CodePosition oldCursor = parser.cursor;
 
             while (true)
             {
@@ -102,7 +106,7 @@ namespace LazenLang.Parsing.Ast
             if (operands.Count == 0)
             {
                 throw new ParserError(
-                    new FailedConsumer(), parser.cursor
+                    new FailedConsumer(), parser.Cursor
                 );
             }
             else if (operators.Count > operands.Count - 1)
@@ -117,22 +121,21 @@ namespace LazenLang.Parsing.Ast
                 return operands[0];
             }
 
-            InfixOp parsedExpr = ShuntingYard.Go(operands, operators);
-
-            /*foreach (Expr operand in operands)
-            {
-                Console.WriteLine(operand.ToString());
-            }*/
-
-            
-
-            throw new NotImplementedException();
+            return ShuntingYard.Go(operands, operators);
         }
 
         public static ExprNode Consume(Parser parser)
         {
+            CodePosition oldCursor = parser.Cursor;
+            return new ExprNode(
+                parser.TryConsumer((Parser p) => ParseBinOpSeq(p)),
+                oldCursor
+            );
+        }
 
-            throw new NotImplementedException();
+        public string Pretty()
+        {
+            return $"ExprNode(value: {Value.Pretty()}, pos: {Position.Pretty()})";
         }
     }
 }

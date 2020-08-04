@@ -17,7 +17,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new Identifier(literal);
         }
 
-        public new string ToString()
+        public override string Pretty()
         {
             return $"Identifier(`{Value}`)";
         }

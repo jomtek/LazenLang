@@ -15,6 +15,11 @@ namespace LazenLang.Lexing
             Line = line;
             Column = column;
         }
+
+        public string Pretty()
+        {
+            return $"line: {Line}, column: {Column}";
+        }
     }
 
     class Token

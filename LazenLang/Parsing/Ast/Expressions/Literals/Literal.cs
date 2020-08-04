@@ -16,12 +16,11 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
                     Identifier.Consume,
                     IntegerLit.Consume,
                     StringLit.Consume
-                },
-                parser
+                }
             );
 
             return new ExprNode(
-                literal, parser.cursor
+                literal, parser.Cursor
             );
         }
     }

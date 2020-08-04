@@ -20,7 +20,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new BooleanLit(Convert.ToBoolean(value));
         }
 
-        public new string ToString()
+        public override string Pretty()
         {
             string literal = Value ? "true" : "false";
             return $"BooleanLit({literal})";

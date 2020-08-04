@@ -18,7 +18,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new IntegerLit(Convert.ToInt32(literal));
         }
 
-        public new string ToString()
+        public override string Pretty()
         {
             return $"IntegerLit({Value})";
         }

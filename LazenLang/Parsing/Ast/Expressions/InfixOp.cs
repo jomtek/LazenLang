@@ -17,5 +17,10 @@ namespace LazenLang.Parsing.Ast.Expressions
             RightOperand = rightOperand;
             Operator = op;
         }
+
+        public override string Pretty()
+        {
+            return $"InfixOp({Operator.Type}, {LeftOperand.Pretty()}, {RightOperand.Pretty()})"; 
+        }
     }
 }

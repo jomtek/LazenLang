@@ -21,16 +21,16 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             try
             {
                 return new DoubleLit(Double.Parse(literal, CultureInfo.InvariantCulture));
-            } catch (FormatException ex)
+            } catch (FormatException)
             {
                 throw new ParserError(
                     new InvalidDoubleLit(literal),
-                    parser.cursor
+                    parser.Cursor
                 );
             }
         }
 
-        public new string ToString()
+        public override string Pretty()
         {
             return $"DoubleLit({Value})"; 
         }
