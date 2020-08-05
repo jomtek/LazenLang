@@ -25,6 +25,18 @@ namespace LazenLang.Parsing.Ast
             Position = position;
         }
 
+        public static string PrettyMultiple(Instr[] instructions)
+        {
+            string result = "";
+            for (int i = 0; i < instructions.Length; i++)
+            {
+                Instr instr = instructions[i];
+                result += instr.Pretty();
+                if (i < instructions.Length - 1) result += ", ";
+            }
+            return result;
+        }
+
         public static Instr Consume(Parser parser)
         {
             return parser.TryManyConsumers(new Func<Parser, Instr>[]

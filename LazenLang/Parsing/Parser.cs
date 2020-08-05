@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace LazenLang.Parsing
 {
@@ -51,6 +52,15 @@ namespace LazenLang.Parsing
         }
     }
 
+    struct InvalidElementException : IParserErrorContent
+    {
+        public string Message { get; }
+        public InvalidElementException(string message)
+        {
+            Message = message;
+        }
+    }
+
     struct MysticalLineException : IParserErrorContent
     {}
 
@@ -84,10 +94,9 @@ namespace LazenLang.Parsing
             Position = position;
         }
 
-        public bool IsErrorFromParserClass()
+        public bool IsExceptionFictive()
         {
             return Content is FailedEatToken ||
-                   Content is NoTokenLeft ||
                    Content is FailedConsumer;
         }
     }
@@ -96,12 +105,22 @@ namespace LazenLang.Parsing
     {
         public List<Token> Tokens { get; set; }
         public Token LastTokenEaten { get; set; }
+        public Token ActualToken { get; set; }
         public CodePosition Cursor { get; set; }
 
         public Parser(List<Token> tokens)
         {
-            this.Tokens = tokens;
+            Tokens = tokens;
+            ActualToken = tokens[0];
             Cursor = new CodePosition(0, 0);
+        }
+
+        public void SetActualToken()
+        {
+            if (Tokens.Count == 0)
+                return;
+            ActualToken = Tokens[0];
+            Cursor = Tokens[0].Pos;
         }
 
         public static Func<Parser, Token> CurryEat(TokenInfo.TokenType tokenType) =>
@@ -109,32 +128,17 @@ namespace LazenLang.Parsing
 
         public Token Eat(TokenInfo.TokenType tokenType)
         {
-            var oldTokens = new Token[Tokens.Count];
-            Tokens.CopyTo(oldTokens);
-
-            Token token;
-
-            try
-            {
-                token = Tokens[0];
-                Tokens.RemoveAt(0);
-                if (Tokens.Count > 0)
-                    Cursor = Tokens[0].Pos;
-            } catch (ArgumentOutOfRangeException)
-            {
-                Tokens = oldTokens.ToList();
+            if (Tokens.Count == 0)
                 throw new ParserError(new NoTokenLeft(), Cursor);
-            }
+            else if (ActualToken.Type != tokenType)
+                throw new ParserError(new FailedEatToken(tokenType), Cursor);
 
-            if (token.Type == tokenType)
-            {
-                LastTokenEaten = token;
-                return token;
-            } else
-            {
-                Tokens = oldTokens.ToList();
-                throw new ParserError(new FailedEatToken(token.Type), token.Pos);
-            }
+            Token token = ActualToken;
+            Tokens.RemoveAt(0);
+            SetActualToken();
+
+            LastTokenEaten = token;
+            return token;
         }
 
         public Token TryManyEats(TokenInfo.TokenType[] tokenTypes)
@@ -182,7 +186,7 @@ namespace LazenLang.Parsing
                     return TryConsumer(consumer);
                 } catch (ParserError ex)
                 {
-                    if (ex.IsErrorFromParserClass())
+                    if (ex.IsExceptionFictive())
                     {
                         lastError = ex;
                     }

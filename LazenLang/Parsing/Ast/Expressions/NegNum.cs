@@ -39,7 +39,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
                 expression = parser.TryConsumer(ExprNode.Consume).Value;
             } catch (ParserError ex)
             {
-                if (!ex.IsErrorFromParserClass())
+                if (!ex.IsExceptionFictive())
                     throw ex;
                 throw new ParserError(
                     new ExpectedElementException("Expected expression after PLUS or MINUS prefix"),

@@ -20,34 +20,35 @@ namespace LazenLang.Parsing.Ast.Statements
 
             while (true)
             {
+                //Console.WriteLine("new cycle------------");
                 Instr statement = null;
-                
+                bool eolFailed = false;
+
                 try
                 {
-                    statement = parser.TryConsumer(InstrNode.Consume);
-                } catch (ParserError ex)
+                    parser.Eat(TokenInfo.TokenType.EOL);
+                }
+                catch (ParserError)
                 {
-                    if (!ex.IsErrorFromParserClass())
-                        throw ex;
+                    eolFailed = true;
                 }
 
-                if (statement == null)
+                if (eolFailed)
                 {
                     try
                     {
-                        parser.Eat(TokenInfo.TokenType.EOL);
-                    } catch (ParserError)
+                        statement = parser.TryConsumer(InstrNode.Consume);
+                    }
+                    catch (ParserError ex)
                     {
+                        if (!(ex.Content is NoTokenLeft) && !ex.IsExceptionFictive())
+                            throw ex;
                         break;
                     }
-                } else
-                {
+
                     statements.Add(statement);
                 }
             }
-
-            foreach (Instr statement in statements)
-                Console.WriteLine(statement.Pretty());
 
             return statements.ToArray();
         }

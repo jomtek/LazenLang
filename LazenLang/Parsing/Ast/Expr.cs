@@ -68,6 +68,8 @@ namespace LazenLang.Parsing.Ast
 
         private static Token ParseOperator(Parser parser)
         {
+            if (!operators.Contains(parser.ActualToken.Type))
+                throw new ParserError(new FailedConsumer(), parser.Cursor);
             return parser.TryManyEats(operators);
         }
 
@@ -78,6 +80,7 @@ namespace LazenLang.Parsing.Ast
                     Literal.Consume,
                     NegExpr.Consume,
                     NegNum.Consume,
+                    IfInstr.Consume,
                     ParseParenthesisExpr
                 }
             );
@@ -97,14 +100,18 @@ namespace LazenLang.Parsing.Ast
                     operators.Add(ParseOperator(parser));
                 } catch (ParserError ex)
                 {
-                    if (!ex.IsErrorFromParserClass())
+                    if (!ex.IsExceptionFictive())
                         throw ex;
                     else
                         break;
                 }
             }
-      
-            if (operands.Count == 0)
+
+            if (operands.Count == 1)
+            {
+                return operands[0];
+            }
+            else if (operands.Count == 0)
             {
                 throw new ParserError(
                     new FailedConsumer(), parser.Cursor
@@ -116,10 +123,6 @@ namespace LazenLang.Parsing.Ast
                     new UnexpectedTokenException(operators.Last().Type),
                     operators.Last().Pos
                 );
-            }
-            else if (operands.Count == 1)
-            {
-                return operands[0];
             }
 
             return ShuntingYard.Go(operands, operators);

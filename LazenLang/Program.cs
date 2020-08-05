@@ -17,7 +17,10 @@ namespace LazenLang
             Parser parser = new Parser(tokens);
 
             Block topLevel = Block.Consume(parser, false);
-            
+            foreach (Instr instr in topLevel.Instructions)
+            {
+                Console.WriteLine(instr.Pretty());
+            }
         }
     }
 }
