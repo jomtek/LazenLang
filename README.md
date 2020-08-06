@@ -1,21 +1,28 @@
+
 # The Lazen Programming Language
 Lazen is an imperative, object-oriented programming language, which supports type-inference. It is meant to be "100% handmade" : it uses no lexing/parsing/compilation library.
 
 # Code examples
 **Hello world**
 
-    func main() {
-    	println("Hello, world!")
-    	0
-    }
+    class Program
+    {
+	    func main()
+	    {
+	    	println("Hello, world!")
+	    	0
+	    }
+	}
 
 **Bubblesort algorithm**
 
-    func bubbleSort<T>(list: List<T>) {
+    func bubbleSort<T>(list: List<T>) -> List<T>
+    {
     	var n = list.len()
     	for i in 0..n-1
     		for j in 0..n-i-1
-    			if arr[j] > arr[j + 1] {
+    			if arr[j] > arr[j + 1]
+    			{
     				arr[j] = arr[j + 1]
     				arr[j + 1] = arr[j]
     			}
@@ -23,7 +30,7 @@ Lazen is an imperative, object-oriented programming language, which supports typ
 
 # Project evolution
 
- - [ ] Lexing
+ - [x] Lexing
  - [ ] Parsing
  - [ ] Typechecking
  - [ ] IR code generation
