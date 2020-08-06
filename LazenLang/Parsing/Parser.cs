@@ -61,9 +61,6 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct MysticalLineException : IParserErrorContent
-    {}
-
     struct InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }
