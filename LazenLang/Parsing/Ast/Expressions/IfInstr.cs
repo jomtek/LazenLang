@@ -22,12 +22,13 @@ namespace LazenLang.Parsing.Ast.Expressions
 
         public static IfInstr Consume(Parser parser)
         {
+            parser.Eat(TokenInfo.TokenType.IF);
+
             Block mainBranch = null;
             Block elseBranch = null;
             var elifBranches = new List<IfInstr>();
 
-            parser.Eat(TokenInfo.TokenType.IF);
-            
+            #region base_condition
             Expr baseCondition;
             try
             {
@@ -40,10 +41,13 @@ namespace LazenLang.Parsing.Ast.Expressions
                     parser.Cursor
                 );
             }
+            #endregion
 
+            #region main_branch
+            Instr mainInstr;
             try
             {
-                mainBranch = parser.TryConsumer((Parser p) => Block.Consume(p));
+                mainInstr = parser.TryConsumer(InstrNode.Consume);
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -53,6 +57,13 @@ namespace LazenLang.Parsing.Ast.Expressions
                 );
             }
 
+            if (mainInstr is Block)
+                mainBranch = (Block)mainInstr;
+            else
+                mainBranch = new Block(new Instr[] { mainInstr });
+            #endregion
+
+            #region elif_branches_collect
             while (true)
             {
                 Expr condition;
@@ -93,6 +104,7 @@ namespace LazenLang.Parsing.Ast.Expressions
 
                 try
                 {
+                    // For each ELIF branch, we want a clear block instead of an instruction
                     branch = parser.TryConsumer((Parser p) => Block.Consume(p));
                 }
                 catch (ParserError ex)
@@ -107,6 +119,9 @@ namespace LazenLang.Parsing.Ast.Expressions
                 elifBranches.Add(new IfInstr(condition, branch, null));
             }
 
+            #endregion
+
+            #region else_branch
             while (true)
             {
                 try
@@ -130,9 +145,11 @@ namespace LazenLang.Parsing.Ast.Expressions
 
             if (isThereElse)
             {
+                Instr elseInstr;
+
                 try
                 {
-                    elseBranch = parser.TryConsumer((Parser p) => Block.Consume(p));
+                    elseInstr = parser.TryConsumer(InstrNode.Consume);
                 }
                 catch (ParserError ex)
                 {
@@ -143,13 +160,20 @@ namespace LazenLang.Parsing.Ast.Expressions
                     );
                 }
 
+                if (elseInstr is Block)
+                    elseBranch = (Block)elseInstr;
+                else
+                    elseBranch = new Block(new Instr[] { elseInstr });
+
                 if (elifBranches.Count > 0)
                     elifBranches[elifBranches.Count - 1].ElseBranch = elseBranch;
             }
+            #endregion
 
-
+            #region elif_else_fold
             if (elifBranches.Count > 0)
             {
+                elifBranches.Reverse();
                 for (int i = 0; i < elifBranches.Count - 1; i++)
                 {
                     IfInstr branch = elifBranches[i];
@@ -159,17 +183,9 @@ namespace LazenLang.Parsing.Ast.Expressions
 
             if (elifBranches.Count > 0)
             {
-                Console.WriteLine("else branch OK");
-                elseBranch = new Block(new Instr[] { new ExprInstr(elifBranches[0]) });
+                elseBranch = new Block(new Instr[] { new ExprInstr(elifBranches[elifBranches.Count - 1]) });
             }
-            /*Console.WriteLine("basecondition : " + baseCondition.Pretty());
-            Console.WriteLine("mainbranch (" + mainBranch.Instructions.Count().ToString() + "): ");
-            foreach (Instr x in mainBranch.Instructions)
-                Console.WriteLine(x.Pretty());
-
-            Console.WriteLine("elsebranch (" + elseBranch.Instructions.Count().ToString() + "): ");
-            foreach (Instr x in elseBranch.Instructions)
-                Console.WriteLine(x.Pretty());*/
+            #endregion
 
             return new IfInstr(baseCondition, mainBranch, elseBranch);
         }
@@ -180,10 +196,10 @@ namespace LazenLang.Parsing.Ast.Expressions
             string elseBranchPretty = "none";
 
             if (MainBranch != null)
-                mainBranchPretty = InstrNode.PrettyMultiple(MainBranch.Instructions);
+                mainBranchPretty = MainBranch.Pretty();
 
             if (ElseBranch != null)
-                elseBranchPretty = InstrNode.PrettyMultiple(ElseBranch.Instructions);
+                elseBranchPretty = ElseBranch.Pretty();
 
             return $"IfInstr(condition: {Condition.Pretty()}, main: {mainBranchPretty}, else: {elseBranchPretty})";
         }

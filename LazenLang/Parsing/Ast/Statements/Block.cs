@@ -5,7 +5,7 @@ using LazenLang.Lexing;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-    class Block
+    class Block : Instr
     {
         public Instr[] Instructions { get; set; }
 
@@ -71,6 +71,11 @@ namespace LazenLang.Parsing.Ast.Statements
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
 
             return new Block(statements);
+        }
+
+        public override string Pretty()
+        {
+            return $"Block({InstrNode.PrettyMultiple(Instructions)})";
         }
     }
 }

@@ -27,20 +27,21 @@ namespace LazenLang.Parsing.Ast
 
         public static string PrettyMultiple(Instr[] instructions)
         {
-            string result = "";
+            string result = "{";
             for (int i = 0; i < instructions.Length; i++)
             {
                 Instr instr = instructions[i];
                 result += instr.Pretty();
                 if (i < instructions.Length - 1) result += ", ";
             }
-            return result;
+            return result + "}";
         }
 
         public static Instr Consume(Parser parser)
         {
             return parser.TryManyConsumers(new Func<Parser, Instr>[]
             {
+                (Parser p) => Block.Consume(p),
                 ExprInstr.Consume
             });
         }
