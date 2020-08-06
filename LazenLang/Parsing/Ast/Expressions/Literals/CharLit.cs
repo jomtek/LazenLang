@@ -17,7 +17,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
         public new static CharLit Consume(Parser parser)
         {
             string literal = parser.Eat(TokenInfo.TokenType.CHAR_LIT).Value;
-
+            Console.WriteLine("literal : " + literal);
             if (literal.Length != 1)
                 throw new ParserError(new InvalidCharLit(literal), parser.Cursor);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
@@ -12,15 +13,25 @@ namespace LazenLang
     {
         static void Main()
         {
-            string code = File.ReadAllText("code.lzn");
+            Console.WriteLine("Compiling...");
+            
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            string code = File.ReadAllText("../../code.lzn");
             List<Token> tokens = new Lexer(code).tokens;
             Parser parser = new Parser(tokens);
 
             Block topLevel = Block.Consume(parser, false);
+
+            stopwatch.Stop();
+            
             foreach (Instr instr in topLevel.Instructions)
             {
                 Console.WriteLine(instr.Pretty());
             }
+
+            Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");
         }
     }
 }

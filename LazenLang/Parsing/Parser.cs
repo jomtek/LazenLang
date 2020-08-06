@@ -178,7 +178,6 @@ namespace LazenLang.Parsing
         {
             ParserError lastError = null;
 
-
             foreach (var consumer in consumers)
             {
                 try

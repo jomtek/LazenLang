@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -31,13 +32,22 @@ namespace LazenLang.Lexing
                     TokenInfo.TokenType tokenType = regexPair.Item2;
 
                     var regex = new Regex(regexPair.Item1);
-                    var match = regex.Match(code);
+                    Match match = regex.Match(code);
+                    int matchLength = match.Length;
+                    string matchValue = match.Value;
 
                     if (match.Success)
                     {
                         if (tokenType != TokenInfo.TokenType.SPACE && tokenType != TokenInfo.TokenType.TAB)
-                            if (GetEscapeSequence(match.Value[0]) != @"\u000D") // Because we don't need CR characters as tokens
-                                tokens.Add(new Token(match.Value.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
+                        {
+                            if (GetEscapeSequence(matchValue[0]) != @"\u000D") // Because we don't need CR characters as tokens
+                            {
+                                if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
+                                    matchValue = matchValue.Substring(1).Remove(matchLength - 2);
+
+                                tokens.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
+                            }
+                        }
 
                         if (tokenType == TokenInfo.TokenType.EOL)
                         {

@@ -1,0 +1,12 @@
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.exe
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.deps.json
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.runtimeconfig.json
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.runtimeconfig.dev.json
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\LazenLang.pdb
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.AssemblyInfoInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.AssemblyInfo.cs
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.csproj.CoreCompileInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.pdb
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.genruntimeconfig.cache
