@@ -29,7 +29,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             };
 
             if (parser.LastTokenEaten != null && blockedBeforeNegSymbol.Contains(parser.LastTokenEaten.Type))
+            {
                 throw new ParserError(new FailedConsumer(), parser.Cursor);
+            }
 
             Token prefix = parser.TryManyEats(new TokenInfo.TokenType[] { TokenInfo.TokenType.PLUS, TokenInfo.TokenType.MINUS });
          

@@ -22,7 +22,7 @@ namespace LazenLang.Lexing
 
         private void tokenize(string code)
         {
-            int colTrack = 0;
+            int colTrack = 1;
             int lineTrack = 1;
 
             while (code.Length > 0)
@@ -51,7 +51,7 @@ namespace LazenLang.Lexing
 
                         if (tokenType == TokenInfo.TokenType.EOL)
                         {
-                            colTrack = 0;
+                            colTrack = 1;
                             lineTrack++;
                         } else
                         {

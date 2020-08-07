@@ -22,13 +22,13 @@ namespace LazenLang
             List<Token> tokens = new Lexer(code).tokens;
             Parser parser = new Parser(tokens);
 
-            Block topLevel = Block.Consume(parser, false);
+            Block topLevel = Block.Consume(parser, false, true);
 
             stopwatch.Stop();
             
-            foreach (Instr instr in topLevel.Instructions)
+            foreach (InstrNode instr in topLevel.Instructions)
             {
-                Console.WriteLine(instr.Pretty());
+                Console.WriteLine(instr.Value.Pretty());
             }
 
             Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");

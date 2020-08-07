@@ -44,7 +44,7 @@ namespace LazenLang.Parsing.Ast.Expressions
             #endregion
 
             #region main_branch
-            Instr mainInstr;
+            InstrNode mainInstr;
             try
             {
                 mainInstr = parser.TryConsumer(InstrNode.Consume);
@@ -57,10 +57,10 @@ namespace LazenLang.Parsing.Ast.Expressions
                 );
             }
 
-            if (mainInstr is Block)
-                mainBranch = (Block)mainInstr;
+            if (mainInstr.Value is Block)
+                mainBranch = (Block)mainInstr.Value;
             else
-                mainBranch = new Block(new Instr[] { mainInstr });
+                mainBranch = new Block(new InstrNode[] { mainInstr });
             #endregion
 
             #region elif_branches_collect
@@ -145,7 +145,7 @@ namespace LazenLang.Parsing.Ast.Expressions
 
             if (isThereElse)
             {
-                Instr elseInstr;
+                InstrNode elseInstr;
 
                 try
                 {
@@ -160,10 +160,10 @@ namespace LazenLang.Parsing.Ast.Expressions
                     );
                 }
 
-                if (elseInstr is Block)
-                    elseBranch = (Block)elseInstr;
+                if (elseInstr.Value is Block)
+                    elseBranch = (Block)elseInstr.Value;
                 else
-                    elseBranch = new Block(new Instr[] { elseInstr });
+                    elseBranch = new Block(new InstrNode[] { elseInstr });
 
                 if (elifBranches.Count > 0)
                     elifBranches[elifBranches.Count - 1].ElseBranch = elseBranch;
@@ -177,13 +177,18 @@ namespace LazenLang.Parsing.Ast.Expressions
                 for (int i = 0; i < elifBranches.Count - 1; i++)
                 {
                     IfInstr branch = elifBranches[i];
-                    elifBranches[i + 1].ElseBranch = new Block(new Instr[] { new ExprInstr(branch) });
+                    elifBranches[i + 1].ElseBranch = new Block(new InstrNode[] {
+                        new InstrNode(new ExprInstr(branch), new CodePosition())
+                    });
                 }
             }
 
             if (elifBranches.Count > 0)
             {
-                elseBranch = new Block(new Instr[] { new ExprInstr(elifBranches[elifBranches.Count - 1]) });
+                IfInstr lastElifBranch = elifBranches[elifBranches.Count - 1];
+                elseBranch = new Block(new InstrNode[] {
+                    new InstrNode(new ExprInstr(lastElifBranch), new CodePosition())
+                });
             }
             #endregion
 

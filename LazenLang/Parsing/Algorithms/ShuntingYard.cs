@@ -58,7 +58,6 @@ namespace LazenLang.Parsing.Algorithms
                 {
                     if (operandIndex > operands.Count - 1)
                         break;
-
                     Expr operand = operands[operandIndex];
                     operandStack.Add(operand);
                     operandIndex++;

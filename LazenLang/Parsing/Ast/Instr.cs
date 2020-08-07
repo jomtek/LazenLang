@@ -1,5 +1,6 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Parsing.Ast.Statements.Loops;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,25 +26,30 @@ namespace LazenLang.Parsing.Ast
             Position = position;
         }
 
-        public static string PrettyMultiple(Instr[] instructions)
+        public static string PrettyMultiple(InstrNode[] instructions)
         {
             string result = "{";
             for (int i = 0; i < instructions.Length; i++)
             {
-                Instr instr = instructions[i];
+                Instr instr = instructions[i].Value;
                 result += instr.Pretty();
                 if (i < instructions.Length - 1) result += ", ";
             }
             return result + "}";
         }
 
-        public static Instr Consume(Parser parser)
+        public static InstrNode Consume(Parser parser)
         {
-            return parser.TryManyConsumers(new Func<Parser, Instr>[]
+            CodePosition oldCursor = parser.Cursor;
+
+            Instr instr =  parser.TryManyConsumers(new Func<Parser, Instr>[]
             {
                 (Parser p) => Block.Consume(p),
+                WhileLoop.Consume,
                 ExprInstr.Consume
             });
+
+            return new InstrNode(instr, oldCursor);
         }
     }
 }

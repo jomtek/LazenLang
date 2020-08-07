@@ -7,21 +7,21 @@ namespace LazenLang.Parsing.Ast.Statements
 {
     class Block : Instr
     {
-        public Instr[] Instructions { get; set; }
+        public InstrNode[] Instructions { get; set; }
 
-        public Block(Instr[] instructions)
+        public Block(InstrNode[] instructions)
         {
             Instructions = instructions;
         }
 
-        private static Instr[] ParseStatementSeq(Parser parser)
+        private static InstrNode[] ParseStatementSeq(Parser parser)
         {
-            var statements = new List<Instr>();
+            var statements = new List<InstrNode>();
 
             while (true)
             {
                 //Console.WriteLine("new cycle------------");
-                Instr statement = null;
+                InstrNode statement = null;
                 bool eolFailed = false;
 
                 try
@@ -53,7 +53,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true)
+        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false)
         {
             while (true)
             {
@@ -67,8 +67,16 @@ namespace LazenLang.Parsing.Ast.Statements
             }
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
-            Instr[] statements = parser.TryConsumer(ParseStatementSeq);
+            InstrNode[] statements = parser.TryConsumer(ParseStatementSeq);
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
+
+            if (topLevel && parser.Tokens.Count > 0)
+            {
+                throw new ParserError(
+                    new UnexpectedTokenException(parser.Tokens[0].Type),
+                    parser.Cursor
+                );
+            }
 
             return new Block(statements);
         }

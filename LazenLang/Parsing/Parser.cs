@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace LazenLang.Parsing
 {
-    interface IParserErrorContent { }
+    interface IParserErrorContent
+    {}
 
     // "Parser class" exceptions
     struct FailedEatToken : IParserErrorContent
@@ -94,6 +95,7 @@ namespace LazenLang.Parsing
         public bool IsExceptionFictive()
         {
             return Content is FailedEatToken ||
+                   Content is NoTokenLeft ||
                    Content is FailedConsumer;
         }
     }

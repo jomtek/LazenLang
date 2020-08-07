@@ -6,5 +6,6 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
 {
     class AttributeAccess
     {
+
     }
 }
