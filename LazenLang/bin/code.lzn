@@ -1,7 +1,10 @@
-if (baz)
+for x in lol
 {
-	break
-} else
-{
-	continue
+	if (baz)
+	{
+		break
+	} else
+	{
+		continue
+	}
 }

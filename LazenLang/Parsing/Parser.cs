@@ -125,12 +125,19 @@ namespace LazenLang.Parsing
         public static Func<Parser, Token> CurryEat(TokenInfo.TokenType tokenType) =>
             (Parser p) => p.Eat(tokenType);
 
-        public Token Eat(TokenInfo.TokenType tokenType)
+        public Token Eat(TokenInfo.TokenType tokenType, bool facultative = true)
         {
             if (ActualToken.Type != tokenType)
-                throw new ParserError(new FailedEatToken(tokenType), Cursor);
+            {
+                if (facultative)
+                    throw new ParserError(new FailedEatToken(tokenType), Cursor);
+                else
+                    throw new ParserError(new ExpectedTokenException(tokenType), Cursor);
+            }
             else if (Tokens.Count == 0)
+            {
                 throw new ParserError(new NoTokenLeft(), Cursor);
+            }
 
             Token token = ActualToken;
             Tokens.RemoveAt(0);
