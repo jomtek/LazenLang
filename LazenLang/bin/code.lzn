@@ -1,8 +1,7 @@
-a
-a
-a
-a
-a
-a
-a
-a
+if (baz)
+{
+	break
+} else
+{
+	continue
+}

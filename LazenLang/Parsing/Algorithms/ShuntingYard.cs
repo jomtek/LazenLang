@@ -58,20 +58,23 @@ namespace LazenLang.Parsing.Algorithms
                 {
                     if (operandIndex > operands.Count - 1)
                         break;
+
                     Expr operand = operands[operandIndex];
                     operandStack.Add(operand);
                     operandIndex++;
                     wasLastOperand = true;
-                } else
+                }
+                else
                 {
                     if (operatorIndex > operators.Count - 1)
                         break;
 
                     Token currentOp = operators[operatorIndex];
-                                        
+
                     if (opStack.Count > 0)
                     {
-                        var stackCopy = new Token[opStack.Count]; opStack.CopyTo(stackCopy);
+                        var stackCopy = new Token[opStack.Count];
+                        opStack.CopyTo(stackCopy);
 
                         foreach (Token op in stackCopy.Reverse())
                         {

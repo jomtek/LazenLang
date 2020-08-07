@@ -46,6 +46,8 @@ namespace LazenLang.Parsing.Ast
             {
                 (Parser p) => Block.Consume(p),
                 WhileLoop.Consume,
+                BreakInstr.Consume,
+                ContinueInstr.Consume,
                 ExprInstr.Consume
             });
 
