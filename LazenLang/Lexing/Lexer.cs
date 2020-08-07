@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace LazenLang.Lexing
@@ -12,7 +9,7 @@ namespace LazenLang.Lexing
 
         public Lexer(string code)
         {
-            tokenize(code);
+            Tokenize(code);
         }
 
         private string GetEscapeSequence(char c)
@@ -20,7 +17,7 @@ namespace LazenLang.Lexing
             return "\\u" + ((int)c).ToString("X4");
         }
 
-        private void tokenize(string code)
+        private void Tokenize(string code)
         {
             int colTrack = 1;
             int lineTrack = 1;

@@ -127,10 +127,10 @@ namespace LazenLang.Parsing
 
         public Token Eat(TokenInfo.TokenType tokenType)
         {
-            if (Tokens.Count == 0)
-                throw new ParserError(new NoTokenLeft(), Cursor);
-            else if (ActualToken.Type != tokenType)
+            if (ActualToken.Type != tokenType)
                 throw new ParserError(new FailedEatToken(tokenType), Cursor);
+            else if (Tokens.Count == 0)
+                throw new ParserError(new NoTokenLeft(), Cursor);
 
             Token token = ActualToken;
             Tokens.RemoveAt(0);

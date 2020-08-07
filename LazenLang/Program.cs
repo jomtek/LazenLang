@@ -22,7 +22,15 @@ namespace LazenLang
             List<Token> tokens = new Lexer(code).tokens;
             Parser parser = new Parser(tokens);
 
-            Block topLevel = Block.Consume(parser, false, true);
+            Block topLevel;
+            try
+            {
+                topLevel = Block.Consume(parser, false, true);
+            } catch (ParserError ex)
+            {
+                Console.WriteLine("parsing: " + ex.Content.ToString().LastIndexOf('.'));
+                return;
+            }
 
             stopwatch.Stop();
             

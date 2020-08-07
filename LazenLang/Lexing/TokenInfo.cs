@@ -27,7 +27,7 @@ namespace LazenLang.Lexing
             OTHER
         }
 
-        public static List<(string, TokenType)> RegexTable = new List<(string, TokenType)>()
+        public static (string, TokenType)[] RegexTable = new (string, TokenType)[]
         {
             (@"^ ",                                   TokenType.SPACE),
             (@"^\t",                                  TokenType.TAB),
