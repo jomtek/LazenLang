@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 namespace LazenLang.Parsing
 {
     interface IParserErrorContent
-    {}
+    { }
 
     // "Parser class" exceptions
-    struct FailedEatToken : IParserErrorContent
+    class FailedEatToken : IParserErrorContent
     {
         public TokenInfo.TokenType TokenType { get; }
         public FailedEatToken(TokenInfo.TokenType tokenType)
@@ -19,14 +19,14 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct FailedConsumer : IParserErrorContent
-    {}
+    class FailedConsumer : IParserErrorContent
+    { }
 
-    struct NoTokenLeft : IParserErrorContent
-    {}
+    class NoTokenLeft : IParserErrorContent
+    { }
 
     // "Real" exceptions
-    struct UnexpectedTokenException : IParserErrorContent
+    class UnexpectedTokenException : IParserErrorContent
     {
         public TokenInfo.TokenType TokenType { get; }
         public UnexpectedTokenException(TokenInfo.TokenType tokenType)
@@ -35,7 +35,7 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct ExpectedTokenException : IParserErrorContent
+    class ExpectedTokenException : IParserErrorContent
     {
         public TokenInfo.TokenType TokenType { get; }
         public ExpectedTokenException(TokenInfo.TokenType tokenType)
@@ -44,7 +44,7 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct ExpectedElementException : IParserErrorContent
+    class ExpectedElementException : IParserErrorContent
     {
         public string Message { get; }
         public ExpectedElementException(string message)
@@ -53,7 +53,7 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct InvalidElementException : IParserErrorContent
+    class InvalidElementException : IParserErrorContent
     {
         public string Message { get; }
         public InvalidElementException(string message)
@@ -62,7 +62,7 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct InvalidDoubleLit : IParserErrorContent
+    class InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }
         public InvalidDoubleLit(string value)
@@ -71,7 +71,7 @@ namespace LazenLang.Parsing
         }
     }
 
-    struct InvalidCharLit : IParserErrorContent
+    class InvalidCharLit : IParserErrorContent
     {
         public string Value { get; }
         public InvalidCharLit(string value)

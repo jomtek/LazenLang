@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using LazenLang.Lexing;
 
 namespace LazenLang.Parsing.Ast.Statements
@@ -17,10 +15,10 @@ namespace LazenLang.Parsing.Ast.Statements
         private static InstrNode[] ParseStatementSeq(Parser parser)
         {
             var statements = new List<InstrNode>();
+            bool isLastEOL = true;
 
             while (true)
             {
-                //Console.WriteLine("new cycle------------");
                 InstrNode statement = null;
                 bool eolFailed = false;
 
@@ -35,6 +33,7 @@ namespace LazenLang.Parsing.Ast.Statements
 
                 if (eolFailed)
                 {
+                    if (!isLastEOL) break;
                     try
                     {
                         statement = parser.TryConsumer(InstrNode.Consume);
@@ -47,6 +46,10 @@ namespace LazenLang.Parsing.Ast.Statements
                     }
 
                     statements.Add(statement);
+                    isLastEOL = false;
+                } else
+                {
+                    isLastEOL = true;
                 }
             }
 

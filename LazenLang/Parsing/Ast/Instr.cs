@@ -41,17 +41,34 @@ namespace LazenLang.Parsing.Ast
         public static InstrNode Consume(Parser parser)
         {
             CodePosition oldCursor = parser.Cursor;
-
-            Instr instr =  parser.TryManyConsumers(new Func<Parser, Instr>[]
+            
+            Instr instr;
+            switch (parser.ActualToken.Type)
             {
-                (Parser p) => Block.Consume(p),
-                WhileLoop.Consume,
-                ForLoop.Consume,
-                BreakInstr.Consume,
-                ContinueInstr.Consume,
-                ExprInstr.Consume
-            });
+                case TokenInfo.TokenType.EOL:
+                case TokenInfo.TokenType.L_CURLY_BRACKET:
+                    instr = parser.TryConsumer((Parser p) => Block.Consume(p));
+                    break;
+                case TokenInfo.TokenType.WHILE:
+                    instr = parser.TryConsumer(WhileLoop.Consume);
+                    break;
+                case TokenInfo.TokenType.FOR:
+                    instr = parser.TryConsumer(ForLoop.Consume);
+                    break;
+                case TokenInfo.TokenType.BREAK:
+                    instr = parser.TryConsumer(BreakInstr.Consume);
+                    break;
+                case TokenInfo.TokenType.CONTINUE:
+                    instr = parser.TryConsumer(ContinueInstr.Consume);
+                    break;
+                default:
+                    instr = parser.TryConsumer(ExprInstr.Consume);
+                    break;
+            }
 
+            if (instr == null)
+                throw new ParserError(new FailedConsumer(), parser.Cursor);
+            
             return new InstrNode(instr, oldCursor);
         }
     }

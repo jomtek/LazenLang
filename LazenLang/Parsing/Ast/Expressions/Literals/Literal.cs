@@ -1,4 +1,5 @@
 ﻿using System;
+using LazenLang.Lexing;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
@@ -6,16 +7,33 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
     {
         public static Expr Consume(Parser parser)
         {
-            return parser.TryManyConsumers(
-                new Func<Parser, Literal>[] {
-                    BooleanLit.Consume,
-                    CharLit.Consume,
-                    DoubleLit.Consume,
-                    Identifier.Consume,
-                    IntegerLit.Consume,
-                    StringLit.Consume
-                }
-            );
+            Expr expr = null;
+            switch (parser.ActualToken.Type)
+            {
+                case TokenInfo.TokenType.BOOLEAN_LIT:
+                    expr = parser.TryConsumer(BooleanLit.Consume);
+                    break;
+                case TokenInfo.TokenType.CHAR_LIT:
+                    expr = parser.TryConsumer(CharLit.Consume);
+                    break;
+                case TokenInfo.TokenType.DOUBLE_LIT:
+                    expr = parser.TryConsumer(DoubleLit.Consume);
+                    break;
+                case TokenInfo.TokenType.IDENTIFIER:
+                    expr = parser.TryConsumer(Identifier.Consume);
+                    break;
+                case TokenInfo.TokenType.INTEGER_LIT:
+                    expr = parser.TryConsumer(IntegerLit.Consume);
+                    break;
+                case TokenInfo.TokenType.STRING_LIT:
+                    expr = parser.TryConsumer(StringLit.Consume);
+                    break;
+            }
+
+            if (expr == null)
+                throw new ParserError(new FailedConsumer(), parser.Cursor);
+
+            return expr;
         }
     }
 }

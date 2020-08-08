@@ -28,7 +28,9 @@ namespace LazenLang
                 topLevel = Block.Consume(parser, false, true);
             } catch (ParserError ex)
             {
-                Console.WriteLine("parsing: " + ex.Content.ToString().LastIndexOf('.'));
+                string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
+                string prettyPrintedContent = PrettyPrinter.ParserExceptions.PrettyContent(ex.Content);
+                Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
                 return;
             }
 

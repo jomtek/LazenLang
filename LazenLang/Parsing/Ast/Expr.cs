@@ -75,15 +75,36 @@ namespace LazenLang.Parsing.Ast
 
         private static Expr ParseOperand(Parser parser)
         {
-            return parser.TryManyConsumers(
-                new Func<Parser, Expr>[]{
-                    Literal.Consume,
-                    NegExpr.Consume,
-                    NegNum.Consume,
-                    IfInstr.Consume,
-                    ParseParenthesisExpr
-                }
-            );
+            Expr operand = null;
+            switch (parser.ActualToken.Type)
+            {
+                case TokenInfo.TokenType.DOUBLE_LIT:
+                case TokenInfo.TokenType.INTEGER_LIT:
+                case TokenInfo.TokenType.STRING_LIT:
+                case TokenInfo.TokenType.CHAR_LIT:
+                case TokenInfo.TokenType.BOOLEAN_LIT:
+                case TokenInfo.TokenType.IDENTIFIER:
+                    operand = parser.TryConsumer(Literal.Consume);
+                    break;
+                case TokenInfo.TokenType.NEG:
+                    operand = parser.TryConsumer(NegExpr.Consume);
+                    break;
+                case TokenInfo.TokenType.MINUS:
+                case TokenInfo.TokenType.PLUS:
+                    operand = parser.TryConsumer(NegNum.Consume);
+                    break;
+                case TokenInfo.TokenType.IF:
+                    operand = parser.TryConsumer(IfInstr.Consume);
+                    break;
+                case TokenInfo.TokenType.L_PAREN:
+                    operand = parser.TryConsumer(ParseParenthesisExpr);
+                    break;
+            }
+
+            if (operand == null)
+                throw new ParserError(new FailedConsumer(), parser.Cursor);
+
+            return operand;
         }
 
         private static Expr ParseBinOpSeq(Parser parser, bool uniOpPrivilege = false)

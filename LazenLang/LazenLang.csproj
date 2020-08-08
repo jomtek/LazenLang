@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PrettyPrinter\" />
     <Folder Include="Typechecking\" />
   </ItemGroup>
 
