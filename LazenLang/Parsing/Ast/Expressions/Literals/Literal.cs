@@ -5,9 +5,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
     abstract class Literal : Expr
     {
-        public static Expr Consume(Parser parser)
+        public static Literal Consume(Parser parser)
         {
-            Expr expr = null;
+            Literal expr = null;
             switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.BOOLEAN_LIT:

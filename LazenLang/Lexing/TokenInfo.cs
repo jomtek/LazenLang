@@ -15,6 +15,9 @@ namespace LazenLang.Lexing
             VAR, CONST, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
             NEW, CLASS, CONSTRUCTOR, PUBLIC, PRIVATE, STEP, TRY, CATCH, THROW, INTERFACE,
 
+            // Atom types
+            BOOL, CHAR, DOUBLE, INT, STRING,
+
             // Operators
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS, PLUS, MINUS,
             DIVIDE, MULTIPLY, POWER, MODULO, NEG, GREATER_EQ, LESS_EQ, PLUS_EQ, MINUS_EQ,
@@ -95,6 +98,11 @@ namespace LazenLang.Lexing
             (@"^public(?![a-zA-Z_0-9])",              TokenType.PUBLIC),
             (@"^private(?![a-zA-Z_0-9])",             TokenType.PRIVATE),
             (@"^interface(?![a-zA-Z_0-9])",           TokenType.INTERFACE),
+            (@"^Bool(?![a-zA-Z_0-9])",                TokenType.BOOL),
+            (@"^Char(?![a-zA-Z_0-9])",                TokenType.CHAR),
+            (@"^Double(?![a-zA-Z_0-9])",              TokenType.DOUBLE),
+            (@"^Int(?![a-zA-Z_0-9])",                 TokenType.INT),
+            (@"^String(?![a-zA-Z_0-9])",              TokenType.STRING),
             (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
             (@"^.",                                   TokenType.OTHER)
         };
