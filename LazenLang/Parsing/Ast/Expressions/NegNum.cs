@@ -14,25 +14,6 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
 
         public static Expr Consume(Parser parser)
         {
-            var blockedBeforeNegSymbol = new List<TokenInfo.TokenType>()
-            {
-                TokenInfo.TokenType.IDENTIFIER,
-                TokenInfo.TokenType.MINUS,
-                TokenInfo.TokenType.PLUS,
-                TokenInfo.TokenType.R_BRACKET,
-                TokenInfo.TokenType.R_PAREN,
-                TokenInfo.TokenType.INTEGER_LIT,
-                TokenInfo.TokenType.DOUBLE_LIT,
-                TokenInfo.TokenType.STRING_LIT,
-                TokenInfo.TokenType.CHAR_LIT,
-                TokenInfo.TokenType.BOOLEAN_LIT,
-            };
-
-            if (parser.LastTokenEaten != null && blockedBeforeNegSymbol.Contains(parser.LastTokenEaten.Type))
-            {
-                throw new ParserError(new FailedConsumer(), parser.Cursor);
-            }
-
             Token prefix = parser.TryManyEats(new TokenInfo.TokenType[] { TokenInfo.TokenType.PLUS, TokenInfo.TokenType.MINUS });
          
             Expr expression;

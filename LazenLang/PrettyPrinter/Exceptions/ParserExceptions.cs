@@ -23,6 +23,8 @@ namespace LazenLang.PrettyPrinter
                     return $"'{x.Value}'";
                 case InvalidCharLit x:
                     return $"'{x.Value}'";
+                default:
+                    break;
             }
 
             throw new ArgumentException("content");

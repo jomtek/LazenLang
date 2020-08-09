@@ -73,10 +73,10 @@ namespace LazenLang.Parsing.Ast.Statements
             InstrNode[] statements = parser.TryConsumer(ParseStatementSeq);
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
 
-            if (topLevel && parser.Tokens.Count > 0)
+            if (topLevel && parser.AreTokensRemaining())
             {
                 throw new ParserError(
-                    new UnexpectedTokenException(parser.Tokens[0].Type),
+                    new UnexpectedTokenException(parser.LookAhead().Type),
                     parser.Cursor
                 );
             }

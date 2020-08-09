@@ -68,7 +68,7 @@ namespace LazenLang.Parsing.Ast
 
         private static Token ParseOperator(Parser parser)
         {
-            if (!operators.Contains(parser.ActualToken.Type))
+            if (!operators.Contains(parser.LookAhead().Type))
                 throw new ParserError(new FailedConsumer(), parser.Cursor);
             return parser.TryManyEats(operators);
         }
@@ -76,7 +76,7 @@ namespace LazenLang.Parsing.Ast
         private static Expr ParseOperand(Parser parser)
         {
             Expr operand = null;
-            switch (parser.ActualToken.Type)
+            switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.DOUBLE_LIT:
                 case TokenInfo.TokenType.INTEGER_LIT:

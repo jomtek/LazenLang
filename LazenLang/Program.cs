@@ -19,7 +19,7 @@ namespace LazenLang
             stopwatch.Start();
 
             string code = File.ReadAllText("../../code.lzn");
-            List<Token> tokens = new Lexer(code).tokens;
+            Token[] tokens = new Lexer(code).Tokens;
             Parser parser = new Parser(tokens);
 
             Block topLevel;

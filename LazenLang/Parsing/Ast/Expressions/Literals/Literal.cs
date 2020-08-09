@@ -8,7 +8,7 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
         public static Expr Consume(Parser parser)
         {
             Expr expr = null;
-            switch (parser.ActualToken.Type)
+            switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.BOOLEAN_LIT:
                     expr = parser.TryConsumer(BooleanLit.Consume);

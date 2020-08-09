@@ -5,7 +5,7 @@ namespace LazenLang.Lexing
 {
     class Lexer
     {
-        public List<Token> tokens = new List<Token>();
+        public Token[] Tokens;
 
         public Lexer(string code)
         {
@@ -19,6 +19,7 @@ namespace LazenLang.Lexing
 
         private void Tokenize(string code)
         {
+            var result = new List<Token>();
             int colTrack = 1;
             int lineTrack = 1;
 
@@ -42,7 +43,7 @@ namespace LazenLang.Lexing
                                 if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
                                     matchValue = matchValue.Substring(1).Remove(matchLength - 2);
 
-                                tokens.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
+                                result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
                             }
                         }
 
@@ -60,6 +61,8 @@ namespace LazenLang.Lexing
                     }
                 }
             }
+
+            Tokens = result.ToArray();
         }
     }
 }

@@ -102,24 +102,27 @@ namespace LazenLang.Parsing
     
     class Parser
     {
-        public List<Token> Tokens { get; set; }
-        public Token LastTokenEaten { get; set; }
-        public Token ActualToken { get; set; }
+        private Token[] Tokens { get; set; }
+        private int LookAheadIndex { get; set; }
         public CodePosition Cursor { get; set; }
 
-        public Parser(List<Token> tokens)
+        public Parser(Token[] tokens)
         {
             Tokens = tokens;
-            ActualToken = tokens[0];
+            LookAheadIndex = 0;
             Cursor = new CodePosition(0, 0);
         }
 
-        public void SetActualToken()
+        public Token LookAhead()
         {
-            if (Tokens.Count == 0)
-                return;
-            ActualToken = Tokens[0];
-            Cursor = Tokens[0].Pos;
+            if (LookAheadIndex >= Tokens.Length)
+                throw new ParserError(new NoTokenLeft(), Cursor);
+            return Tokens[LookAheadIndex];
+        }
+
+        public bool AreTokensRemaining()
+        {
+            return LookAheadIndex < Tokens.Count();
         }
 
         public static Func<Parser, Token> CurryEat(TokenInfo.TokenType tokenType) =>
@@ -127,24 +130,20 @@ namespace LazenLang.Parsing
 
         public Token Eat(TokenInfo.TokenType tokenType, bool facultative = true)
         {
-            if (ActualToken.Type != tokenType)
+            if (LookAhead().Type != tokenType)
             {
                 if (facultative)
                     throw new ParserError(new FailedEatToken(tokenType), Cursor);
                 else
                     throw new ParserError(new ExpectedTokenException(tokenType), Cursor);
             }
-            else if (Tokens.Count == 0)
+            else if (Tokens.Length == 0)
             {
                 throw new ParserError(new NoTokenLeft(), Cursor);
             }
 
-            Token token = ActualToken;
-            Tokens.RemoveAt(0);
-            SetActualToken();
-
-            LastTokenEaten = token;
-            return token;
+            LookAheadIndex++;
+            return Tokens[LookAheadIndex - 1];
         }
 
         public Token TryManyEats(TokenInfo.TokenType[] tokenTypes)
@@ -167,15 +166,14 @@ namespace LazenLang.Parsing
 
         public T TryConsumer<T>(Func<Parser, T> consumer)
         {
-            var oldTokens = new Token[Tokens.Count];
-            Tokens.CopyTo(oldTokens);
+            var oldTokens = Tokens;
 
             try
             {
                 return consumer(this);
             } catch (ParserError ex)
             {
-                Tokens = oldTokens.ToList();
+                Tokens = oldTokens;
                 throw ex;
             }
         }

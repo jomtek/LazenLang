@@ -43,7 +43,7 @@ namespace LazenLang.Parsing.Ast
             CodePosition oldCursor = parser.Cursor;
             
             Instr instr;
-            switch (parser.ActualToken.Type)
+            switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.EOL:
                 case TokenInfo.TokenType.L_CURLY_BRACKET:
