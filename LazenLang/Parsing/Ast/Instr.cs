@@ -68,6 +68,10 @@ namespace LazenLang.Parsing.Ast
                     instr = parser.TryConsumer(FuncDecl.Consume);
                     break;
 
+                case TokenInfo.TokenType.RETURN:
+                    instr = parser.TryConsumer(ReturnInstr.Consume);
+                    break;
+
                 case TokenInfo.TokenType.BREAK:
                     instr = parser.TryConsumer(BreakInstr.Consume);
                     break;

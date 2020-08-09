@@ -27,6 +27,7 @@ namespace LazenLang.PrettyPrinter
                     break;
             }
 
+            Console.WriteLine(content.GetType());
             throw new ArgumentException("content");
         }
     }

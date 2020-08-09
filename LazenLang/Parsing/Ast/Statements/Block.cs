@@ -33,7 +33,23 @@ namespace LazenLang.Parsing.Ast.Statements
 
                 if (eolFailed)
                 {
-                    if (!isLastEOL) break;
+                    if (!isLastEOL)
+                    {
+                        TokenInfo.TokenType nextTokenType;
+                        try
+                        {
+                            nextTokenType = parser.LookAhead().Type;
+                        } catch (ParserError)
+                        {
+                            break;
+                        }
+                        
+                        throw new ParserError(
+                            new UnexpectedTokenException(nextTokenType),
+                            new CodePosition(parser.Cursor.Line, parser.Cursor.Column + 1)
+                        );
+                    }
+
                     try
                     {
                         statement = parser.TryConsumer(InstrNode.Consume);
