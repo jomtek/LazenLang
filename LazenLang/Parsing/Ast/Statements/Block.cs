@@ -5,7 +5,7 @@ namespace LazenLang.Parsing.Ast.Statements
 {
     class Block : Instr
     {
-        public InstrNode[] Instructions { get; set; }
+        public InstrNode[] Instructions { get; }
 
         public Block(InstrNode[] instructions)
         {

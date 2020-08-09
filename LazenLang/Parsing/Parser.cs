@@ -83,8 +83,8 @@ namespace LazenLang.Parsing
     // ---
     class ParserError : Exception
     {
-        public IParserErrorContent Content;
-        public CodePosition Position;
+        public IParserErrorContent Content { get; }
+        public CodePosition Position { get; }
 
         public ParserError(IParserErrorContent content, CodePosition position)
         {
@@ -142,6 +142,7 @@ namespace LazenLang.Parsing
                 throw new ParserError(new NoTokenLeft(), Cursor);
             }
 
+            Cursor = LookAhead().Pos;
             LookAheadIndex++;
             return Tokens[LookAheadIndex - 1];
         }
@@ -166,14 +167,14 @@ namespace LazenLang.Parsing
 
         public T TryConsumer<T>(Func<Parser, T> consumer)
         {
-            var oldTokens = Tokens;
+            int oldIndex = LookAheadIndex;
 
             try
             {
                 return consumer(this);
             } catch (ParserError ex)
             {
-                Tokens = oldTokens;
+                LookAheadIndex = oldIndex;
                 throw ex;
             }
         }

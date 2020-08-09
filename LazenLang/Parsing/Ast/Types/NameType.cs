@@ -8,7 +8,7 @@ namespace LazenLang.Parsing.Ast.Types
 {
     class NameType : Type
     {
-        public Identifier Name;
+        public Identifier Name { get; }
 
         public NameType(Identifier name)
         {

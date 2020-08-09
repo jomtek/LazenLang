@@ -86,16 +86,20 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.IDENTIFIER:
                     operand = parser.TryConsumer(Literal.Consume);
                     break;
+               
                 case TokenInfo.TokenType.NEG:
                     operand = parser.TryConsumer(NegExpr.Consume);
                     break;
+                
                 case TokenInfo.TokenType.MINUS:
                 case TokenInfo.TokenType.PLUS:
                     operand = parser.TryConsumer(NegNum.Consume);
                     break;
+                
                 case TokenInfo.TokenType.IF:
                     operand = parser.TryConsumer(IfInstr.Consume);
                     break;
+                
                 case TokenInfo.TokenType.L_PAREN:
                     operand = parser.TryConsumer(ParseParenthesisExpr);
                     break;
@@ -158,9 +162,11 @@ namespace LazenLang.Parsing.Ast
             );
         }
 
-        public string Pretty()
+        public string Pretty(bool printPos = false)
         {
-            return $"ExprNode(value: {Value.Pretty()}, pos: {Position.Pretty()})";
+            string prettyPos = "";
+            if (printPos) prettyPos = $", pos: {Position.Pretty()}";
+            return $"ExprNode(value: {Value.Pretty()}{prettyPos})";
         }
     }
 }

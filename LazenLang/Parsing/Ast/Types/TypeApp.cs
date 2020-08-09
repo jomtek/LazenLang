@@ -8,8 +8,8 @@ namespace LazenLang.Parsing.Ast.Types
 {
     class TypeApp : Type
     {
-        public NameType BaseType;
-        public TypeNode[] GenericArgs;
+        public NameType BaseType { get; }
+        public TypeNode[] GenericArgs { get; }
         
         public TypeApp(NameType baseType, TypeNode[] genericArgs)
         {
@@ -56,7 +56,7 @@ namespace LazenLang.Parsing.Ast.Types
             {
                 TypeNode arg = GenericArgs[i];
                 result += arg.Type.Pretty();
-                if (i != GenericArgs.Count()) result += ", ";
+                if (i != GenericArgs.Count() - 1) result += ", ";
             }
             return $"TypeApp(base: {BaseType.Pretty()}, args: {{{result}}}";
         }

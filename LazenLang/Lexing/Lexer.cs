@@ -43,7 +43,9 @@ namespace LazenLang.Lexing
                                 if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
                                     matchValue = matchValue.Substring(1).Remove(matchLength - 2);
 
-                                result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
+                                
+                                if (tokenType != TokenInfo.TokenType.SINGLE_LINE_COMMENT && tokenType != TokenInfo.TokenType.MULTI_LINE_COMMENT)
+                                    result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
                             }
                         }
 

@@ -4,10 +4,10 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
 {
     class WhileLoop : Instr
     {
-        public Expr Condition;
+        public ExprNode Condition;
         public Block Block;
 
-        public WhileLoop(Expr condition, Block block)
+        public WhileLoop(ExprNode condition, Block block)
         {
             Condition = condition;
             Block = block;
@@ -16,12 +16,12 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
         public static WhileLoop Consume(Parser parser)
         {
             parser.Eat(TokenInfo.TokenType.WHILE);
-            Expr condition;
+            ExprNode condition;
             Block resultBlock;
 
             try
             {
-                condition = parser.TryConsumer(ExprNode.Consume).Value;
+                condition = parser.TryConsumer(ExprNode.Consume);
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -60,7 +60,7 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
 
         public override string Pretty()
         {
-            return $"WhileInstr(condition: {Condition.Pretty()}, block: {Block.Pretty()})";
+            return $"WhileInstr(condition: {Condition.Value.Pretty()}, block: {Block.Pretty()})";
         }
     }
 }

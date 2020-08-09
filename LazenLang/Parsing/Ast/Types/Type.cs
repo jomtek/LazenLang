@@ -17,8 +17,8 @@ namespace LazenLang.Parsing.Ast.Types
 
     class TypeNode
     {
-        public Type Type;
-        public CodePosition Position;
+        public Type Type { get;  }
+        public CodePosition Position { get; }
 
         public TypeNode(Type type, CodePosition position)
         {
@@ -50,9 +50,11 @@ namespace LazenLang.Parsing.Ast.Types
             return new TypeNode(type, oldCursor);
         }
 
-        public string Pretty()
+        public string Pretty(bool printPos = false)
         {
-            return "TypeNode";
+            string prettyPos = "";
+            if (printPos) prettyPos = $", pos: {Position.Pretty()}";
+            return $"TypeNode({Type.Pretty()}{prettyPos})";
         }
     }
 }

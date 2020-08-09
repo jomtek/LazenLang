@@ -49,18 +49,28 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.L_CURLY_BRACKET:
                     instr = parser.TryConsumer((Parser p) => Block.Consume(p));
                     break;
+                
                 case TokenInfo.TokenType.WHILE:
                     instr = parser.TryConsumer(WhileLoop.Consume);
                     break;
+                
                 case TokenInfo.TokenType.FOR:
                     instr = parser.TryConsumer(ForLoop.Consume);
                     break;
+
+                case TokenInfo.TokenType.CONST:
+                case TokenInfo.TokenType.VAR:
+                    instr = parser.TryConsumer(VarDecl.Consume);
+                    break;
+                
                 case TokenInfo.TokenType.BREAK:
                     instr = parser.TryConsumer(BreakInstr.Consume);
                     break;
+                
                 case TokenInfo.TokenType.CONTINUE:
                     instr = parser.TryConsumer(ContinueInstr.Consume);
                     break;
+                
                 default:
                     instr = parser.TryConsumer(ExprInstr.Consume);
                     break;

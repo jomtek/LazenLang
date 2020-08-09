@@ -6,7 +6,7 @@ namespace LazenLang.Parsing.Ast.Statements
 {
     class ExprInstr : Instr
     {
-        public Expr Expression;
+        public Expr Expression { get; }
 
         public ExprInstr(Expr expression)
         {
