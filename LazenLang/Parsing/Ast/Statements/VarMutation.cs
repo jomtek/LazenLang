@@ -13,7 +13,7 @@ namespace LazenLang.Parsing.Ast.Statements
         public TokenInfo.TokenType MutationOp;
         public Expr NewValue;
 
-        private static TokenInfo.TokenType[] mutationOperators = new TokenInfo.TokenType[]
+        private static readonly TokenInfo.TokenType[] mutationOperators = new TokenInfo.TokenType[]
         {
             TokenInfo.TokenType.ASSIGN,
             TokenInfo.TokenType.MINUS_EQ,

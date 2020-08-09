@@ -1,5 +1,6 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.Loops;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,11 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.VAR:
                     instr = parser.TryConsumer(VarDecl.Consume);
                     break;
-                
+
+                case TokenInfo.TokenType.FUNC:
+                    instr = parser.TryConsumer(FuncDecl.Consume);
+                    break;
+
                 case TokenInfo.TokenType.BREAK:
                     instr = parser.TryConsumer(BreakInstr.Consume);
                     break;

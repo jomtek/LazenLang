@@ -18,8 +18,8 @@ namespace LazenLang.Parsing
             {
                 try
                 {
-                    lastCommaEaten = null;
                     sequence.Add(parser.TryConsumer(consumer));
+                    lastCommaEaten = null;
                     lastCommaEaten = parser.Eat(TokenInfo.TokenType.COMMA);
                 } catch (ParserError ex)
                 {

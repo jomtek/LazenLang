@@ -1,1 +1,4 @@
-a += 2
+func foo<T, T1>(x: T, y: T1)
+{
+	x + y
+}
