@@ -1,4 +1,8 @@
-func lol()
+namespace Program
 {
-	func lol() {}
+	func Main()
+	{
+		println("hello, world")
+		return 0		
+	}
 }

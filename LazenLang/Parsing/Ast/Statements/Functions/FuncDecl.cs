@@ -21,9 +21,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             Block block = null;
 
             signature = parser.TryConsumer(Signature.Consume);
-            
-            InstrNode parsedInstr = parser.TryConsumer(InstrNode.Consume);
-            block = Utils.InstrToBlock(parsedInstr);
+            block = parser.TryConsumer((Parser p) => Block.Consume(p));
 
             return new FuncDecl(signature, block);
         }

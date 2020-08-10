@@ -14,7 +14,7 @@ namespace LazenLang.Parsing.Ast.Statements
             Instructions = instructions;
         }
 
-        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevelLike)
+        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevelLike, bool topLevel)
         {
             var statements = new List<InstrNode>();
             bool isLastEOL = true;
@@ -54,12 +54,18 @@ namespace LazenLang.Parsing.Ast.Statements
 
                     try
                     {
-                        if (topLevelLike)
+                        if (topLevel)
+                        {
+                            statement = parser.TryConsumer((Parser p) => new InstrNode(p.TryConsumer(NamespaceDecl.Consume), p.Cursor));
+                        }
+                        else if (topLevelLike)
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor)
+                                (Parser p) => new InstrNode(p.TryConsumer(VarDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
                             });
-                        } else
+                        }
+                        else
                         {
                             statement = parser.TryConsumer(InstrNode.Consume);
                         }
@@ -67,7 +73,7 @@ namespace LazenLang.Parsing.Ast.Statements
                     catch (ParserError ex)
                     {
                         if (!ex.IsExceptionFictive()) throw ex;
-                        if (topLevelLike)
+                        if (topLevelLike && parser.LookAhead().Type != TokenInfo.TokenType.R_CURLY_BRACKET)
                         {
                             throw new ParserError(
                                 new InvalidElementException("Unwanted instruction"),
@@ -88,7 +94,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevelLike = false)
+        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevelLike = false, bool topLevel = false)
         {
             while (true)
             {
@@ -102,7 +108,7 @@ namespace LazenLang.Parsing.Ast.Statements
             }
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
-            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevelLike));
+            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevelLike, topLevel));
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
 
             return new Block(statements);

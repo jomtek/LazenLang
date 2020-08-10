@@ -25,7 +25,7 @@ namespace LazenLang
             Block topLevel;
             try
             {
-                topLevel = Block.Consume(parser, false, true);
+                topLevel = Block.Consume(parser, false, false, true);
             } catch (ParserError ex)
             {
                 string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
