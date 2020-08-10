@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Ast.Statements.Functions;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
@@ -12,7 +14,7 @@ namespace LazenLang.Parsing.Ast.Statements
             Instructions = instructions;
         }
 
-        private static InstrNode[] ParseStatementSeq(Parser parser)
+        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevelLike)
         {
             var statements = new List<InstrNode>();
             bool isLastEOL = true;
@@ -52,12 +54,26 @@ namespace LazenLang.Parsing.Ast.Statements
 
                     try
                     {
-                        statement = parser.TryConsumer(InstrNode.Consume);
+                        if (topLevelLike)
+                        {
+                            statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
+                                (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor)
+                            });
+                        } else
+                        {
+                            statement = parser.TryConsumer(InstrNode.Consume);
+                        }
                     }
                     catch (ParserError ex)
                     {
-                        if (!(ex.Content is NoTokenLeft) && !ex.IsExceptionFictive())
-                            throw ex;
+                        if (!ex.IsExceptionFictive()) throw ex;
+                        if (topLevelLike)
+                        {
+                            throw new ParserError(
+                                new InvalidElementException("Unwanted instruction"),
+                                parser.Cursor
+                            );
+                        }
                         break;
                     }
 
@@ -72,7 +88,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true)
+        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevelLike = false)
         {
             while (true)
             {
@@ -86,7 +102,7 @@ namespace LazenLang.Parsing.Ast.Statements
             }
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
-            InstrNode[] statements = parser.TryConsumer(ParseStatementSeq);
+            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevelLike));
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
 
             return new Block(statements);

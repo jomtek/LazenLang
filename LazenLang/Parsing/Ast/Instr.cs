@@ -79,8 +79,7 @@ namespace LazenLang.Parsing.Ast
                 default:
                     instr = parser.TryManyConsumers(new Func<Parser, Instr>[] {
                         VarMutation.Consume,
-                        ExprInstr.Consume,
-                        FuncDecl.Consume
+                        ExprInstr.Consume
                     });
                     break;
             }

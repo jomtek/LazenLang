@@ -21,21 +21,10 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             Block block = null;
 
             signature = parser.TryConsumer(Signature.Consume);
-
-            InstrNode parsedInstr;
-            try
-            {
-                parsedInstr = parser.TryConsumer(InstrNode.Consume);
-            } catch (ParserError ex)
-            {
-                if (!ex.IsExceptionFictive()) throw ex;
-                throw new ParserError(
-                    new ExpectedElementException("Expected block or instruction after signature for function declaration"),
-                    parser.Cursor
-                );
-            }
-
+            
+            InstrNode parsedInstr = parser.TryConsumer(InstrNode.Consume);
             block = Utils.InstrToBlock(parsedInstr);
+
             return new FuncDecl(signature, block);
         }
 

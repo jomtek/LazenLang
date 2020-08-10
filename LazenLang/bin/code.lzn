@@ -1,2 +1,4 @@
-func() -> "8"+8
-eol
+func lol()
+{
+	func lol() {}
+}

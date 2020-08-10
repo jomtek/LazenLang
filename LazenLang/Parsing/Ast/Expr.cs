@@ -143,7 +143,13 @@ namespace LazenLang.Parsing.Ast
                 }
             }
 
-            if (operators.Count > operands.Count - 1)
+            if (operands.Count == 0)
+            {
+                throw new ParserError(
+                    new FailedConsumer(), parser.Cursor
+                );
+            }
+            else if (operators.Count > operands.Count - 1)
             {
                 throw new ParserError(
                     new UnexpectedTokenException(operators.Last().Type),
@@ -153,12 +159,6 @@ namespace LazenLang.Parsing.Ast
             else if (operands.Count == 1)
             {
                 return operands[0];
-            }
-            else if (operands.Count == 0)
-            {
-                throw new ParserError(
-                    new FailedConsumer(), parser.Cursor
-                );
             }
 
             return ShuntingYard.Go(operands, operators);
