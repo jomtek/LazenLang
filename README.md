@@ -1,6 +1,8 @@
 # The Lazen Programming Language
 Lazen is an imperative, object-oriented programming language, which supports type-inference. It is meant to be "100% handmade" : it uses no lexing/parsing/compilation library.
 
+[Click here to access Lazen documentation](https://github.com/Jomtek/LazenLang/blob/master/DOC.md)
+
 # Code examples
 **Hello world**
 
