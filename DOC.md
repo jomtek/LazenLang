@@ -1,4 +1,5 @@
 
+
 # **Lazen Documentation**
 
 Lazen is an imperative, object-oriented, statically-typed and infered programming language, which offers higher-order functions, threading, and more. This language could be learned in a matter of hours.
@@ -14,9 +15,10 @@ Note: This documentation is very incomplete and is still in work.
  6. Lambdas
  7. Blocks
  8. Flow-of-control statements
- 9. Classes
- 10. Type casting
- 11. Exceptions
+ 9. Namespaces
+ 10. Classes
+ 11. Type casting
+ 12. Exceptions
  
 ## **1. Main types**
 Lazen has various main types, which are either built-in or defined/implemented in Lazen's *standard library*.
@@ -151,3 +153,27 @@ Tip: use the `range` function for "classical" a to b iteration
  - Can be broken are continued at any moment
 	 - `break`
 	 - `continue`
+
+## 9. Namespaces
+In Lazen, a program is constitued of at least one namespace, which contains functions, classes and members.
+The main obligatory namespace is `Program`. It contains the `main` int-returning function, which represents the program's entry-point.
+
+Thus, a Lazen program should normally start like this :
+
+    namespace Program
+    {
+	    func Main()
+		{
+			// ...
+			0
+		}
+    }
+
+ - Note that the function's name isn't `main` but `Main` : it is a public function ; public functions are PascalCase
+   - There is no `public` keyword in this language; each object is public by default.
+   - Note that the `private` keyword is usable
+
+For accessing objects from specific namespace - in this example, the Abs function from the `Math` namespace - you need to use the same syntax as when you try to access a member of some class :
+
+    Math.Abs(x, y)
+

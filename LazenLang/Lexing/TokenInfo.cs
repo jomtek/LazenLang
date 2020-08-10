@@ -13,7 +13,7 @@ namespace LazenLang.Lexing
 
             // Keywords    
             VAR, CONST, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
-            NEW, CLASS, CONSTRUCTOR, PUBLIC, PRIVATE, STEP, TRY, CATCH, THROW, INTERFACE,
+            NEW, CLASS, CONSTRUCTOR, PRIVATE, STEP, TRY, CATCH, THROW, INTERFACE,
 
             // Atom types
             BOOL, CHAR, DOUBLE, INT, STRING,
@@ -95,7 +95,6 @@ namespace LazenLang.Lexing
             (@"^class(?![a-zA-Z_0-9])",               TokenType.CLASS),
             (@"^new(?![a-zA-Z_0-9])",                 TokenType.NEW),
             (@"^step(?![a-zA-Z_0-9])",                TokenType.STEP),
-            (@"^public(?![a-zA-Z_0-9])",              TokenType.PUBLIC),
             (@"^private(?![a-zA-Z_0-9])",             TokenType.PRIVATE),
             (@"^interface(?![a-zA-Z_0-9])",           TokenType.INTERFACE),
             (@"^Bool(?![a-zA-Z_0-9])",                TokenType.BOOL),

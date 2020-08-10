@@ -44,7 +44,6 @@ namespace LazenLang.Parsing.Ast.Statements
                             break;
                         }
 
-
                         throw new ParserError(
                             new UnexpectedTokenException(nextTokenType),
                             parser.LookAhead().Pos
@@ -73,7 +72,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false)
+        public static Block Consume(Parser parser, bool curlyBrackets = true)
         {
             while (true)
             {
