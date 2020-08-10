@@ -74,7 +74,7 @@ namespace LazenLang.Lexing
             (@"^\.",                                  TokenType.DOT),
             (@"^\""[^\""\\]*(\\.[^\""\\]*)*\""",      TokenType.STRING_LIT),
             (@"^\'[^\'\\]*(\\.[^\'\\]*)*\'",          TokenType.CHAR_LIT),
-            (@"^(True|False)",                        TokenType.BOOLEAN_LIT),
+            (@"^(true|false)",                        TokenType.BOOLEAN_LIT),
             (@"^\'",                                  TokenType.APOSTROPHE),
             (@"^\""",                                 TokenType.QUOTE),
             (@"^try(?![a-zA-Z_0-9])",                 TokenType.TRY),
