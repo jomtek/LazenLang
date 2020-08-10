@@ -78,12 +78,19 @@ namespace LazenLang.Parsing.Ast
             Expr operand = null;
             switch (parser.LookAhead().Type)
             {
+                case TokenInfo.TokenType.IDENTIFIER:
+                    operand = parser.TryManyConsumers(new Func<Parser, Expr>[]
+                    {
+                        FuncCall.Consume,
+                        Literal.Consume
+                    });
+                    break;
+
                 case TokenInfo.TokenType.DOUBLE_LIT:
                 case TokenInfo.TokenType.INTEGER_LIT:
                 case TokenInfo.TokenType.STRING_LIT:
                 case TokenInfo.TokenType.CHAR_LIT:
                 case TokenInfo.TokenType.BOOLEAN_LIT:
-                case TokenInfo.TokenType.IDENTIFIER:
                     operand = parser.TryConsumer(Literal.Consume);
                     break;
                

@@ -43,10 +43,11 @@ namespace LazenLang.Parsing.Ast.Statements
                         {
                             break;
                         }
-                        
+
+
                         throw new ParserError(
                             new UnexpectedTokenException(nextTokenType),
-                            new CodePosition(parser.Cursor.Line, parser.Cursor.Column + 1)
+                            parser.LookAhead().Pos
                         );
                     }
 
@@ -88,14 +89,6 @@ namespace LazenLang.Parsing.Ast.Statements
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
             InstrNode[] statements = parser.TryConsumer(ParseStatementSeq);
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
-
-            if (topLevel && parser.AreTokensRemaining())
-            {
-                throw new ParserError(
-                    new UnexpectedTokenException(parser.LookAhead().Type),
-                    parser.Cursor
-                );
-            }
 
             return new Block(statements);
         }
