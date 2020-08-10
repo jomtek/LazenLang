@@ -106,7 +106,11 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.IF:
                     operand = parser.TryConsumer(IfInstr.Consume);
                     break;
-                
+
+                case TokenInfo.TokenType.FUNC:
+                    operand = parser.TryConsumer(Lambda.Consume);
+                    break;
+
                 case TokenInfo.TokenType.L_PAREN:
                     operand = parser.TryConsumer(ParseParenthesisExpr);
                     break;
@@ -139,7 +143,14 @@ namespace LazenLang.Parsing.Ast
                 }
             }
 
-            if (operands.Count == 1)
+            if (operators.Count > operands.Count - 1)
+            {
+                throw new ParserError(
+                    new UnexpectedTokenException(operators.Last().Type),
+                    operators.Last().Pos
+                );
+            }
+            else if (operands.Count == 1)
             {
                 return operands[0];
             }
@@ -147,13 +158,6 @@ namespace LazenLang.Parsing.Ast
             {
                 throw new ParserError(
                     new FailedConsumer(), parser.Cursor
-                );
-            }
-            else if (operators.Count > operands.Count - 1)
-            {
-                throw new ParserError(
-                    new UnexpectedTokenException(operators.Last().Type),
-                    operators.Last().Pos
                 );
             }
 

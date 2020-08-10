@@ -64,11 +64,7 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
                 );
             }
 
-            if (parsedInstr.Value is Block)
-                block = (Block)parsedInstr.Value;
-            else
-                block = new Block(new InstrNode[] { parsedInstr });
-
+            block = Utils.InstrToBlock(parsedInstr);
             return new ForLoop(id, array, block);
         }
 

@@ -57,10 +57,8 @@ namespace LazenLang.Parsing.Ast.Expressions
                 );
             }
 
-            if (mainInstr.Value is Block)
-                mainBranch = (Block)mainInstr.Value;
-            else
-                mainBranch = new Block(new InstrNode[] { mainInstr });
+            mainBranch = Utils.InstrToBlock(mainInstr);
+
             #endregion
 
             #region elif_branches_collect
@@ -160,10 +158,7 @@ namespace LazenLang.Parsing.Ast.Expressions
                     );
                 }
 
-                if (elseInstr.Value is Block)
-                    elseBranch = (Block)elseInstr.Value;
-                else
-                    elseBranch = new Block(new InstrNode[] { elseInstr });
+                elseBranch = Utils.InstrToBlock(elseInstr);
 
                 if (elifBranches.Count > 0)
                     elifBranches[elifBranches.Count - 1].ElseBranch = elseBranch;

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Ast;
+using LazenLang.Parsing.Ast.Statements;
 
 namespace LazenLang.Parsing
 {
@@ -36,6 +38,14 @@ namespace LazenLang.Parsing
             }
 
             return sequence.ToArray();
+        }
+
+        public static Block InstrToBlock(InstrNode instr)
+        {
+            if (instr.Value is Block)
+                return (Block)instr.Value;
+            else
+                return new Block(new InstrNode[] { instr });
         }
 
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)

@@ -31,10 +31,10 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
                 );
             }
 
-            InstrNode instr;
+            InstrNode parsedInstr;
             try
             {
-                instr = parser.TryConsumer(InstrNode.Consume);
+                parsedInstr = parser.TryConsumer(InstrNode.Consume);
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -44,17 +44,7 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
                 );
             }
 
-            if (instr.Value is Block)
-            {
-                resultBlock = (Block)instr.Value;
-            }
-            else
-            {
-                resultBlock = new Block(new InstrNode[] {
-                    new InstrNode(instr.Value, instr.Position)
-                });
-            }
-
+            resultBlock = Utils.InstrToBlock(parsedInstr);
             return new WhileLoop(condition, resultBlock);
         }
 

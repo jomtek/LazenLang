@@ -64,10 +64,6 @@ namespace LazenLang.Parsing.Ast
                     instr = parser.TryConsumer(VarDecl.Consume);
                     break;
 
-                case TokenInfo.TokenType.FUNC:
-                    instr = parser.TryConsumer(FuncDecl.Consume);
-                    break;
-
                 case TokenInfo.TokenType.RETURN:
                     instr = parser.TryConsumer(ReturnInstr.Consume);
                     break;
@@ -83,7 +79,8 @@ namespace LazenLang.Parsing.Ast
                 default:
                     instr = parser.TryManyConsumers(new Func<Parser, Instr>[] {
                         VarMutation.Consume,
-                        ExprInstr.Consume
+                        ExprInstr.Consume,
+                        FuncDecl.Consume
                     });
                     break;
             }

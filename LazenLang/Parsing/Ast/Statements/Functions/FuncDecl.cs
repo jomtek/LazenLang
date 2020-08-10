@@ -22,7 +22,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
             signature = parser.TryConsumer(Signature.Consume);
 
-            InstrNode parsedInstr = null;
+            InstrNode parsedInstr;
             try
             {
                 parsedInstr = parser.TryConsumer(InstrNode.Consume);
@@ -35,11 +35,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 );
             }
 
-            if (parsedInstr.Value is Block)
-                block = (Block)parsedInstr.Value;
-            else
-                block = new Block(new InstrNode[] { parsedInstr });
-
+            block = Utils.InstrToBlock(parsedInstr);
             return new FuncDecl(signature, block);
         }
 
