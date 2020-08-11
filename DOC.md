@@ -1,5 +1,3 @@
-
-
 # **Lazen Documentation**
 
 Lazen is an imperative, object-oriented, statically-typed and infered programming language, which offers higher-order functions, threading, and more. This language could be learned in a matter of hours.
@@ -29,6 +27,17 @@ Lazen has various main types, which are either built-in or defined/implemented i
  - `Bool`, the Boolean type (`true`, `false`)
  - `Char` (example: `'\n'`)
  - `String` (example: `"test"`)
+
+**Arrays**
+Lazen has a native type describing an array
+
+ - Example of an array of `Int`
+	 - `[1, 2, 3]` 
+ - Example of a method taking an array of `Int` as parameter
+	-  `func foo([Int] arr) {}`
+
+Note: Arrays are immutable. Lists aren't.
+Initialize a list using `new List(arr)`.
 
 **Other essential types**
 
@@ -110,7 +119,7 @@ Functions can hold multiple type variables
     }
 
 ## 6. Lambdas
-Lambdas, are anonymous functions considered as expressions, which have no implicit return type and which can't hide any instruction.
+Lambdas are anonymous functions considered as expressions. They have no implicit return type and which can't hide any instruction.
 
 An example of a self-explanatory lambda :
 `func(x) -> x * 2`
@@ -177,3 +186,51 @@ For accessing objects from specific namespace - in this example, the Abs functio
 
     Math.Abs(x, y)
 
+## 10. Classes
+A class is a useful structure which stand behind each Lazen type. Like in all programming languages, it can be instantiated. When writing a class, you should think about its interface - which way will the objects from your class be used ?
+
+Thus, classes' members can be either public or private - they're public by default and that's why the `public` keyword doesn't exist in Lazen.
+
+A class is implemented this way - here, a simple class with a constructor, initializing the `Number` public integer -
+
+    class MyClass
+    {
+	    var Number: Int
+	    constructor(number)
+		{
+			this Number = number
+		}
+    }
+
+Notes
+
+ - Constructors are introduced using the `constructor` keyword
+ - In the constructor, the usage of the `this` keyword helps figuring out which object we're initializing. In some situations, this keyword must necessarily be used. Note the space after `this`.
+
+**Private members**
+A class can have private members, which are only accessible inside the scope if the concerned class.
+Just add the `private` keyword before any variable or function declaration.
+
+**Generic classes**
+Classes can hold typevariables. And the syntax is pretty much intuitive
+
+    class MyClass<T>
+    {
+	    var Object: T
+		constructor(object)
+		{
+			this Object = object
+		}
+    }
+
+**Initialization**
+You may want to intialize a new object from your class. Do it this way
+
+    var myObject = new MyClass("hello")
+    
+Note that between the parentheses stand the arguments passed to the class' constructor.
+
+**Member access**
+Whenever your object is instantiated, you are able to access its public members.
+
+    myObject.Object
