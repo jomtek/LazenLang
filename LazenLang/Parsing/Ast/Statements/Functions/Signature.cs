@@ -8,14 +8,14 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
     class Signature
     {
         public Identifier Name { get; }
-        public Identifier[] GenericTypes { get; }
+        public TypevarSeq Typevars { get; }
         public Param[] Domain { get; }
         public TypeNode Codomain { get; }
 
-        public Signature(Identifier name, Identifier[] genericTypes, Param[] domain, TypeNode codomain)
+        public Signature(Identifier name, TypevarSeq typevars, Param[] domain, TypeNode codomain)
         {
             Name = name;
-            GenericTypes = genericTypes;
+            Typevars = typevars;
             Domain = domain;
             Codomain = codomain;
         }
@@ -25,7 +25,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             parser.Eat(TokenInfo.TokenType.FUNC);
 
             Identifier name = null;
-            Identifier[] genericTypes = null;
+            TypevarSeq typevars = null;
             Param[] domain = null;
             TypeNode codomain = null;
 
@@ -34,38 +34,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             // func foo()
 
             name = parser.TryConsumer(Identifier.Consume);
-
-            bool lessToken = true;
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.LESS);
-            } catch (ParserError)
-            {
-                lessToken = false;
-            }
-
-            if (lessToken)
-            {
-                genericTypes = Utils.ParseSequence(parser, Identifier.Consume);
-                if (genericTypes.Count() == 0)
-                {
-                    throw new ParserError(
-                        new ExpectedElementException("Expected one or more generic types"),
-                        parser.Cursor
-                    );
-                }
-
-                try
-                {
-                    parser.Eat(TokenInfo.TokenType.GREATER);
-                } catch (ParserError)
-                {
-                    throw new ParserError(
-                        new ExpectedTokenException(TokenInfo.TokenType.GREATER),
-                        parser.Cursor
-                    );
-                }
-            }
+            typevars = parser.TryConsumer(TypevarSeq.Consume);
 
             try
             {
@@ -115,24 +84,13 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 }
             }
 
-            return new Signature(name, genericTypes, domain, codomain);
+            return new Signature(name, typevars, domain, codomain);
         }
 
         public string Pretty()
         {
-            string prettyGenericTypes = "";
             string prettyDomain = "";
             string prettyCodomain = "none";
-
-            if (GenericTypes != null)
-            {
-                for (int i = 0; i < GenericTypes.Count(); i++)
-                {
-                    Identifier genericType = GenericTypes[i];
-                    prettyGenericTypes += genericType.Value;
-                    if (i != GenericTypes.Count() - 1) prettyGenericTypes += ", ";
-                }
-            }
 
             for (int i = 0; i < Domain.Count(); i++)
             {
@@ -143,7 +101,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
             if (Codomain != null) prettyCodomain = Codomain.Pretty();
 
-            return $"Signature(name: {Name.Pretty()}, genericTypes: [{prettyGenericTypes}], domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
+            return $"Signature(name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
         }
     }
 }

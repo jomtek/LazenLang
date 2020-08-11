@@ -1,8 +1,14 @@
-namespace Program
+namespace AAA
 {
-	func Main()
+	class A
 	{
-		println("hello, world")
-		return 0		
+	}
+
+	class B<T>
+	{
+	}
+
+	class C<T, T1>
+	{
 	}
 }

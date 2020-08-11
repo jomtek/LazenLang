@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements.Functions;
+using LazenLang.Parsing.Ast.Statements.OOP;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
@@ -63,6 +64,7 @@ namespace LazenLang.Parsing.Ast.Statements
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
                                 (Parser p) => new InstrNode(p.TryConsumer(VarDecl.Consume), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer(ClassDecl.Consume), p.Cursor)
                             });
                         }
                         else
