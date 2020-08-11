@@ -1,14 +1,4 @@
-namespace AAA
+namespace A.
 {
-	class A
-	{
-	}
 
-	class B<T>
-	{
-	}
-
-	class C<T, T1>
-	{
-	}
 }

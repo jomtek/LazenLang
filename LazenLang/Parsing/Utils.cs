@@ -12,30 +12,33 @@ namespace LazenLang.Parsing
 {
     class Utils
     {
-        public static T[] ParseSequence<T>(Parser parser, Func<Parser, T> consumer)
+        public static T[] ParseSequence<T>(Parser parser, Func<Parser, T> consumer, TokenInfo.TokenType delimiter = TokenInfo.TokenType.COMMA)
         {
             var sequence = new List<T>();
-            Token lastCommaEaten = null;
+            bool lastlyEaten = false;
+            Token lastTokenEaten = null;
 
             while (true)
             {
                 try
                 {
                     sequence.Add(parser.TryConsumer(consumer));
-                    lastCommaEaten = null;
-                    lastCommaEaten = parser.Eat(TokenInfo.TokenType.COMMA);
+                    lastlyEaten = false;
+                    lastTokenEaten = parser.Eat(delimiter);
+                    lastlyEaten = true;
                 } catch (ParserError ex)
                 {
                     if (!ex.IsExceptionFictive()) throw ex;
-                    if (lastCommaEaten != null)
-                    {
-                        throw new ParserError(
-                            new UnexpectedTokenException(TokenInfo.TokenType.COMMA),
-                            lastCommaEaten.Pos
-                        );
-                    }
                     break;
                 }
+            }
+
+            if (lastlyEaten)
+            {
+                throw new ParserError(
+                    new UnexpectedTokenException(delimiter),
+                    lastTokenEaten.Pos
+                );
             }
 
             return sequence.ToArray();
