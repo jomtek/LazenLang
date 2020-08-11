@@ -93,7 +93,11 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.BOOLEAN_LIT:
                     operand = parser.TryConsumer(Literal.Consume);
                     break;
-               
+
+                case TokenInfo.TokenType.L_BRACKET:
+                    operand = parser.TryConsumer(NativeArray.Consume);
+                    break;
+
                 case TokenInfo.TokenType.NEG:
                     operand = parser.TryConsumer(NegExpr.Consume);
                     break;

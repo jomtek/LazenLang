@@ -1,4 +1,7 @@
-namespace A.
+namespace A
 {
+	func sort<T>(arr: [T])
+	{
 
+	}
 }

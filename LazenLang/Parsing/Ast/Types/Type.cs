@@ -33,12 +33,17 @@ namespace LazenLang.Parsing.Ast.Types
             
             switch (parser.LookAhead().Type)
             {
+                case TokenInfo.TokenType.L_BRACKET:
+                    type = parser.TryConsumer(NativeArrayType.Consume);
+                    break;
+
                 case TokenInfo.TokenType.IDENTIFIER:
                     type = parser.TryManyConsumers(new Func<Parser, Type>[] {
                         TypeApp.Consume,
                         NameType.Consume
                     });
                     break;
+
                 default:
                     type = parser.TryConsumer(AtomType.Consume);
                     break;

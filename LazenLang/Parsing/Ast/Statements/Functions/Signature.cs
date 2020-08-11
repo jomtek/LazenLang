@@ -26,7 +26,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
             Identifier name = null;
             TypevarSeq typevars = null;
-            Param[] domain = null;
+            Param[] domain = new Param[0];
             TypeNode codomain = null;
 
             // func foo(baz: String, bax) -> Int
@@ -99,7 +99,8 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 if (i != Domain.Count() - 1) prettyDomain += ", ";
             }
 
-            if (Codomain != null) prettyCodomain = Codomain.Pretty();
+            if (Codomain != null)
+                prettyCodomain = Codomain.Pretty();
 
             return $"Signature(name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
         }

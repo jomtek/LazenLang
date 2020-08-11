@@ -25,7 +25,6 @@ namespace LazenLang.Parsing.Ast.Statements
             IEnumerable<string> portions = (from x in Portions select x.Value);
             return $"NamespaceName(`{string.Join('.', portions)}`)";
         }
-
     }
 
     class NamespaceDecl : Instr
