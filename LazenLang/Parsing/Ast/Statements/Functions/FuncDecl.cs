@@ -20,7 +20,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             Signature signature = null;
             Block block = null;
 
-            signature = parser.TryConsumer(Signature.Consume);
+            signature = parser.TryConsumer((Parser p) =>  Signature.Consume(p));
             block = parser.TryConsumer((Parser p) => Block.Consume(p));
 
             return new FuncDecl(signature, block);

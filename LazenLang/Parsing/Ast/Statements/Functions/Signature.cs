@@ -36,35 +36,17 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             name = parser.TryConsumer(Identifier.Consume);
             typevars = parser.TryConsumer(TypevarSeq.Consume);
 
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.L_PAREN);
-            } catch (ParserError)
-            {
-                throw new ParserError(
-                    new ExpectedTokenException(TokenInfo.TokenType.L_PAREN),
-                    parser.Cursor
-                );
-            }
-
+            parser.Eat(TokenInfo.TokenType.L_PAREN, false);
             domain = Utils.ParseSequence(parser, Param.Consume);
-
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.R_PAREN);
-            } catch (ParserError)
-            {
-                throw new ParserError(
-                    new ExpectedTokenException(TokenInfo.TokenType.R_PAREN),
-                    parser.Cursor
-                );
-            }
+            parser.Eat(TokenInfo.TokenType.R_PAREN, false);
 
             bool arrow = true;
+            Token arrowToken = null;
             try
             {
-                parser.Eat(TokenInfo.TokenType.ARROW);
-            } catch (ParserError)
+                arrowToken = parser.Eat(TokenInfo.TokenType.ARROW);
+            }
+            catch (ParserError)
             {
                 arrow = false;
             }
@@ -74,7 +56,8 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 try
                 {
                     codomain = parser.TryConsumer(TypeNode.Consume);
-                } catch (ParserError ex)
+                }
+                catch (ParserError ex)
                 {
                     if (!ex.IsExceptionFictive()) throw ex;
                     throw new ParserError(

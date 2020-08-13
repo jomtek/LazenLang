@@ -142,7 +142,11 @@ namespace LazenLang.Parsing
                 throw new ParserError(new NoTokenLeft(), Cursor);
             }
 
-            Cursor = LookAhead().Pos;
+            if (LookAhead().Type != TokenInfo.TokenType.EOL)
+                Cursor = LookAhead().Pos;
+            else
+                Cursor = new CodePosition(LookAhead().Pos.Line + 1, 1);
+
             LookAheadIndex++;
             return Tokens[LookAheadIndex - 1];
         }

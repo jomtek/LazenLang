@@ -2,6 +2,7 @@
 using LazenLang.Parsing.Ast.Statements;
 using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.Loops;
+using LazenLang.Parsing.Ast.Statements.OOP;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -75,7 +76,7 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.CONTINUE:
                     instr = parser.TryConsumer(ContinueInstr.Consume);
                     break;
-                
+
                 default:
                     instr = parser.TryManyConsumers(new Func<Parser, Instr>[] {
                         VarMutation.Consume,

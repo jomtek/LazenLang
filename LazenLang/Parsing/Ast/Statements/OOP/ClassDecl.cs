@@ -42,7 +42,7 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
 
             try
             {
-                block = parser.TryConsumer((Parser p) => Block.Consume(p, true, true));
+                block = parser.TryConsumer((Parser p) => Block.Consume(p, true, false, false, true));
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;

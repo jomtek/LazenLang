@@ -97,6 +97,7 @@ namespace LazenLang.Lexing
             (@"^private(?![a-zA-Z_0-9])",             TokenType.PRIVATE),
             (@"^interface(?![a-zA-Z_0-9])",           TokenType.INTERFACE),
             (@"^namespace(?![a-zA-Z_0-9])",           TokenType.NAMESPACE),
+            (@"^constructor(?![a-zA-Z_0-9])",         TokenType.CONSTRUCTOR),
             (@"^Bool(?![a-zA-Z_0-9])",                TokenType.BOOL),
             (@"^Char(?![a-zA-Z_0-9])",                TokenType.CHAR),
             (@"^Double(?![a-zA-Z_0-9])",              TokenType.DOUBLE),

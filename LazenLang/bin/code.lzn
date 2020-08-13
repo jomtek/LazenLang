@@ -1,7 +1,13 @@
 namespace A
 {
-	func sort<T>(arr: [T])
+	class Human
 	{
-
+		var Age: Int
+		var Gender: String
+		constructor(age: Int, gender: String)
+		{
+			Age = age
+			Gender = gender	
+		}	
 	}
 }
