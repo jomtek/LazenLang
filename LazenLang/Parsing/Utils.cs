@@ -65,6 +65,21 @@ namespace LazenLang.Parsing
             return $"{{{result}}}";
         }
 
+        public static void CheckBannedIds(Identifier id, CodePosition cursor)
+        {
+            var bannedIds = new string[]
+            {
+                "this"
+            };
+
+            if (bannedIds.Contains(id.Value))
+            {
+                throw new ParserError(
+                    new BannedIdentifier(id.Value),
+                    cursor
+                );
+            }
+        }
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)
         {
             string result = "";

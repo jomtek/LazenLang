@@ -49,6 +49,8 @@ namespace LazenLang.Parsing.Ast.Statements
                 );
             }
 
+            Utils.CheckBannedIds(name, parser.Cursor);
+
             bool colon = true;
             Token colonTok = null;
             try

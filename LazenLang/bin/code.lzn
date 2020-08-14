@@ -1,7 +1,7 @@
 namespace A
 {	
-	func main()
+	func this()
 	{
-		var human = new Human(12, "Ali")
+		var hello = new Human(12, "Ali")
 	}
 }

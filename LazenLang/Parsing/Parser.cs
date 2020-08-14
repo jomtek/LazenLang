@@ -62,6 +62,15 @@ namespace LazenLang.Parsing
         }
     }
 
+    class BannedIdentifier : IParserErrorContent
+    {
+        public string Value { get; }
+        public BannedIdentifier(string value)
+        {
+            Value = value;
+        }
+    }
+
     class InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }

@@ -1,7 +1,5 @@
 ﻿using LazenLang.Parsing;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LazenLang.PrettyPrinter
 {
@@ -19,6 +17,8 @@ namespace LazenLang.PrettyPrinter
                     return x.Message;
                 case InvalidElementException x:
                     return x.Message;
+                case BannedIdentifier x:
+                    return $"`{x.Value}`";
                 case InvalidDoubleLit x:
                     return $"'{x.Value}'";
                 case InvalidCharLit x:
