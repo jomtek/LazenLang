@@ -1,6 +1,7 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast;
 using LazenLang.Parsing.Ast.Expressions;
+using LazenLang.Parsing.Ast.Expressions.OOP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,19 @@ namespace LazenLang.Parsing.Algorithms
             Expr leftOperand = operands[operands.Count - 2];
             Expr rightOperand = operands[operands.Count - 1];
 
-            var operation = new InfixOp(leftOperand, rightOperand, op);
+            Expr operation;         
+            if (op.Type == TokenInfo.TokenType.DOT)
+                operation = new AttributeAccess(leftOperand, rightOperand);
+            else
+                operation = new InfixOp(leftOperand, rightOperand, op);
+
             operands.RemoveAt(operands.Count - 1);
             operands.RemoveAt(operands.Count - 1);
 
             operands.Add(operation);
         }
 
-        public static InfixOp Go(List<Expr> operands, List<Token> operators)
+        public static Expr Go(List<Expr> operands, List<Token> operators)
         {
             var operatorPrecedences = new Dictionary<TokenInfo.TokenType, int>()
             {
@@ -98,7 +104,7 @@ namespace LazenLang.Parsing.Algorithms
                 FoldLastOperands(ref operandStack, op);
             }
 
-            return (InfixOp)operandStack[0];
+            return operandStack[0];
         }
     }
 }

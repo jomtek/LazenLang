@@ -77,13 +77,14 @@ namespace LazenLang.Parsing.Ast
         private static Expr ParseOperand(Parser parser)
         {
             Expr operand = null;
+
             switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.IDENTIFIER:
                     operand = parser.TryManyConsumers(new Func<Parser, Expr>[]
                     {
-                        FuncCall.Consume,
-                        Literal.Consume
+                    FuncCall.Consume,
+                    Literal.Consume
                     });
                     break;
 
@@ -102,12 +103,12 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.NEG:
                     operand = parser.TryConsumer(NegExpr.Consume);
                     break;
-                
+
                 case TokenInfo.TokenType.MINUS:
                 case TokenInfo.TokenType.PLUS:
                     operand = parser.TryConsumer(NegNum.Consume);
                     break;
-                
+
                 case TokenInfo.TokenType.IF:
                     operand = parser.TryConsumer(IfInstr.Consume);
                     break;
