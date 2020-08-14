@@ -207,11 +207,11 @@ Notes
  - Constructors are introduced using the `constructor` keyword
  - In the constructor, the usage of the `this` keyword helps figuring out which object we're initializing. In some situations, this keyword must necessarily be used. Note the space after `this`.
 
-**Private members**
+**Private members**<br>
 A class can have private members, which are only accessible inside the scope if the concerned class.
 Just add the `private` keyword before any variable or function declaration.
 
-**Generic classes**
+**Generic classes**<br>
 Classes can hold typevariables. And the syntax is pretty much intuitive
 
     class MyClass<T>
@@ -223,14 +223,14 @@ Classes can hold typevariables. And the syntax is pretty much intuitive
 		}
     }
 
-**Initialization**
+**Initialization**<br>
 You may want to intialize a new object from your class. Do it this way
 
     var myObject = new MyClass("hello")
     
 Note that between the parentheses stand the arguments passed to the class' constructor.
 
-**Member access**
+**Member access**<br>
 Whenever your object is instantiated, you are able to access its public members.
 
     myObject.Object
