@@ -25,8 +25,8 @@ namespace LazenLang.Parsing.Ast.Expressions
         public static FuncCall Consume(Parser parser)
         {
             Identifier name = null;
-            TypeNode[] genericArgs = null;
-            ExprNode[] arguments = null;
+            TypeNode[] genericArgs = new TypeNode[0];
+            ExprNode[] arguments = new ExprNode[0];
 
             name = parser.TryConsumer(Identifier.Consume);
 
@@ -91,29 +91,14 @@ namespace LazenLang.Parsing.Ast.Expressions
         public override string Pretty()
         {
             string prettyGenericArgs = "";
-            string prettyArgs = "";
-
-            if (GenericArgs != null)
+            for (int i = 0; i < GenericArgs.Count(); i++)
             {
-                for (int i = 0; i < GenericArgs.Count(); i++)
-                {
-                    TypeNode node = GenericArgs[i];
-                    prettyGenericArgs += node.Pretty();
-                    if (i != GenericArgs.Count() - 1) prettyGenericArgs += ", ";
-                }
+                TypeNode node = GenericArgs[i];
+                prettyGenericArgs += node.Pretty();
+                if (i != GenericArgs.Count() - 1) prettyGenericArgs += ", ";
             }
 
-            if (Arguments != null)
-            {
-                for (int i = 0; i < Arguments.Count(); i++)
-                {
-                    ExprNode node = Arguments[i];
-                    prettyArgs += node.Pretty();
-                    if (i != Arguments.Count() - 1) prettyArgs += ", ";
-                }
-            }
-
-            return $"FuncCall(name: {Name.Pretty()}, genericArgs: {{{prettyGenericArgs}}}, args: {{{prettyArgs}}})";
+            return $"FuncCall(name: {Name.Pretty()}, genericArgs: {{{prettyGenericArgs}}}, args: {Utils.PrettyArgs(Arguments)})";
         }
     }
 }

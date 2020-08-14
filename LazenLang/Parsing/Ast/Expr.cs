@@ -2,6 +2,7 @@
 using LazenLang.Parsing.Algorithms;
 using LazenLang.Parsing.Ast.Expressions;
 using LazenLang.Parsing.Ast.Expressions.Literals;
+using LazenLang.Parsing.Ast.Expressions.OOP;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,6 +114,10 @@ namespace LazenLang.Parsing.Ast
 
                 case TokenInfo.TokenType.FUNC:
                     operand = parser.TryConsumer(Lambda.Consume);
+                    break;
+
+                case TokenInfo.TokenType.NEW:
+                    operand = parser.TryConsumer(Instanciation.Consume);
                     break;
 
                 case TokenInfo.TokenType.L_PAREN:

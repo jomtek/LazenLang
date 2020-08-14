@@ -7,6 +7,7 @@ using LazenLang.Lexing;
 using LazenLang.Parsing.Ast;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Parsing.Ast.Statements.Functions;
 
 namespace LazenLang.Parsing
 {
@@ -50,6 +51,18 @@ namespace LazenLang.Parsing
                 return (Block)instr.Value;
             else
                 return new Block(new InstrNode[] { instr });
+        }
+
+        public static string PrettyArgs(ExprNode[] args)
+        {
+            string result = "";
+            for (int i = 0; i < args.Count(); i++)
+            {
+                ExprNode node = args[i];
+                result += node.Pretty();
+                if (i != args.Count() - 1) result += ", ";
+            }
+            return $"{{{result}}}";
         }
 
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)

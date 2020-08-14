@@ -1,13 +1,7 @@
 namespace A
-{
-	class Human
+{	
+	func main()
 	{
-		var Age: Int
-		var Gender: String
-		constructor(age: Int, gender: String)
-		{
-			Age = age
-			Gender = gender	
-		}	
+		var human = new Human(12, "Ali")
 	}
 }
