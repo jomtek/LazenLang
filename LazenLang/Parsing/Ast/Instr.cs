@@ -62,7 +62,7 @@ namespace LazenLang.Parsing.Ast
 
                 case TokenInfo.TokenType.CONST:
                 case TokenInfo.TokenType.VAR:
-                    instr = parser.TryConsumer(VarDecl.Consume);
+                    instr = parser.TryConsumer((Parser p) => VarDecl.Consume(p));
                     break;
 
                 case TokenInfo.TokenType.RETURN:

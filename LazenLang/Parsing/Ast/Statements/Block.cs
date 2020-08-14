@@ -47,6 +47,9 @@ namespace LazenLang.Parsing.Ast.Statements
                             break;
                         }
 
+                        if (nextTokenType == TokenInfo.TokenType.R_CURLY_BRACKET)
+                            break;
+
                         throw new ParserError(
                             new UnexpectedTokenException(nextTokenType),
                             parser.LookAhead().Pos
@@ -62,7 +65,7 @@ namespace LazenLang.Parsing.Ast.Statements
                         else if (intoNamespace)
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer(VarDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(ClassDecl.Consume), p.Cursor)
                             });
@@ -70,7 +73,7 @@ namespace LazenLang.Parsing.Ast.Statements
                         else if (intoClass)
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer(VarDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(ConstructorDecl.Consume), p.Cursor)
                             });

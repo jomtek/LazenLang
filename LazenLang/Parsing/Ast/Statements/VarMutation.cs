@@ -1,15 +1,14 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
+using LazenLang.Parsing.Ast.Expressions.OOP;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
     class VarMutation : Instr
     {
-        public Identifier BaseVariable;
+        public Expr BaseVariable;
         public TokenInfo.TokenType MutationOp;
         public Expr NewValue;
 
@@ -24,7 +23,7 @@ namespace LazenLang.Parsing.Ast.Statements
             TokenInfo.TokenType.MODULO_EQ
         };
 
-        public VarMutation(Identifier baseVariable, TokenInfo.TokenType mutationOp, Expr newValue)
+        public VarMutation(TokenInfo.TokenType mutationOp, Expr baseVariable, Expr newValue)
         {
             BaseVariable = baseVariable;
             MutationOp = mutationOp;
@@ -33,11 +32,14 @@ namespace LazenLang.Parsing.Ast.Statements
 
         public static VarMutation Consume(Parser parser)
         {
-            Identifier baseVariable = null;
+            Expr baseVariable = null;
             TokenInfo.TokenType mutationOp;
             Expr newValue = null;
 
-            baseVariable = parser.TryConsumer(Identifier.Consume);
+            baseVariable = parser.TryConsumer(ExprNode.Consume).Value;
+
+            if (!(baseVariable is Identifier) && !(baseVariable is AttributeAccess))
+                throw new ParserError(new FailedConsumer(), parser.Cursor);
 
             if (mutationOperators.Contains(parser.LookAhead().Type))
                 mutationOp = parser.Eat(parser.LookAhead().Type).Type;
@@ -56,12 +58,12 @@ namespace LazenLang.Parsing.Ast.Statements
                 );
             }
 
-            return new VarMutation(baseVariable, mutationOp, newValue);
+            return new VarMutation(mutationOp, baseVariable, newValue);
         }
 
         public override string Pretty()
         {
-            return $"VarMutation(basevar: {BaseVariable.Pretty()}, op: {MutationOp}, newvalue: {NewValue.Pretty()})";
+            return $"VarMutation(op: {MutationOp}, basevar: {BaseVariable.Pretty()}, newvalue: {NewValue.Pretty()})";
         }
     }
 }

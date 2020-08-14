@@ -1,7 +1,23 @@
 namespace A
 {	
-	func foo()
+	private class Human
 	{
-		5 + 5 * 5 
+		private var Age = 0
+		private var Name: String
+
+		constructor(age: Int, name)
+		{
+			this.Age = age
+			this.Name = name	
+		}
+
+		func GetAge()  { Age  }
+		func GetName() { Name }
+	}
+
+	func main()
+	{
+		var human = new Human(15, "Ali")
+		println(human.GetAge())
 	}
 }

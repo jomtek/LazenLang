@@ -1,19 +1,18 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.OOP
 {
     class ClassDecl : Instr
     {
+        public bool PublicAccess { get; }
         public Identifier Name;
         public TypevarSeq Typevars;
         public Block Block;
 
-        public ClassDecl(Identifier name, TypevarSeq typevars, Block block)
+        public ClassDecl(bool publicAccess, Identifier name, TypevarSeq typevars, Block block)
         {
+            PublicAccess = publicAccess;
             Name = name;
             Typevars = typevars;
             Block = block;
@@ -21,6 +20,7 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
 
         public static ClassDecl Consume(Parser parser)
         {
+            bool publicAccess = Utils.ParseAccessModifier(parser);
             parser.Eat(TokenInfo.TokenType.CLASS);
 
             Identifier name;
@@ -52,12 +52,13 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
                 );
             }
 
-            return new ClassDecl(name, typevars, block);
+            return new ClassDecl(publicAccess, name, typevars, block);
         }
 
         public override string Pretty()
         {
-            return $"ClassDecl(name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, block: {Block.Pretty()})";
+            string prettyAccess = PublicAccess ? "public" : "private";
+            return $"ClassDecl(access: {prettyAccess}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, block: {Block.Pretty()})";
         }
     }
 }

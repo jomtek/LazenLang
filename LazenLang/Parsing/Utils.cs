@@ -80,6 +80,21 @@ namespace LazenLang.Parsing
                 );
             }
         }
+
+        public static bool ParseAccessModifier(Parser parser) {
+            bool publicAccess = false;
+
+            try
+            {
+                parser.Eat(TokenInfo.TokenType.PRIVATE);
+            }
+            catch (ParserError)
+            {
+                publicAccess = true;
+            }
+
+            return publicAccess;
+        }
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)
         {
             string result = "";

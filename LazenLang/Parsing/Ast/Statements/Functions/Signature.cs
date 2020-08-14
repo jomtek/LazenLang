@@ -7,13 +7,15 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 {
     class Signature
     {
+        public bool PublicAccess { get; }
         public Identifier Name { get; }
         public TypevarSeq Typevars { get; }
         public Param[] Domain { get; }
         public TypeNode Codomain { get; }
 
-        public Signature(Identifier name, TypevarSeq typevars, Param[] domain, TypeNode codomain)
+        public Signature(bool publicAccess, Identifier name, TypevarSeq typevars, Param[] domain, TypeNode codomain)
         {
+            PublicAccess = publicAccess;
             Name = name;
             Typevars = typevars;
             Domain = domain;
@@ -22,6 +24,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
         public static Signature Consume(Parser parser)
         {
+            bool publicAccess = Utils.ParseAccessModifier(parser);
             parser.Eat(TokenInfo.TokenType.FUNC);
 
             Identifier name = null;
@@ -69,11 +72,12 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 }
             }
 
-            return new Signature(name, typevars, domain, codomain);
+            return new Signature(publicAccess, name, typevars, domain, codomain);
         }
 
         public string Pretty()
         {
+            string prettyAccess = PublicAccess ? "public" : "private";
             string prettyDomain = "";
             string prettyCodomain = "none";
 
@@ -87,7 +91,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             if (Codomain != null)
                 prettyCodomain = Codomain.Pretty();
 
-            return $"Signature(name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
+            return $"Signature(access: {prettyAccess}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
         }
     }
 }

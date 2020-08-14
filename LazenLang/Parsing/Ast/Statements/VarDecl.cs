@@ -10,24 +10,30 @@ namespace LazenLang.Parsing.Ast.Statements
     class VarDecl : Instr
     {
         public bool Mutable { get; }
+        public bool PublicAccess { get; }
         public Identifier Name { get; }
         public TypeNode Type { get; }
         public ExprNode Value { get; }
 
-        public VarDecl(bool mutable, Identifier name, TypeNode type, ExprNode value)
+        public VarDecl(bool mutable, bool publicAccess, Identifier name, TypeNode type, ExprNode value)
         {
             Mutable = mutable;
+            PublicAccess = publicAccess;
             Name = name;
             Type = type;
             Value = value;
         }
 
-        public static VarDecl Consume(Parser parser)
+        public static VarDecl Consume(Parser parser, bool inClassOrNamespace = false)
         {
             bool mutable = true;
+            bool publicAccess = false;
             Identifier name = null;
             TypeNode type = null;
             ExprNode value = null;
+
+            if (inClassOrNamespace)
+                publicAccess = Utils.ParseAccessModifier(parser);
 
             Token varOrConstToken = parser.TryManyEats(new TokenInfo.TokenType[]
             {
@@ -108,16 +114,17 @@ namespace LazenLang.Parsing.Ast.Statements
                 }
             }
 
-            return new VarDecl(mutable, name, type, value);
+            return new VarDecl(mutable, publicAccess, name, type, value);
         }
 
         public override string Pretty()
         {
             string prettyType = "none", prettyValue = "none";
+            string prettyAccess = PublicAccess ? "public" : "private";
             if (Type != null) prettyType = Type.Pretty();
             if (Value != null) prettyValue = Value.Value.Pretty();
 
-            return $"VarDecl(mutable: {Mutable}, name: {Name.Pretty()}, type: {prettyType}, value: {prettyValue})";
+            return $"VarDecl(mutable: {Mutable}, access: {prettyAccess}, name: {Name.Pretty()}, type: {prettyType}, value: {prettyValue})";
         }
     }
 }
