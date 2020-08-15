@@ -37,8 +37,6 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             // func foo()
 
             name = parser.TryConsumer(Identifier.Consume);
-            Utils.CheckBannedIds(name, parser.Cursor);
-
             typevars = parser.TryConsumer(TypevarSeq.Consume);
 
             parser.Eat(TokenInfo.TokenType.L_PAREN, false);

@@ -1,23 +1,20 @@
-namespace A
-{	
-	private class Human
+namespace STD
+{
+	class Container<T>
 	{
-		private var Age = 0
-		private var Name: String
-
-		constructor(age: Int, name)
+		var object: T
+		constructor(object: T)
 		{
-			this.Age = age
-			this.Name = name	
+			this.object = object
 		}
-
-		func GetAge()  { Age  }
-		func GetName() { Name }
 	}
+}
 
+namespace Program
+{
 	func main()
 	{
-		var human = new Human(15, "Ali")
-		println(human.GetAge())
-	}
+		var container = new Container("hello")
+		println(container.object)
+	}	
 }

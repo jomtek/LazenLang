@@ -121,6 +121,10 @@ namespace LazenLang.Parsing.Ast
                     operand = parser.TryConsumer(Instanciation.Consume);
                     break;
 
+                case TokenInfo.TokenType.THIS:
+                    operand = parser.TryConsumer(This.Consume);
+                    break;
+
                 case TokenInfo.TokenType.L_PAREN:
                     operand = parser.TryConsumer(ParseParenthesisExpr);
                     break;

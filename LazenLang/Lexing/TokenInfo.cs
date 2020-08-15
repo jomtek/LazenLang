@@ -12,7 +12,7 @@ namespace LazenLang.Lexing
             INTEGER_LIT, DOUBLE_LIT, STRING_LIT, CHAR_LIT, BOOLEAN_LIT,
 
             // Keywords    
-            VAR, CONST, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
+            VAR, CONST, THIS, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
             NEW, CLASS, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW, INTERFACE, NAMESPACE,
 
             // Atom types
@@ -82,6 +82,7 @@ namespace LazenLang.Lexing
             (@"^throw(?![a-zA-Z_0-9])",               TokenType.THROW),
             (@"^var(?![a-zA-Z_0-9])",                 TokenType.VAR),
             (@"^const(?![a-zA-Z_0-9])",               TokenType.CONST),
+            (@"^this(?![a-zA-Z_0-9])",               TokenType.THIS),
             (@"^in(?![a-zA-Z_0-9])",                  TokenType.IN),
             (@"^for(?![a-zA-Z_0-9])",                 TokenType.FOR),
             (@"^return(?![a-zA-Z_0-9])",              TokenType.RETURN),
