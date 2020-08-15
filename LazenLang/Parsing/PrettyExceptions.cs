@@ -3,7 +3,7 @@ using System;
 
 namespace LazenLang.PrettyPrinter
 {
-    class ParserExceptions
+    class PrettyExceptions
     {
         public static string PrettyContent(IParserErrorContent content)
         {
