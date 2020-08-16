@@ -17,6 +17,13 @@ namespace LazenLang.Parsing.Ast.Statements
         public static NamespaceName Consume(Parser parser)
         {
             Identifier[] portions = Utils.ParseSequence(parser, Identifier.Consume, TokenInfo.TokenType.DOT);
+            if (portions.Length == 0)
+            {
+                throw new ParserError(
+                    new ExpectedElementException("Expected name after NAMESPACE token"),
+                    parser.Cursor
+                );
+            }
             return new NamespaceName(portions);
         }
 
@@ -45,17 +52,7 @@ namespace LazenLang.Parsing.Ast.Statements
             NamespaceName name;
             Block block;
 
-            try
-            {
-                name = parser.TryConsumer(NamespaceName.Consume);
-            } catch (ParserError ex)
-            {
-                if (!ex.IsExceptionFictive()) throw ex;
-                throw new ParserError(
-                    new ExpectedElementException("Expected name after NAMESPACE token"),
-                    parser.Cursor
-                );
-            }
+            name = parser.TryConsumer(NamespaceName.Consume);
 
             try
             {
