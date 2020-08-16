@@ -28,9 +28,12 @@ namespace LazenLang
                 topLevel = Block.Consume(parser, false, true);
             } catch (ParserError ex)
             {
-                string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
-                string prettyPrintedContent = PrettyPrinter.PrettyExceptions.PrettyContent(ex.Content);
-                Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
+                if (!(ex.Content is NoTokenLeft))
+                {
+                    string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
+                    string prettyPrintedContent = PrettyPrinter.PrettyExceptions.PrettyContent(ex.Content);
+                    Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
+                }
                 return;
             }
 

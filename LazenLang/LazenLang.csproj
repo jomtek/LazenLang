@@ -11,8 +11,4 @@
     <None Remove="Parsing\Consumers\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Typechecking\" />
-  </ItemGroup>
-
 </Project>

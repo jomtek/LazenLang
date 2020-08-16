@@ -1,20 +1,4 @@
-namespace STD
-{
-	class Container<T>
-	{
-		var object: T
-		constructor(object: T)
-		{
-			this.object = object
-		}
-	}
-}
-
 namespace Program
 {
-	func main()
-	{
-		var container = new Container("hello")
-		println(container.object)
-	}	
+
 }
