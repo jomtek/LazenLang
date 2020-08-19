@@ -38,7 +38,7 @@ namespace LazenLang
                 return;
             }
 
-            Typechecker typechecker = new Typechecker(ast);
+            GlobalChecker typechecker = new GlobalChecker(ast);
             typechecker.TypecheckAst();
 
             stopwatch.Stop();

@@ -1,9 +1,10 @@
 namespace P
 {
+	func main()
+	{
+		func foo()
+		{
+		}
+	}
 	var hello: List<String> = []
-}
-
-namespace P.D
-{
-
 }
