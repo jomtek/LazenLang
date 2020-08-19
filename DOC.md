@@ -42,7 +42,9 @@ Initialize a list using `new List(arr)`.
 **Other essential types**
 
  - `List<T>` where typevar T stands for elements' type
- - `Func(T) -> T1`, the type representing each function. After the arrow stands the return type.
+ - `Func(T) => T1`, the type representing each function. After the arrow stands the return type.
+ - `Void`, the uninstantiable type returned by default when a function doesn't have any codomain or explicit return type
+
 
 ## 2. Boolean and ternary operators
 There are 10 boolean operators in the Lazen programming language
