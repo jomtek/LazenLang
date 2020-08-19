@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Text.Json;
-
-namespace LazenLang.Lexing
+﻿namespace LazenLang.Lexing
 {
     class TokenInfo
     {
         public enum TokenType
         {
             L_PAREN, R_PAREN, L_BRACKET, R_BRACKET, L_CURLY_BRACKET, R_CURLY_BRACKET,
-            COMMA, DOT, APOSTROPHE, QUOTE, EOL, IDENTIFIER, COLON, ARROW,
+            COMMA, DOT, APOSTROPHE, QUOTE, EOL, IDENTIFIER, COLON, ARROW, BIG_ARROW,
             INTEGER_LIT, DOUBLE_LIT, STRING_LIT, CHAR_LIT, BOOLEAN_LIT,
 
             // Keywords    
@@ -16,7 +13,7 @@ namespace LazenLang.Lexing
             NEW, CLASS, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW, INTERFACE, NAMESPACE,
 
             // Atom types
-            BOOL, CHAR, DOUBLE, INT, STRING,
+            BOOL, CHAR, DOUBLE, INT, STRING, VOID,
 
             // Operators
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS, PLUS, MINUS,
@@ -45,6 +42,7 @@ namespace LazenLang.Lexing
             (@"^\}",                                  TokenType.R_CURLY_BRACKET),
             (@"^\:",                                  TokenType.COLON),
             (@"^\-\>",                                TokenType.ARROW),
+            (@"^\=\>",                                TokenType.BIG_ARROW),
             (@"^\+\=",                                TokenType.PLUS_EQ),
             (@"^\-\=",                                TokenType.MINUS_EQ),
             (@"^\/\=",                                TokenType.DIVIDE_EQ),
@@ -104,6 +102,7 @@ namespace LazenLang.Lexing
             (@"^Double(?![a-zA-Z_0-9])",              TokenType.DOUBLE),
             (@"^Int(?![a-zA-Z_0-9])",                 TokenType.INT),
             (@"^String(?![a-zA-Z_0-9])",              TokenType.STRING),
+            (@"^Void(?![a-zA-Z_0-9])",                TokenType.VOID),
             (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
             (@"^.",                                   TokenType.OTHER)
         };

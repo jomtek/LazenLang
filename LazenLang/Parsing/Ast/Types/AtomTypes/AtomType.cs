@@ -25,6 +25,9 @@ namespace LazenLang.Parsing.Ast.Types.AtomTypes
                 case TokenInfo.TokenType.STRING:
                     atomType = parser.TryConsumer(AtomString.Consume);
                     break;
+                case TokenInfo.TokenType.VOID:
+                    atomType = parser.TryConsumer(AtomVoid.Consume);
+                    break;
                 default:
                     break;
             }
