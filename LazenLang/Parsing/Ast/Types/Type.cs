@@ -30,7 +30,7 @@ namespace LazenLang.Parsing.Ast.Types
         {
             CodePosition oldCursor = parser.Cursor;
             Type type = null;
-            
+
             switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.L_BRACKET:
@@ -42,6 +42,10 @@ namespace LazenLang.Parsing.Ast.Types
                         TypeApp.Consume,
                         NameType.Consume
                     });
+                    break;
+
+                case TokenInfo.TokenType.FUNC_TYPE:
+                    type = parser.TryConsumer(FuncType.Consume);
                     break;
 
                 default:

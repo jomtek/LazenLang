@@ -10,7 +10,7 @@
 
             // Keywords    
             VAR, CONST, THIS, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
-            NEW, CLASS, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW, INTERFACE, NAMESPACE,
+            FUNC_TYPE, NEW, CLASS, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW, INTERFACE, NAMESPACE,
 
             // Atom types
             BOOL, CHAR, DOUBLE, INT, STRING, VOID,
@@ -91,6 +91,7 @@
             (@"^break(?![a-zA-Z_0-9])",               TokenType.BREAK),
             (@"^continue(?![a-zA-Z_0-9])",            TokenType.CONTINUE),
             (@"^func(?![a-zA-Z_0-9])",                TokenType.FUNC),
+            (@"^Func(?![a-zA-Z_0-9])",                TokenType.FUNC_TYPE),
             (@"^class(?![a-zA-Z_0-9])",               TokenType.CLASS),
             (@"^new(?![a-zA-Z_0-9])",                 TokenType.NEW),
             (@"^private(?![a-zA-Z_0-9])",             TokenType.PRIVATE),

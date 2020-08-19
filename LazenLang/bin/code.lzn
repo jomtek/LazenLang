@@ -1,17 +1,6 @@
 namespace P
 {
-	func foo(x: Int) -> Int
-	{
-		x * 2		
-	}
-
-
-	func hello() -> Void
-	{
-		println("hello")
-	}
-
-	func main() //-> Func(Int) => Int
+	func foo() -> Func(Int, List<String>) => Int
 	{
 		
 	}
