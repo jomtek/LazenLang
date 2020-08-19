@@ -6,6 +6,7 @@ using LazenLang.Lexing;
 using LazenLang.Parsing;
 using LazenLang.Parsing.Ast;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Typechecking;
 
 namespace LazenLang
 {
@@ -22,10 +23,10 @@ namespace LazenLang
             Token[] tokens = new Lexer(code).Tokens;
             Parser parser = new Parser(tokens);
 
-            Block topLevel;
+            Block ast;
             try
             {
-                topLevel = Block.Consume(parser, false, true);
+                ast = Block.Consume(parser, false, true);
             } catch (ParserError ex)
             {
                 if (!(ex.Content is NoTokenLeft))
@@ -37,12 +38,17 @@ namespace LazenLang
                 return;
             }
 
+            Typechecker typechecker = new Typechecker(ast);
+            typechecker.TypecheckAst();
+
             stopwatch.Stop();
             
-            foreach (InstrNode instr in topLevel.Instructions)
+            foreach (InstrNode instr in ast.Instructions)
             {
                 Console.WriteLine(instr.Value.Pretty());
             }
+
+
 
             Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");
         }

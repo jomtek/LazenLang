@@ -1,4 +1,9 @@
-namespace 
+namespace P
+{
+	var hello: List<String> = []
+}
+
+namespace P.D
 {
 
 }

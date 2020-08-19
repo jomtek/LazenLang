@@ -18,6 +18,16 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new Identifier(literal);
         }
 
+        public override bool Equals(object obj)
+        {
+            return Value == ((Identifier)obj).Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Value);
+        }
+
         public override string Pretty()
         {
             return $"Identifier(`{Value}`)";

@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
+
     class NamespaceName
     {
         public Identifier[] Portions;
@@ -25,6 +26,16 @@ namespace LazenLang.Parsing.Ast.Statements
                 );
             }
             return new NamespaceName(portions);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Portions);
+        }
+
+        public override bool Equals(object other)
+        {
+            return Portions.SequenceEqual(((NamespaceName)other).Portions);
         }
 
         public string Pretty()
