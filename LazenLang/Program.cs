@@ -39,7 +39,7 @@ namespace LazenLang
             }
 
             GlobalChecker typechecker = new GlobalChecker(ast);
-            typechecker.TypecheckAst();
+            typechecker.Typecheck();
 
             stopwatch.Stop();
             
@@ -47,8 +47,6 @@ namespace LazenLang
             {
                 Console.WriteLine(instr.Value.Pretty());
             }
-
-
 
             Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");
         }

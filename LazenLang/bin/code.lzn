@@ -1,7 +1,10 @@
-namespace P
+namespace Program
 {
-	func foo() -> Func(Int, List<String>) => Int
-	{
-		
-	}
+	var hello = ""
+	var c = 12
+	var lol = ["a", "b", 5]
+	var baz = new Lol()
+	var cax = new Lol().foo()
+	var x = 1 + 1 * 2
+	var c = 1 + 1 * new X()
 }

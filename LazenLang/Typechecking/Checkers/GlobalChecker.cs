@@ -17,12 +17,13 @@ namespace LazenLang.Typechecking
             this.globalEnv = new GlobalEnvironment();
         }
 
-        public void TypecheckAst()
+        public void Typecheck()
         {
             foreach (InstrNode node in ast.Instructions)
             {
                 globalEnv.RegisterNamespace(node);
-
+                var nmspChecker = new NamespaceChecker(((NamespaceDecl)node.Value).Block);
+                nmspChecker.Typecheck();
             }
         }
     }
