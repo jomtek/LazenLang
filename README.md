@@ -18,22 +18,25 @@ Lazen is an imperative, object-oriented programming language, which supports typ
 
 **Bubblesort algorithm**
 
-    func BubbleSort<T>(list: List<T>) -> List<T>
+    static func BubbleSort<T>(list: List<T>) -> List<T>
     {
     	var n = list.Len()
     	for i in range(0, n-1)
     		for j in range(0, n-i-1)
-    			if arr[j] > arr[j + 1]
+		{
+    			if list[j] > list[j + 1]
     			{
-    				arr[j] = arr[j + 1]
-    				arr[j + 1] = arr[j]
+    				list[j] = list[j + 1]
+    				list[j + 1] = list[j]
     			}
+		}
+	list
     }
 
 # Project evolution
 
  - [x] Lexing
- - [ ] Parsing
+ - [x] Parsing
  - [ ] Typechecking
  - [ ] IR code generation
 	 - [ ] Optimisation
