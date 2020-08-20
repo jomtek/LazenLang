@@ -2,6 +2,10 @@ namespace Program
 {
 	class Object
 	{
+		private static var counter = 0
+		static func foo()
+		{
 
+		}
 	}
 }

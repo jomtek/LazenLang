@@ -15,12 +15,12 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             Block = block;
         }
 
-        public static FuncDecl Consume(Parser parser)
+        public static FuncDecl Consume(Parser parser, bool inClass = false)
         {
             Signature signature = null;
             Block block = null;
 
-            signature = parser.TryConsumer(Signature.Consume);
+            signature = parser.TryConsumer((Parser p) => Signature.Consume(p, inClass));
             block = parser.TryConsumer((Parser p) => Block.Consume(p));
 
             return new FuncDecl(signature, block);

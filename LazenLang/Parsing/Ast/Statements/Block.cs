@@ -66,15 +66,15 @@ namespace LazenLang.Parsing.Ast.Statements
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
                                 (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(ClassDecl.Consume), p.Cursor)
                             });
                         }
                         else if (intoClass)
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer(FuncDecl.Consume), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true, true)), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p, true)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(ConstructorDecl.Consume), p.Cursor)
                             });
                         }

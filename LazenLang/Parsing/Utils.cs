@@ -76,8 +76,23 @@ namespace LazenLang.Parsing
             {
                 publicAccess = true;
             }
-
+            
             return publicAccess;
+        }
+
+        public static bool ParseStatic(Parser parser)
+        {
+            bool static_ = true;
+            
+            try
+            {
+                parser.Eat(TokenInfo.TokenType.STATIC);
+            } catch (ParserError)
+            {
+                static_ = false;
+            }
+
+            return static_;
         }
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)
         {

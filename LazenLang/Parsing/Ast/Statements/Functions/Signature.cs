@@ -8,23 +8,30 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
     class Signature
     {
         public bool PublicAccess { get; }
+        public bool Static { get; }
         public Identifier Name { get; }
         public TypevarSeq Typevars { get; }
         public Param[] Domain { get; }
         public TypeNode Codomain { get; }
 
-        public Signature(bool publicAccess, Identifier name, TypevarSeq typevars, Param[] domain, TypeNode codomain)
+        public Signature(bool publicAccess, bool static_, Identifier name, TypevarSeq typevars, Param[] domain, TypeNode codomain)
         {
             PublicAccess = publicAccess;
+            Static = static_;
             Name = name;
             Typevars = typevars;
             Domain = domain;
             Codomain = codomain;
         }
 
-        public static Signature Consume(Parser parser)
+        public static Signature Consume(Parser parser, bool inClass = false)
         {
             bool publicAccess = Utils.ParseAccessModifier(parser);
+            bool static_ = false;
+
+            if (inClass)
+                static_ = Utils.ParseStatic(parser);
+
             parser.Eat(TokenInfo.TokenType.FUNC);
 
             Identifier name = null;
@@ -70,7 +77,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
                 }
             }
 
-            return new Signature(publicAccess, name, typevars, domain, codomain);
+            return new Signature(publicAccess, static_, name, typevars, domain, codomain);
         }
 
         public string Pretty()
@@ -89,7 +96,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             if (Codomain != null)
                 prettyCodomain = Codomain.Pretty();
 
-            return $"Signature(access: {prettyAccess}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
+            return $"Signature(access: {prettyAccess}, static: {Static}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
         }
     }
 }
