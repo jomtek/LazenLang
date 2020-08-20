@@ -6,6 +6,7 @@ namespace LazenLang.Typechecking.Tools
 {
     class TypeResolver
     {
+
         public static Type ResolveType(ExprNode expr)
         {
 

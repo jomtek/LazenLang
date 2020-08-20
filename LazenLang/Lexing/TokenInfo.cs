@@ -10,7 +10,8 @@
 
             // Keywords    
             VAR, CONST, THIS, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
-            FUNC_TYPE, NEW, CLASS, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW, INTERFACE, NAMESPACE,
+            FUNC_TYPE, NEW, CLASS, STATIC, ABSTRACT, CONSTRUCTOR, PRIVATE, TRY, CATCH, THROW,
+            INTERFACE, NAMESPACE,
 
             // Atom types
             BOOL, CHAR, DOUBLE, INT, STRING, VOID,
@@ -80,7 +81,7 @@
             (@"^throw(?![a-zA-Z_0-9])",               TokenType.THROW),
             (@"^var(?![a-zA-Z_0-9])",                 TokenType.VAR),
             (@"^const(?![a-zA-Z_0-9])",               TokenType.CONST),
-            (@"^this(?![a-zA-Z_0-9])",               TokenType.THIS),
+            (@"^this(?![a-zA-Z_0-9])",                TokenType.THIS),
             (@"^in(?![a-zA-Z_0-9])",                  TokenType.IN),
             (@"^for(?![a-zA-Z_0-9])",                 TokenType.FOR),
             (@"^return(?![a-zA-Z_0-9])",              TokenType.RETURN),
@@ -97,6 +98,8 @@
             (@"^private(?![a-zA-Z_0-9])",             TokenType.PRIVATE),
             (@"^interface(?![a-zA-Z_0-9])",           TokenType.INTERFACE),
             (@"^namespace(?![a-zA-Z_0-9])",           TokenType.NAMESPACE),
+            (@"^static(?![a-zA-Z_0-9])",              TokenType.STATIC),
+            (@"^abstract(?![a-zA-Z_0-9])",            TokenType.ABSTRACT),
             (@"^constructor(?![a-zA-Z_0-9])",         TokenType.CONSTRUCTOR),
             (@"^Bool(?![a-zA-Z_0-9])",                TokenType.BOOL),
             (@"^Char(?![a-zA-Z_0-9])",                TokenType.CHAR),
