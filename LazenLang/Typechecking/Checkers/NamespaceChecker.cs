@@ -11,14 +11,12 @@ namespace LazenLang.Typechecking
     class NamespaceChecker
     {
         private Environment env;
-        private List<Identifier> classes;
         private Block block;
 
         public NamespaceChecker(Block block)
         {
             this.block = block;
             env = new Environment(new Dictionary<Identifier, TypeDesc>());
-            classes = new List<Identifier>();
         }
 
         public void Typecheck()

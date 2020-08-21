@@ -1,4 +1,5 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Ast.Expressions;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Types;
 using System;
@@ -34,7 +35,7 @@ namespace LazenLang.Parsing.Ast.Statements
             bool static_ = false;
             Identifier name = null;
             TypeNode type = null;
-            ExprNode value = null;
+            ExprNode value = new ExprNode(new NullExpr(), parser.Cursor);
 
             if (inClassOrNamespace)
                 publicAccess = Utils.ParseAccessModifier(parser);
@@ -115,6 +116,23 @@ namespace LazenLang.Parsing.Ast.Statements
                     throw new ParserError(
                         new ExpectedElementException("Expected expression after ASSIGN token"),
                         assignTok.Pos
+                    );
+                }
+            }
+
+            if (value.Value is NullExpr)
+            {
+                if (type == null)
+                {
+                    throw new ParserError(
+                        new ExpectedElementException("Expected either type name or value in variable declaration"),
+                        parser.Cursor
+                    );
+                } else if (!mutable)
+                {
+                    throw new ParserError(
+                       new InvalidElementException("A constant cannot be null"),
+                       parser.Cursor
                     );
                 }
             }

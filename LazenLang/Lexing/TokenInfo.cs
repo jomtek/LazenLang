@@ -6,7 +6,7 @@
         {
             L_PAREN, R_PAREN, L_BRACKET, R_BRACKET, L_CURLY_BRACKET, R_CURLY_BRACKET,
             COMMA, DOT, APOSTROPHE, QUOTE, EOL, IDENTIFIER, COLON, ARROW, BIG_ARROW,
-            INTEGER_LIT, DOUBLE_LIT, STRING_LIT, CHAR_LIT, BOOLEAN_LIT,
+            INTEGER_LIT, DOUBLE_LIT, STRING_LIT, CHAR_LIT, BOOLEAN_LIT, NULL,
 
             // Keywords    
             VAR, CONST, THIS, IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC,
@@ -107,6 +107,7 @@
             (@"^Int(?![a-zA-Z_0-9])",                 TokenType.INT),
             (@"^String(?![a-zA-Z_0-9])",              TokenType.STRING),
             (@"^Void(?![a-zA-Z_0-9])",                TokenType.VOID),
+            (@"^null(?![a-zA-Z_0-9])",                TokenType.NULL),
             (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
             (@"^.",                                   TokenType.OTHER)
         };

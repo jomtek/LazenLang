@@ -1,4 +1,4 @@
 namespace Program
 {
-	var hello = new MyClass<T, A, B>()
+	private const baz: Int = null
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class NegNum
+    class NegNum : Expr
     {
         public Expr Value;
 
