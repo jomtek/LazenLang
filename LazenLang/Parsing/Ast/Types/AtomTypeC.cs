@@ -1,8 +1,9 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Typechecking;
 
 namespace LazenLang.Parsing.Ast.Types.AtomTypes
 {
-    abstract class AtomType : Type
+    abstract class AtomTypeC
     {
         public static AtomType Consume(Parser parser)
         {
@@ -11,23 +12,35 @@ namespace LazenLang.Parsing.Ast.Types.AtomTypes
             switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.BOOL:
-                    atomType = parser.TryConsumer(AtomBool.Consume);
+                    parser.Eat(TokenInfo.TokenType.BOOL);
+                    atomType = new BoolType();
                     break;
+
                 case TokenInfo.TokenType.CHAR:
-                    atomType = parser.TryConsumer(AtomChar.Consume);
+                    parser.Eat(TokenInfo.TokenType.CHAR);
+                    atomType = new CharType();
                     break;
+
                 case TokenInfo.TokenType.DOUBLE:
-                    atomType = parser.TryConsumer(AtomDouble.Consume);
+                    parser.Eat(TokenInfo.TokenType.DOUBLE);
+                    atomType = new DoubleType();
                     break;
+
                 case TokenInfo.TokenType.INT:
-                    atomType = parser.TryConsumer(AtomInt.Consume);
+                    parser.Eat(TokenInfo.TokenType.INT);
+                    atomType = new IntType();
                     break;
+
                 case TokenInfo.TokenType.STRING:
-                    atomType = parser.TryConsumer(AtomString.Consume);
+                    parser.Eat(TokenInfo.TokenType.STRING);
+                    atomType = new StringType();
                     break;
+
                 case TokenInfo.TokenType.VOID:
-                    atomType = parser.TryConsumer(AtomVoid.Consume);
+                    parser.Eat(TokenInfo.TokenType.VOID);
+                    atomType = new VoidType();
                     break;
+
                 default:
                     break;
             }

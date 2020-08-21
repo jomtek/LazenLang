@@ -1,4 +1,4 @@
 namespace Program
 {
-	private const baz: Int = null
+	func map<A, B>(array : Array<A>, body : Func(A) => B) -> Array<B> {}
 }

@@ -13,53 +13,6 @@ namespace LazenLang.Typechecking.Tools
 {
     class TypeResolver
     {
-        private static TypeDesc AstTypeToTypeDesc(LazenLang.Parsing.Ast.Types.Type type)
-        {
-            if (type is AtomBool) return new BoolType();
-            if (type is AtomChar) return new CharType();
-            if (type is AtomDouble) return new DoubleType();
-            if (type is AtomInt) return new IntType();
-            if (type is AtomString) return new StringType();
-
-            if (type is NativeArrayType)
-            {
-                TypeNode castedType = ((NativeArrayType)type).Type;
-                return new ArrayType(AstTypeToTypeDesc(castedType.Type));
-            }
-
-            if (type is Parsing.Ast.Types.NameType)
-            {
-                var castedType = (Parsing.Ast.Types.NameType)type;
-                return new NameType(castedType.Name);
-            }
-
-            if (type is Parsing.Ast.Types.TypeApp)
-            {
-                var castedType = (Parsing.Ast.Types.TypeApp)type;
-                var generics = new List<TypeDesc>();
-
-                foreach (TypeNode node in castedType.GenericArgs)
-                    generics.Add(AstTypeToTypeDesc(node.Type));
-
-                return new TypeApp((NameType)AstTypeToTypeDesc(castedType.BaseType), generics.ToArray()); 
-            }
-
-            if (type is Parsing.Ast.Types.FuncType)
-            {
-                var castedType = (Parsing.Ast.Types.FuncType)type;
-
-                var domain = new List<TypeDesc>();
-                TypeDesc codomain = AstTypeToTypeDesc(castedType.Codomain.Type);
-
-                foreach (TypeNode node in castedType.Domain)
-                    domain.Add(AstTypeToTypeDesc(node.Type));
-
-                return new FuncType(domain.ToArray(), codomain);
-            }
-
-            throw new ArgumentException();
-        }
-
         private static TypeDesc ResolveType(NativeArray arr)
         {
             ExprNode[] elements = ((NativeArray)arr).Elements;
@@ -98,7 +51,7 @@ namespace LazenLang.Typechecking.Tools
             {
                 var generics = new List<TypeDesc>();
                 foreach (TypeNode node in instanciation.GenericArgs)
-                    generics.Add(AstTypeToTypeDesc(node.Type));
+                    generics.Add(node.Type);
 
                 return new TypeApp(new NameType(instanciation.ClassName), generics.ToArray());
             }

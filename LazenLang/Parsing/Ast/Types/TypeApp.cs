@@ -3,28 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Typechecking;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    class TypeApp : Type
+    class TypeAppC
     {
-        public NameType BaseType { get; }
-        public TypeNode[] GenericArgs { get; }
-        
-        public TypeApp(NameType baseType, TypeNode[] genericArgs)
-        {
-            BaseType = baseType;
-            GenericArgs = genericArgs;
-        }
-
         public static TypeApp Consume(Parser parser)
         {
             NameType baseType;
-            TypeNode[] genericArgs;
+            TypeDesc[] genericArgs;
 
-            baseType = parser.TryConsumer(NameType.Consume);
+            baseType = parser.TryConsumer(NameTypeC.Consume);
             parser.Eat(TokenInfo.TokenType.LESS);
-            genericArgs = Utils.ParseSequence(parser, TypeNode.Consume);
+            genericArgs = Utils.ParseSequence(parser, (Parser p) => TypeNode.Consume(p).Type);
 
             try
             {
@@ -46,19 +38,6 @@ namespace LazenLang.Parsing.Ast.Types
             }
 
             return new TypeApp(baseType, genericArgs);
-        }
-
-        public override string Pretty()
-        {
-
-            string result = "";
-            for (int i = 0; i < GenericArgs.Count(); i++)
-            {
-                TypeNode arg = GenericArgs[i];
-                result += arg.Type.Pretty();
-                if (i != GenericArgs.Count() - 1) result += ", ";
-            }
-            return $"TypeApp(base: {BaseType.Pretty()}, args: {{{result}}}";
         }
     }
 }

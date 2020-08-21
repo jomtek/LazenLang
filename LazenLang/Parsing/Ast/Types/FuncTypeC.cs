@@ -3,29 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Typechecking;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    class FuncType : Type
+    class FuncTypeC
     {
-        public TypeNode[] Domain { get; }
-        public TypeNode Codomain { get; }
-
-        public FuncType(TypeNode[] domain, TypeNode codomain)
-        {
-            Domain = domain;
-            Codomain = codomain;
-        }
-
         public static FuncType Consume(Parser parser)
         {
             parser.Eat(TokenInfo.TokenType.FUNC_TYPE);
             parser.Eat(TokenInfo.TokenType.L_PAREN, false);
 
-            TypeNode[] domain;
-            TypeNode codomain;
+            TypeDesc[] domain;
+            TypeDesc codomain;
 
-            domain = Utils.ParseSequence(parser, TypeNode.Consume);
+            domain = Utils.ParseSequence(parser, (Parser p) => TypeNode.Consume(p).Type);
             if (domain.Length == 0)
             {
                 throw new ParserError(
@@ -39,7 +31,7 @@ namespace LazenLang.Parsing.Ast.Types
 
             try
             {
-                codomain = parser.TryConsumer(TypeNode.Consume);
+                codomain = parser.TryConsumer(TypeNode.Consume).Type;
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -50,19 +42,6 @@ namespace LazenLang.Parsing.Ast.Types
             }
 
             return new FuncType(domain, codomain);
-        }
-
-        public override string Pretty()
-        {
-            string prettyDomain = "";
-            for (int i = 0; i < Domain.Length; i++)
-            {
-                TypeNode node = Domain[i];
-                prettyDomain += node.Pretty();
-                if (i != Domain.Length - 1) prettyDomain += ", ";
-            }
-
-            return $"FuncType(domain: {{{prettyDomain}}}, codomain: {Codomain.Pretty()})";
         }
     }
 }

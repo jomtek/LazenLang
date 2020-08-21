@@ -1,24 +1,18 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Typechecking;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    class NativeArrayType : Type
+    class NativeArrayType : TypeDesc
     {
-        public TypeNode Type;
-
-        public NativeArrayType(TypeNode type)
-        {
-            Type = type;
-        }
-
-        public static NativeArrayType Consume(Parser parser)
+        public static ArrayType Consume(Parser parser)
         {
             parser.Eat(TokenInfo.TokenType.L_BRACKET);
 
-            TypeNode type;
+            TypeDesc type;
             try
             {
-                type = parser.TryConsumer(TypeNode.Consume);
+                type = parser.TryConsumer(TypeNode.Consume).Type;
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -30,12 +24,7 @@ namespace LazenLang.Parsing.Ast.Types
 
             parser.Eat(TokenInfo.TokenType.R_BRACKET, false);
 
-            return new NativeArrayType(type);
-        }
-
-        public override string Pretty()
-        {
-            return $"NativeArrayType(type: {Type.Pretty()})";
+            return new ArrayType(type);
         }
     }
 }

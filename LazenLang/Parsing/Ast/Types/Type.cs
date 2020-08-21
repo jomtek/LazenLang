@@ -1,26 +1,19 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Types.AtomTypes;
 using LazenLang.PrettyPrinter;
+using LazenLang.Typechecking;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    abstract class Type
-    {
-        public virtual string Pretty()
-        {
-            return "Type";
-        }
-    }
-
     class TypeNode
     {
-        public Type Type { get;  }
+        public TypeDesc Type { get;  }
         public CodePosition Position { get; }
 
-        public TypeNode(Type type, CodePosition position)
+        public TypeNode(TypeDesc type, CodePosition position)
         {
             Type = type;
             Position = position;
@@ -29,7 +22,7 @@ namespace LazenLang.Parsing.Ast.Types
         public static TypeNode Consume(Parser parser)
         {
             CodePosition oldCursor = parser.Cursor;
-            Type type = null;
+            TypeDesc type = null;
 
             switch (parser.LookAhead().Type)
             {
@@ -38,18 +31,18 @@ namespace LazenLang.Parsing.Ast.Types
                     break;
 
                 case TokenInfo.TokenType.IDENTIFIER:
-                    type = parser.TryManyConsumers(new Func<Parser, Type>[] {
-                        TypeApp.Consume,
-                        NameType.Consume
+                    type = parser.TryManyConsumers(new Func<Parser, TypeDesc>[] {
+                        TypeAppC.Consume,
+                        NameTypeC.Consume
                     });
                     break;
 
                 case TokenInfo.TokenType.FUNC_TYPE:
-                    type = parser.TryConsumer(FuncType.Consume);
+                    type = parser.TryConsumer(FuncTypeC.Consume);
                     break;
 
                 default:
-                    type = parser.TryConsumer(AtomType.Consume);
+                    type = parser.TryConsumer(AtomTypeC.Consume);
                     break;
             }
 
@@ -63,7 +56,7 @@ namespace LazenLang.Parsing.Ast.Types
         {
             string prettyPos = "";
             if (printPos) prettyPos = $", pos: {Position.Pretty()}";
-            return $"TypeNode({Type.Pretty()}{prettyPos})";
+            return $"TypeNode(type: {Type.GetType().Name}{prettyPos})";
         }
     }
 }
