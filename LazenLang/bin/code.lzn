@@ -1,10 +1,4 @@
 namespace Program
 {
-	var hello = ""
-	var c = 12
-	var lol = ["a", "b", "d"]
-	var baz = new Lol<A, List<C>>()
-	var cax = new Lol().foo<A>()
-	var x = 1 + 1 * 2
-	var c2 = 1 + 1 * new X()
+	var hello = new MyClass<T, A, B>()
 }
