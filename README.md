@@ -23,8 +23,8 @@ Lazen is an imperative, object-oriented programming language, which supports typ
     {
     	var n = list.Len()
     	for i in range(0, n-1)
+    	{
     		for j in range(0, n-i-1)
-		{
     			if list[j] > list[j + 1]
     			{
     				list[j] = list[j + 1]
