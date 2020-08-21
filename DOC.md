@@ -154,14 +154,14 @@ Note: in the examples, `instruction` is to be replaced by either a block or any 
 
 ### 2. While loop
 `while expression instruction`
- - Can be broken are continued at any moment
+ - Can be broken or continued at any moment
 	 - `break`
 	 - `continue`
 
 ### 3. For loop
 `for x in array instruction`
 Tip: use the `range` function for "classical" a to b iteration
- - Can be broken are continued at any moment
+ - Can be broken or continued at any moment
 	 - `break`
 	 - `continue`
 

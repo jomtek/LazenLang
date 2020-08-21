@@ -1,11 +1,8 @@
 namespace Program
 {
-	class Object
+	func main() -> Func(String) => [Number]
 	{
-		private static var counter = 0
-		static func foo()
-		{
-
-		}
+		print("hello world\n")
+		0
 	}
 }
