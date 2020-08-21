@@ -29,45 +29,7 @@ namespace LazenLang.Parsing.Ast.Expressions
             ExprNode[] arguments = new ExprNode[0];
 
             name = parser.TryConsumer(Identifier.Consume);
-
-            bool lessToken = true;
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.LESS);
-            } catch (ParserError)
-            {
-                lessToken = false;
-            }
-
-            if (lessToken)
-            {
-                genericArgs = Utils.ParseSequence(parser, TypeNode.Consume);
-
-                try
-                {
-                    parser.Eat(TokenInfo.TokenType.GREATER);
-                }
-                catch (ParserError ex)
-                {
-                    if (genericArgs.Count() > 1)
-                    {
-                        throw new ParserError(
-                            new ExpectedTokenException(TokenInfo.TokenType.GREATER),
-                            parser.Cursor
-                        );
-                    }
-
-                    throw ex;
-                }
-
-                if (genericArgs.Count() == 0)
-                {
-                    throw new ParserError(
-                        new ExpectedElementException("Expected one or more generic types"),
-                        parser.Cursor
-                    );
-                }
-            }
+            genericArgs = Utils.ParseGenericArgs(parser);
 
             parser.Eat(TokenInfo.TokenType.L_PAREN);
 
@@ -91,11 +53,11 @@ namespace LazenLang.Parsing.Ast.Expressions
         public override string Pretty()
         {
             string prettyGenericArgs = "";
-            for (int i = 0; i < GenericArgs.Count(); i++)
+            for (int i = 0; i < GenericArgs.Length; i++)
             {
                 TypeNode node = GenericArgs[i];
                 prettyGenericArgs += node.Pretty();
-                if (i != GenericArgs.Count() - 1) prettyGenericArgs += ", ";
+                if (i != GenericArgs.Length - 1) prettyGenericArgs += ", ";
             }
 
             return $"FuncCall(name: {Name.Pretty()}, genericArgs: {{{prettyGenericArgs}}}, args: {Utils.PrettyArgs(Arguments)})";

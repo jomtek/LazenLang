@@ -1,8 +1,10 @@
 namespace Program
 {
-	func main() -> Func(String) => [Number]
-	{
-		print("hello world\n")
-		0
-	}
+	var hello = ""
+	var c = 12
+	var lol = ["a", "b", "d"]
+	var baz = new Lol<A, List<C>>()
+	var cax = new Lol().foo<A>()
+	var x = 1 + 1 * 2
+	var c2 = 1 + 1 * new X()
 }

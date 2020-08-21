@@ -8,9 +8,9 @@ namespace LazenLang.Typechecking
 {
     class Environment
     {
-        private Dictionary<Identifier, Type> table;
+        private Dictionary<Identifier, TypeDesc> table;
         
-        public Environment(Dictionary<Identifier, Type> table)
+        public Environment(Dictionary<Identifier, TypeDesc> table)
         {
             this.table = table;
         }
@@ -20,19 +20,19 @@ namespace LazenLang.Typechecking
             return table.ContainsKey(id);
         }
 
-        public Type LookupId(Identifier id)
+        public TypeDesc LookupId(Identifier id)
         {
             if (!Has(id)) throw new KeyNotFoundException();
             return table[id];
         }
 
-        public void SetIdType(Identifier id, Type type)
+        public void SetIdType(Identifier id, TypeDesc type)
         {
             LookupId(id);
             table[id] = type; 
         }
 
-        public void AddEntry(Identifier id, CodePosition position, Type type)
+        public void AddEntry(Identifier id, CodePosition position, TypeDesc type)
         {
             if (Has(id))
             {

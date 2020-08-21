@@ -19,6 +19,17 @@ namespace LazenLang.Typechecking
         }
     }
 
+    class MismatchedTypes : ITypecheckerErrorContent
+    {
+        public TypeDesc Expected;
+        public TypeDesc Found;
+        public MismatchedTypes(TypeDesc expected, TypeDesc found)
+        {
+            Expected = expected;
+            Found = found;
+        }
+    }
+
     class NamespaceShadowing : ITypecheckerErrorContent
     {
         public NamespaceName NamespaceName;

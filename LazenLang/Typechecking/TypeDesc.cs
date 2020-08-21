@@ -31,6 +31,15 @@ namespace LazenLang.Typechecking
         }
     }
 
+    class ArrayType : TypeDesc
+    {
+        public TypeDesc ElementsType { get; }
+        public ArrayType(TypeDesc elementsType)
+        {
+            ElementsType = elementsType;
+        }
+    }
+
     class FuncType : TypeDesc
     {
         public TypeDesc[] Domain { get; }
@@ -39,6 +48,15 @@ namespace LazenLang.Typechecking
         {
             Domain = domain;
             Codomain = codomain;
+        }
+    }
+
+    class TypeVariable : TypeDesc
+    {
+        public int Num { get; }
+        public TypeVariable(int num)
+        {
+            Num = num;
         }
     }
 

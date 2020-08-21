@@ -8,6 +8,7 @@ using LazenLang.Parsing.Ast;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Statements;
 using LazenLang.Parsing.Ast.Statements.Functions;
+using LazenLang.Parsing.Ast.Types;
 
 namespace LazenLang.Parsing
 {
@@ -93,6 +94,53 @@ namespace LazenLang.Parsing
             }
 
             return static_;
+        }
+
+        public static TypeNode[] ParseGenericArgs(Parser parser)
+        {
+            TypeNode[] genericArgs = new TypeNode[0];
+
+            bool lessToken = true;
+            try
+            {
+                parser.Eat(TokenInfo.TokenType.LESS);
+            }
+            catch (ParserError)
+            {
+                lessToken = false;
+            }
+
+            if (lessToken)
+            {
+                genericArgs = Utils.ParseSequence(parser, TypeNode.Consume);
+
+                try
+                {
+                    parser.Eat(TokenInfo.TokenType.GREATER);
+                }
+                catch (ParserError ex)
+                {
+                    if (genericArgs.Count() > 1)
+                    {
+                        throw new ParserError(
+                            new ExpectedTokenException(TokenInfo.TokenType.GREATER),
+                            parser.Cursor
+                        );
+                    }
+
+                    throw ex;
+                }
+
+                if (genericArgs.Count() == 0)
+                {
+                    throw new ParserError(
+                        new ExpectedElementException("Expected one or more generic types"),
+                        parser.Cursor
+                    );
+                }
+            }
+
+            return genericArgs;
         }
         /*public static string PrettyArray<T, T1>(T[] list, Func<T, string> prettyPrinter)
         {
