@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.OOP;
@@ -121,8 +122,15 @@ namespace LazenLang.Parsing.Ast.Statements
             }
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
+            
             InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoNamespace, intoClass));
+
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
+
+            if (!intoNamespace && !intoClass)
+            {
+                Console.WriteLine("ye");
+            }
 
             return new Block(statements);
         }

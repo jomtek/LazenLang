@@ -9,11 +9,11 @@ namespace LazenLang.Parsing.Ast.Expressions
 {
     class IfInstr : Expr
     {
-        public Expr Condition;
+        public ExprNode Condition;
         public Block MainBranch;
         public Block ElseBranch;
 
-        public IfInstr(Expr condition, Block mainBranch, Block elseBranch)
+        public IfInstr(ExprNode condition, Block mainBranch, Block elseBranch)
         {
             Condition = condition;
             MainBranch = mainBranch;
@@ -29,10 +29,10 @@ namespace LazenLang.Parsing.Ast.Expressions
             var elifBranches = new List<IfInstr>();
 
             #region base_condition
-            Expr baseCondition;
+            ExprNode baseCondition;
             try
             {
-                baseCondition = parser.TryConsumer(ExprNode.Consume).Value;
+                baseCondition = parser.TryConsumer(ExprNode.Consume);
             } catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
@@ -64,7 +64,7 @@ namespace LazenLang.Parsing.Ast.Expressions
             #region elif_branches_collect
             while (true)
             {
-                Expr condition;
+                ExprNode condition;
                 Block branch;
                 
                 while (true)
@@ -89,7 +89,7 @@ namespace LazenLang.Parsing.Ast.Expressions
 
                 try
                 {
-                    condition = parser.TryConsumer(ExprNode.Consume).Value;
+                    condition = parser.TryConsumer(ExprNode.Consume);
                 }
                 catch (ParserError ex)
                 {
@@ -172,7 +172,8 @@ namespace LazenLang.Parsing.Ast.Expressions
                 for (int i = 0; i < elifBranches.Count - 1; i++)
                 {
                     IfInstr branch = elifBranches[i];
-                    elifBranches[i + 1].ElseBranch = new Block(new InstrNode[] {
+                    elifBranches[i + 1].ElseBranch = new Block(new InstrNode[]
+                    {
                         new InstrNode(new ExprInstr(branch), new CodePosition())
                     });
                 }

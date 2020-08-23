@@ -6,18 +6,19 @@ using System.Linq;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-
     class NamespaceName
     {
-        public Identifier[] Portions;
-        public NamespaceName(Identifier[] portions)
+        public Identifier Seq;
+        public NamespaceName(Identifier seq)
         {
-            Portions = portions;
+            Seq = seq;
         }
 
         public static NamespaceName Consume(Parser parser)
         {
-            Identifier[] portions = Utils.ParseSequence(parser, Identifier.Consume, TokenInfo.TokenType.DOT);
+            string[] portions = Utils.ParseSequence(parser, (Parser p) => Identifier.Consume(p).Value, TokenInfo.TokenType.DOT);
+            string name = string.Join('.', portions);
+
             if (portions.Length == 0)
             {
                 throw new ParserError(
@@ -25,23 +26,12 @@ namespace LazenLang.Parsing.Ast.Statements
                     parser.Cursor
                 );
             }
-            return new NamespaceName(portions);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Portions);
-        }
-
-        public override bool Equals(object other)
-        {
-            return Portions.SequenceEqual(((NamespaceName)other).Portions);
+            return new NamespaceName(new Identifier(name));
         }
 
         public string Pretty()
         {
-            IEnumerable<string> portions = (from x in Portions select x.Value);
-            return $"NamespaceName(`{string.Join('.', portions)}`)";
+            return $"NamespaceName(`{Seq}`)";
         }
     }
 

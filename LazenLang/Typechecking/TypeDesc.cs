@@ -60,6 +60,22 @@ namespace LazenLang.Typechecking
         }
     }
 
+    class NullType : TypeDesc
+    {}
+
+    // Experimental --
+    class Namespace : TypeDesc
+    {}
+
+    class Class : TypeDesc
+    {
+        public Identifier[] GenericParameters { get; }
+        public Class(Identifier[] genericParameters)
+        {
+            GenericParameters = genericParameters;
+        }
+    }
+
     class BoolType : AtomType {}
     class CharType : AtomType {}
     class DoubleType : AtomType {}

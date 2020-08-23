@@ -15,7 +15,7 @@ namespace LazenLang.Parsing.Ast.Statements
         public bool PublicAccess { get; }
         public bool Static { get;  }
         public Identifier Name { get; }
-        public TypeNode Type { get; }
+        public TypeNode Type { get; set; }
         public ExprNode Value { get; }
 
         public VarDecl(bool mutable, bool publicAccess, bool static_, Identifier name, TypeNode type, ExprNode value)

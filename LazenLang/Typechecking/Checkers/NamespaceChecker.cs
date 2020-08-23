@@ -1,6 +1,8 @@
 ﻿using LazenLang.Parsing.Ast;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Parsing.Ast.Statements.OOP;
+using LazenLang.Parsing.Ast.Types;
 using LazenLang.Typechecking.Tools;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,10 @@ namespace LazenLang.Typechecking
         private Environment env;
         private Block block;
 
-        public NamespaceChecker(Block block)
+        public NamespaceChecker(Block block, Environment env)
         {
             this.block = block;
-            env = new Environment(new Dictionary<Identifier, TypeDesc>());
+            this.env = env; 
         }
 
         public void Typecheck()
@@ -27,8 +29,18 @@ namespace LazenLang.Typechecking
                 if (instruction is VarDecl)
                 {
                     VarDecl variable = (VarDecl)instruction;
-                    TypeDesc varType = TypeResolver.ResolveType(variable.Value);
-                    env.AddEntry(variable.Name, node.Position, varType);
+                    TypeDesc varType = TypeResolver.ResolveType(variable.Value, env, variable.Value.Position);
+
+                    if (variable.Type == null && !(varType is NullType))
+                        variable.Type = new TypeNode(varType, variable.Value.Position);
+
+                    env.AddEntry(variable.Name, varType, node.Position);
+                }
+
+                if (instruction is ClassDecl)
+                {
+                    ClassDecl classDecl = (ClassDecl)instruction;
+                    env.AddEntry(classDecl.Name, new Class(classDecl.Typevars.Sequence), node.Position);
                 }
             }
         }

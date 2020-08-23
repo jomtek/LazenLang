@@ -20,28 +20,21 @@ namespace LazenLang.Typechecking
             return table.ContainsKey(id);
         }
 
-        public TypeDesc LookupId(Identifier id)
+        public TypeDesc LookupId(Identifier id, CodePosition position)
         {
-            if (!Has(id)) throw new KeyNotFoundException();
+            if (!Has(id)) throw new TypecheckerError(new EnvironmentError($"Unknown name `{id}`"), position);
             return table[id];
         }
 
-        public void SetIdType(Identifier id, TypeDesc type)
+        public void SetIdType(Identifier id, CodePosition position, TypeDesc type)
         {
-            LookupId(id);
+            LookupId(id, position);
             table[id] = type; 
         }
 
-        public void AddEntry(Identifier id, CodePosition position, TypeDesc type)
+        public void AddEntry(Identifier id, TypeDesc type, CodePosition position)
         {
-            if (Has(id))
-            {
-                throw new TypecheckerError(
-                    new IdentifierShadowing(id),
-                    position
-                );
-            }
-
+            if (Has(id)) throw new TypecheckerError(new EnvironmentError($"Name `{id}` is already defined"), position);
             table.Add(id, type);
         }
     }

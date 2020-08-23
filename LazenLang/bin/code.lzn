@@ -1,4 +1,9 @@
 namespace Program
 {
-	func map<A, B>(array : Array<A>, body : Func(A) => B) -> Array<B> {}
+	class Hello<T>
+	{
+
+	}
+
+	private var lol = new Hello<String>() // ça a inféré le type à partir de la valeur
 }
