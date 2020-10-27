@@ -48,6 +48,8 @@ namespace LazenLang
                 Console.WriteLine(instr.Value.Pretty());
             }
 
+	    // IR compiler.
+
             Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");
         }
     }
