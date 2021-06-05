@@ -129,7 +129,7 @@ namespace LazenLang.Parsing.Ast.Statements
 
             if (!intoNamespace && !intoClass)
             {
-                Console.WriteLine("ye");
+                //Console.WriteLine("ye");
             }
 
             return new Block(statements);

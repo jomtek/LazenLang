@@ -16,11 +16,18 @@ namespace LazenLang
         {
             Console.WriteLine("Compiling...");
             
+
+            string code = File.ReadAllText("../../code.lzn");
+
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            string code = File.ReadAllText("../../code.lzn");
             Token[] tokens = new Lexer(code).Tokens;
+
+            stopwatch.Stop();
+            Console.WriteLine($"elapsed for tokenizer: {stopwatch.ElapsedMilliseconds}");
+
+
             Parser parser = new Parser(tokens);
 
             Block ast;
@@ -38,15 +45,15 @@ namespace LazenLang
                 return;
             }
 
-            TopLevelChecker typechecker = new TopLevelChecker(ast);
-            typechecker.Typecheck();
+            //TopLevelChecker typechecker = new TopLevelChecker(ast);
+            //typechecker.Typecheck();
 
-            stopwatch.Stop();
+            //stopwatch.Stop();
             
-            foreach (InstrNode instr in ast.Instructions)
+            /*foreach (InstrNode instr in ast.Instructions)
             {
                 Console.WriteLine(instr.Value.Pretty());
-            }
+            }*/
 
 	    // IR compiler.
 

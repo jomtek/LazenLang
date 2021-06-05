@@ -1,9 +1,997 @@
 namespace Program
 {
-	class Hello<T>
+	class Main
 	{
+		/*func BubbleSort<T>(list: List<T>) -> List<T>
+		{
+			var n = list.Len()
+			for i in range(0, n-1)
+			{
+				for j in range(0, n-i-1)
+				{
+					if list[j] > list[j + 1]
+					{
+						list[j] = list[j + 1]
+						list[j + 1] = list[j]
+					}
+				}
+			}
+			list
+		}*/
 
+		constructor()
+		{
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+
+					println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+			println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+						println("BubbleSort demo:")
+			for i in BubbleSort([1, 4, 8, 5, 2])
+			{
+				println(i)
+			}
+		}
 	}
-
-	private var lol = new Hello<String>() // ça a inféré le type à partir de la valeur
 }

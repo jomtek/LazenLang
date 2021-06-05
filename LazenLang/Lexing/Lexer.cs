@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace LazenLang.Lexing
@@ -23,37 +24,43 @@ namespace LazenLang.Lexing
             int colTrack = 1;
             int lineTrack = 1;
 
+            int regexesCreated = 0;
+            int totalMs = 0;
+
             while (code.Length > 0)
             {
-                foreach ((string, TokenInfo.TokenType) regexPair in TokenInfo.RegexTable)
+                if (GetEscapeSequence(code[0]) == @"\u000D")
+                {
+                    code = code.Substring(1);
+                    continue;
+                }
+
+                foreach ((string, TokenInfo.TokenType) regexPair in
+                        Char.IsLetter(code[0]) ? TokenInfo.IdenRegexTable : TokenInfo.OtherRegexTable)
                 {
                     TokenInfo.TokenType tokenType = regexPair.Item2;
-
-                    var regex = new Regex(regexPair.Item1);
-                    Match match = regex.Match(code);
-                    int matchLength = match.Length;
-                    string matchValue = match.Value;
-
+                 
+                    Match match = new Regex(regexPair.Item1).Match(code);
                     if (match.Success)
                     {
+                        int matchLength = match.Length;
+                        string matchValue = match.Value;
+
                         if (tokenType != TokenInfo.TokenType.SPACE && tokenType != TokenInfo.TokenType.TAB)
                         {
-                            if (GetEscapeSequence(matchValue[0]) != @"\u000D") // Because we don't need CR characters as tokens
-                            {
-                                if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
-                                    matchValue = matchValue.Substring(1).Remove(matchLength - 2);
+                            if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
+                                matchValue = matchValue.Substring(1).Remove(matchLength - 2);
 
-                                
-                                if (tokenType != TokenInfo.TokenType.SINGLE_LINE_COMMENT && tokenType != TokenInfo.TokenType.MULTI_LINE_COMMENT)
-                                    result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
-                            }
+                            if (tokenType != TokenInfo.TokenType.SINGLE_LINE_COMMENT && tokenType != TokenInfo.TokenType.MULTI_LINE_COMMENT)
+                                result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
                         }
 
                         if (tokenType == TokenInfo.TokenType.EOL)
                         {
                             colTrack = 1;
                             lineTrack++;
-                        } else
+                        }
+                        else
                         {
                             colTrack += match.Length;
                         }
@@ -65,6 +72,8 @@ namespace LazenLang.Lexing
             }
 
             Tokens = result.ToArray();
+            System.Console.WriteLine($"total ms for regex instanciation: {totalMs}");
+            System.Console.WriteLine($"regexes created: {regexesCreated}");
         }
     }
 }
