@@ -1,0 +1,8 @@
+class Program
+{
+	static func Main([string] args)
+	{
+		println("Hello, world")
+		0
+	}
+}

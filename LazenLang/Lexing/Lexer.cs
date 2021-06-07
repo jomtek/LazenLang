@@ -24,9 +24,6 @@ namespace LazenLang.Lexing
             int colTrack = 1;
             int lineTrack = 1;
 
-            int regexesCreated = 0;
-            int totalMs = 0;
-
             while (code.Length > 0)
             {
                 if (GetEscapeSequence(code[0]) == @"\u000D")
@@ -72,8 +69,6 @@ namespace LazenLang.Lexing
             }
 
             Tokens = result.ToArray();
-            System.Console.WriteLine($"total ms for regex instanciation: {totalMs}");
-            System.Console.WriteLine($"regexes created: {regexesCreated}");
         }
     }
 }

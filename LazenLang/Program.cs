@@ -34,7 +34,8 @@ namespace LazenLang
             try
             {
                 ast = Block.Consume(parser, false, true);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!(ex.Content is NoTokenLeft))
                 {

@@ -14,7 +14,7 @@ Note: This documentation is very incomplete and is still in work.
  6. Lambdas
  7. Blocks
  8. Flow-of-control statements
- 9. Namespaces
+ 9. Modules
  10. Classes
  11. Type casting
  12. Exceptions
@@ -168,26 +168,35 @@ Tip: use the `range` function for a "classical" a to b iteration
 	 - `break`
 	 - `continue`
 
-## 9. Namespaces
-A program is constitued of at least one namespace which contains functions and classes. A root namespace contains the `Program` class, itself containing a public static `Main` method defined by `[string] -> Int`. <br>Here you find the program's entry-point.
+## 9. Modules
+A Lazen project is constitued of at least one module represented by a simple folder. Think of it as a namespace. 
+Modules are loaded statically
 
-Thus, a valid Lazen program looks like below
+A folder contains
+ - Sub-folders which are associated with sub-modules or sub-namespaces
+ - `*.lzn` files which are associated with (single) classes or interfaces
 
-    namespace Project
+Thus, a valid Hello World program looks like below
+
+![Hello World project tree](https://i.imgur.com/16cy5um.png)
+
+Contents of `code.lzn` :
+
+    class Program
     {
-	    class Program
-		{
-		    static func Main([string] args)
-			{
-				// ...
-				0
-			}
-		}
+    	static func Main([string] args)
+    	{
+    		println("Hello world!")
+    		0
+    	}
     }
 
- - Public functions are marked PascalCase
-   - There is no `public` keyword  : every object behaves as public by default
-   - Note that the `private` keyword is usable
+Notice how the file name `code` has absolutely nothing to do with its contents.
+
+Notes
+- Public functions are marked PascalCase
+- There is no `public` keyword  : every object behaves as public by default
+- Note that the `private` keyword is usable
 
 <br>
 In order to access objects from a specific distant namespace - in this example, the `Abs` function from the `Math` namespace - you need to use the same syntax as when you try to access a member from some class
@@ -202,7 +211,7 @@ A class is implemented this way - here, a simple class with a constructor, initi
     class MyClass
     {
 	    var Number: Int
-	    constructor (number)
+	    constructor(number)
 		{
 			this Number = number
 		}
