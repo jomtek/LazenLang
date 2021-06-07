@@ -1,4 +1,3 @@
-
 # The Lazen Programming Language
 Lazen is an imperative, object-oriented programming language, which supports type-inference. It is meant to be "100% handmade" : it uses no lexing/parsing/compilation library.
 
@@ -9,7 +8,7 @@ Lazen is an imperative, object-oriented programming language, which supports typ
 
     class Program
     {
-    	static func Main([string] args)
+    	static func Main(args: [String])
     	{
     		println("Hello, world!")
     		0

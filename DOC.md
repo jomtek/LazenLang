@@ -1,4 +1,3 @@
-
 # **Lazen Documentation**
 
 Lazen is an imperative, object-oriented, statically-typed and type-inferred programming language, which offers higher-order functions and more. This language is meant to be learned in a matter of hours.
@@ -184,7 +183,7 @@ Contents of `code.lzn` :
 
     class Program
     {
-    	static func Main([string] args)
+    	static func Main(args: [String])
     	{
     		println("Hello world!")
     		0

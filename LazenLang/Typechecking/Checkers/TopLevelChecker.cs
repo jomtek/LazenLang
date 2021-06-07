@@ -23,9 +23,9 @@ namespace LazenLang.Typechecking
         {
             foreach (InstrNode node in ast.Instructions)
             {
-                NamespaceDecl nmsp = ((NamespaceDecl)node.Value);
-                topLevelEnvironment.AddEntry(nmsp.Name.Seq, new Namespace(), node.Position);
-                new NamespaceChecker(nmsp.Block, topLevelEnvironment).Typecheck();
+                //NamespaceDecl nmsp = ((NamespaceDecl)node.Value);
+                //topLevelEnvironment.AddEntry(nmsp.Name.Seq, new Namespace(), node.Position);
+                //new NamespaceChecker(nmsp.Block, topLevelEnvironment).Typecheck();
             }
         }
     }

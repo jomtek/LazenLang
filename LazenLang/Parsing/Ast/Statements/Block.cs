@@ -16,7 +16,7 @@ namespace LazenLang.Parsing.Ast.Statements
             Instructions = instructions;
         }
 
-        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevel, bool intoNamespace, bool intoClass)
+        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevel, bool intoClass)
         {
             var statements = new List<InstrNode>();
             bool isLastEOL = true;
@@ -61,18 +61,13 @@ namespace LazenLang.Parsing.Ast.Statements
                     {
                         if (topLevel)
                         {
-                            statement = parser.TryConsumer((Parser p) => new InstrNode(p.TryConsumer(NamespaceDecl.Consume), p.Cursor));
-                        }
-                        else if (intoNamespace)
-                        {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer(ClassDecl.Consume), p.Cursor)
                             });
                         }
                         else if (intoClass)
                         {
+                            Console.WriteLine("into class");
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
                                 (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true, true)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p, true)), p.Cursor),
@@ -99,7 +94,8 @@ namespace LazenLang.Parsing.Ast.Statements
 
                     statements.Add(statement);
                     isLastEOL = false;
-                } else
+                }
+                else
                 {
                     isLastEOL = true;
                 }
@@ -108,7 +104,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false, bool intoNamespace = false, bool intoClass = false)
+        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false, bool intoClass = false)
         {
             while (true)
             {
@@ -123,11 +119,11 @@ namespace LazenLang.Parsing.Ast.Statements
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
             
-            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoNamespace, intoClass));
+            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoClass));
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
 
-            if (!intoNamespace && !intoClass)
+            if (!intoClass)
             {
                 //Console.WriteLine("ye");
             }

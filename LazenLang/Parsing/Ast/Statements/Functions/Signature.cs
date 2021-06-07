@@ -48,6 +48,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
             parser.Eat(TokenInfo.TokenType.L_PAREN, false);
             domain = Utils.ParseSequence(parser, Param.Consume);
+
             parser.Eat(TokenInfo.TokenType.R_PAREN, false);
 
             bool arrow = true;

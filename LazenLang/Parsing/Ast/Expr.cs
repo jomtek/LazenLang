@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace LazenLang.Parsing.Ast
 {
-
     abstract class Expr
     {
         public virtual string Pretty()

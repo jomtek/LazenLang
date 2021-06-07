@@ -17,7 +17,7 @@ namespace LazenLang
             Console.WriteLine("Compiling...");
             
 
-            string code = File.ReadAllText("../../code.lzn");
+            string code = File.ReadAllText("../../../../Demo/HelloWorld/code.lzn");
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
