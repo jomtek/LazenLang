@@ -26,7 +26,7 @@ Lazen is an imperative, object-oriented programming language, which supports typ
     		for j in range(0, n-i-1)
     		{
     			if list[j] > list[j + 1]
-	    			swap(list, j, j+1)
+	    				swap(list, j, j+1)
     		}
     	}
     	list
