@@ -14,8 +14,7 @@ namespace LazenLang
     {
         static void Main()
         {
-            Console.WriteLine("Compiling...");
-            
+            Console.WriteLine("Compiling..."); 
 
             string code = File.ReadAllText("../../../../Demo/HelloWorld/code.lzn");
 
@@ -23,11 +22,6 @@ namespace LazenLang
             stopwatch.Start();
 
             Token[] tokens = new Lexer(code).Tokens;
-
-            stopwatch.Stop();
-            Console.WriteLine($"elapsed for tokenizer: {stopwatch.ElapsedMilliseconds}");
-
-
             Parser parser = new Parser(tokens);
 
             Block ast;

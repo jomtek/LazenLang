@@ -1,6 +1,6 @@
 class Program
 {
-	func Main(arg: [string])
+	func Main(arg: [String])
 	{
 		println("Hello, world")
 		0

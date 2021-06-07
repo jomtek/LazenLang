@@ -67,7 +67,6 @@ namespace LazenLang.Parsing.Ast.Statements
                         }
                         else if (intoClass)
                         {
-                            Console.WriteLine("into class");
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
                                 (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true, true)), p.Cursor),
                                 (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p, true)), p.Cursor),
