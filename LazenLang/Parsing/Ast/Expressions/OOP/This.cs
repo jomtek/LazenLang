@@ -2,10 +2,11 @@
 using LazenLang.Lexing;
 using System.Collections.Generic;
 using System.Text;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions.OOP
 {
-    class This : Expr
+    public class This : Expr, IPrettyPrintable
     {
         public static This Consume(Parser parser)
         {
@@ -13,9 +14,9 @@ namespace LazenLang.Parsing.Ast.Expressions.OOP
             return new This();
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return "This()";
+            return "This";
         }
     }
 }

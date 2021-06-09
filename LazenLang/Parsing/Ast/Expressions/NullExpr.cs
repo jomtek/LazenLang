@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions
 {
-    class NullExpr : Expr
+    public class NullExpr : Expr, IPrettyPrintable
     {
         public static NullExpr Consume(Parser parser)
         {
@@ -13,9 +14,9 @@ namespace LazenLang.Parsing.Ast.Expressions
             return new NullExpr();
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return "NullExpr()";
+            return "Null";
         }
     }
 }

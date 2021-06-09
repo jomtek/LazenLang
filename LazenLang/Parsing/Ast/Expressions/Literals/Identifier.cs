@@ -1,9 +1,10 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 using System;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class Identifier : Literal
+    public class Identifier : Literal, IPrettyPrintable
     {
         public string Value;
 
@@ -28,9 +29,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return HashCode.Combine(Value);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"Identifier(`{Value}`)";
+            return $"Identifier: {Value}";
         }
     }
 }

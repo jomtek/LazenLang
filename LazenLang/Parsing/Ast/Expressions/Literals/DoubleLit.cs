@@ -1,4 +1,5 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class DoubleLit : Literal
+    public class DoubleLit : Literal, IPrettyPrintable
     {
         public double Value;
 
@@ -30,9 +31,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             }
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"DoubleLit({Value})"; 
+            return $"DoubleLit: {Value}";
         }
     }
 }

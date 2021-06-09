@@ -3,10 +3,12 @@ using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Lexing;
 using System;
 using System.Linq;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions
 {
-    class Lambda : Expr
+    public class Lambda : Expr, IPrettyPrintable
     {
         public Param[] Domain;
         public ExprNode ReturnValue;
@@ -44,16 +46,14 @@ namespace LazenLang.Parsing.Ast.Expressions
             return new Lambda(domain, returnValue);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyDomain = "";
-            for (int i = 0; i < Domain.Count(); i++)
-            {
-                Param param = Domain[i];
-                prettyDomain += param.Pretty();
-                if (i != Domain.Count() - 1) prettyDomain += ", ";
-            }
-            return $"Lambda(domain: {{{prettyDomain}}}, returnValue: {ReturnValue.Pretty()})";
+            var sb = new StringBuilder("Lambda");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Domain: {Display.Utils.PrettyArray(Domain, level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Return Value: {ReturnValue.Pretty(level)}");
+
+            return sb.ToString();
         }
     }
 }

@@ -3,21 +3,20 @@ using LazenLang.Parsing.Algorithms;
 using LazenLang.Parsing.Ast.Expressions;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Expressions.OOP;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast
 {
-    abstract class Expr
+    public abstract class Expr : IPrettyPrintable
     {
-        public virtual string Pretty()
-        {
-            return "Expr";
-        }
+        public abstract string Pretty(int level);
     }
 
-    class ExprNode
+    public class ExprNode : IPrettyPrintable
     {
         public Expr Value;
         public CodePosition Position;
@@ -99,13 +98,13 @@ namespace LazenLang.Parsing.Ast
                     operand = parser.TryConsumer(NativeArray.Consume);
                     break;
 
-                case TokenInfo.TokenType.NEG:
-                    operand = parser.TryConsumer(NegExpr.Consume);
+                case TokenInfo.TokenType.NOT:
+                    operand = parser.TryConsumer(NotExpr.Consume);
                     break;
 
                 case TokenInfo.TokenType.MINUS:
                 case TokenInfo.TokenType.PLUS:
-                    operand = parser.TryConsumer(NegNum.Consume);
+                    operand = parser.TryConsumer(NegExpr.Consume);
                     break;
 
                 case TokenInfo.TokenType.IF:
@@ -190,11 +189,9 @@ namespace LazenLang.Parsing.Ast
             );
         }
 
-        public string Pretty(bool printPos = false)
+        public string Pretty(int level)
         {
-            string prettyPos = "";
-            if (printPos) prettyPos = $", pos: {Position.Pretty()}";
-            return $"ExprNode(value: {Value.Pretty()}{prettyPos})";
+            return "ExprNode: " + Value.Pretty(level);
         }
     }
 }

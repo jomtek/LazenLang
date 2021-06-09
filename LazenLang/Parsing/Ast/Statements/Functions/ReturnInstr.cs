@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Statements.Functions
 {
-    class ReturnInstr : Instr
+    public class ReturnInstr : Instr, IPrettyPrintable
     {
         public ExprNode Value;
 
@@ -31,11 +32,9 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             return new ReturnInstr(value);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyValue = "none";
-            if (Value != null) prettyValue = Value.Value.Pretty();
-            return $"ReturnInstr({prettyValue})";
+            return $"ReturnInstr: {Value.Pretty(level)}";
         }
     }
 }

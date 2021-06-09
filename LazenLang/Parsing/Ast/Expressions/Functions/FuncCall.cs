@@ -1,6 +1,7 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Types;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions
 {
-    class FuncCall : Expr
+    public class FuncCall : Expr, IPrettyPrintable
     {
         public Identifier Name { get; }
         public TypeNode[] GenericArgs { get; }
@@ -50,17 +51,15 @@ namespace LazenLang.Parsing.Ast.Expressions
             return new FuncCall(name, genericArgs, arguments);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyGenericArgs = "";
-            for (int i = 0; i < GenericArgs.Length; i++)
-            {
-                TypeNode node = GenericArgs[i];
-                prettyGenericArgs += node.Pretty();
-                if (i != GenericArgs.Length - 1) prettyGenericArgs += ", ";
-            }
+            var sb = new StringBuilder("FuncCall");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Generic Arguments: " + Display.Utils.PrettyArray(GenericArgs, level + 1));
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Arguments: " + Display.Utils.PrettyArray(Arguments, level + 1));
 
-            return $"FuncCall(name: {Name.Pretty()}, genericArgs: {{{prettyGenericArgs}}}, args: {Utils.PrettyArgs(Arguments)})";
+            return sb.ToString();
         }
     }
 }

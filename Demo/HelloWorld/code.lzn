@@ -1,8 +1,7 @@
 class Program
 {
-	func Main(arg: [String])
+	static func Main(args: [String]) -> Int
 	{
-		println("Hello, world")
-		0
+		println("Hello, world!")
 	}
 }

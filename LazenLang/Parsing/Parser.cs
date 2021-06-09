@@ -109,7 +109,7 @@ namespace LazenLang.Parsing
         }
     }
     
-    class Parser
+    public class Parser
     {
         private Token[] Tokens { get; set; }
         private int LookAheadIndex { get; set; }

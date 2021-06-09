@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LazenLang.Parsing.Display;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Functions
 {
-    class FuncDecl : Instr
+    public class FuncDecl : Instr, IPrettyPrintable
     {
         public Signature Signature;
         public Block Block;
@@ -26,9 +27,14 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             return new FuncDecl(signature, block);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"FuncDecl(signature: {Signature.Pretty()}, block: {Block.Pretty()})";
+            var sb = new StringBuilder("FuncDecl");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Signature.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Block.Pretty(level + 1)}");
+
+            return sb.ToString();
         }
     }
 }

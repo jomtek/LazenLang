@@ -1,11 +1,12 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
+using LazenLang.Parsing.Display;
 using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace LazenLang.Parsing.Ast
 {
-    class TypevarSeq
+    public class TypevarSeq
     {
         public Identifier[] Sequence;
         public TypevarSeq(Identifier[] typevars)
@@ -52,20 +53,6 @@ namespace LazenLang.Parsing.Ast
             }
 
             return new TypevarSeq(typevars);
-        }
-
-        public string Pretty()
-        {
-            string result = "";
-
-            for (int i = 0; i < Sequence.Count(); i++)
-            {
-                Identifier typevar = Sequence[i];
-                result += typevar.Value;
-                if (i != Sequence.Count() - 1) result += ", ";
-            }
-
-            return $"TypevarSeq [{result}]";
         }
     }
 }

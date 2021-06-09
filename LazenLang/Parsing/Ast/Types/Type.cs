@@ -1,6 +1,6 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Types.AtomTypes;
-using LazenLang.PrettyPrinter;
+using LazenLang.Parsing.Display;
 using LazenLang.Typechecking;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    class TypeNode
+    public class TypeNode : IPrettyPrintable
     {
         public TypeDesc Type { get;  }
         public CodePosition Position { get; }
@@ -52,11 +52,9 @@ namespace LazenLang.Parsing.Ast.Types
             return new TypeNode(type, oldCursor);
         }
 
-        public string Pretty(bool printPos = false)
+        public string Pretty(int level)
         {
-            string prettyPos = "";
-            if (printPos) prettyPos = $", pos: {Position.Pretty()}";
-            return $"TypeNode(type: {Type.GetType().Name}{prettyPos})";
+            return "TypeNode: " + Type.GetType().Name;
         }
     }
 }

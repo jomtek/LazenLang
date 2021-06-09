@@ -1,10 +1,12 @@
 ﻿using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Types;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.OOP
 {
-    class Instanciation : Expr
+    public class Instanciation : Expr, IPrettyPrintable
     {
         public Identifier ClassName;
         public TypeNode[] GenericArgs;
@@ -45,17 +47,15 @@ namespace LazenLang.Parsing.Ast.Expressions.OOP
             return new Instanciation(className, genericArgs, arguments);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyGenericArgs = "";
-            for (int i = 0; i < GenericArgs.Length; i++)
-            {
-                TypeNode node = GenericArgs[i];
-                prettyGenericArgs += node.Pretty();
-                if (i != GenericArgs.Length - 1) prettyGenericArgs += ", ";
-            }
+            var sb = new StringBuilder("Instanciation");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Class Name: {ClassName.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Generic Arguments: {Display.Utils.PrettyArray(GenericArgs, level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Arguments: {Display.Utils.PrettyArray(Arguments, level + 1)}");
 
-            return $"Instanciation(classname: {ClassName.Pretty()}, genericArgs: {{{prettyGenericArgs}}}, arguments: {Utils.PrettyArgs(Arguments)}";
+            return sb.ToString();
         }
     }
 }

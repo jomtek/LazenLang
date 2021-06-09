@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
-    class BreakInstr : Instr
+    public class BreakInstr : Instr, IPrettyPrintable
     {
         public static BreakInstr Consume(Parser parser)
         {
@@ -13,9 +14,9 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             return new BreakInstr();
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return "BreakInstr()";
+            return "BreakInstr";
         }
     }
 }

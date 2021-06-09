@@ -1,6 +1,6 @@
 ﻿namespace LazenLang.Lexing
 {
-    class TokenInfo
+    public static class TokenInfo
     {
         public enum TokenType
         {
@@ -18,7 +18,7 @@
 
             // Operators
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS, PLUS, MINUS,
-            DIVIDE, MULTIPLY, POWER, MODULO, NEG, GREATER_EQ, LESS_EQ, PLUS_EQ, MINUS_EQ,
+            DIVIDE, MULTIPLY, POWER, MODULO, NOT, GREATER_EQ, LESS_EQ, PLUS_EQ, MINUS_EQ,
             DIVIDE_EQ, MULTIPLY_EQ, POWER_EQ, MODULO_EQ, DOUBLE_DOT,
 
             // Other
@@ -85,13 +85,6 @@
             (@"^\/\/(.*)",                            TokenType.SINGLE_LINE_COMMENT),
             (@"^\/\*((((?!\/\*)(?!\*\/).)|\n)*)\*\/", TokenType.MULTI_LINE_COMMENT),
             (@"^\:",                                  TokenType.COLON),
-            (@"^\>",                                  TokenType.GREATER),
-            (@"^\<",                                  TokenType.LESS),
-            (@"^\/",                                  TokenType.DIVIDE),
-            (@"^\*",                                  TokenType.MULTIPLY),
-            (@"^\=",                                  TokenType.ASSIGN),
-            (@"^\+",                                  TokenType.PLUS),
-            (@"^\-",                                  TokenType.MINUS),
             (@"^\%",                                  TokenType.MODULO),
             (@"^\^",                                  TokenType.POWER),
             (@"^\-\>",                                TokenType.ARROW),
@@ -102,13 +95,20 @@
             (@"^\*\=",                                TokenType.MULTIPLY_EQ),
             (@"^\^\=",                                TokenType.POWER_EQ),
             (@"^\%\=",                                TokenType.MODULO_EQ),
+            (@"^\+",                                  TokenType.PLUS),
+            (@"^\-",                                  TokenType.MINUS),
             (@"^\|\|",                                TokenType.BOOLEAN_OR),
             (@"^\&\&",                                TokenType.BOOLEAN_AND),
             (@"^\>\=",                                TokenType.GREATER_EQ),
             (@"^\<\=",                                TokenType.LESS_EQ),
             (@"^\=\=",                                TokenType.EQ),
             (@"^\!\=",                                TokenType.NOT_EQ),
-            (@"^\!",                                  TokenType.NEG),
+            (@"^\>",                                  TokenType.GREATER),
+            (@"^\<",                                  TokenType.LESS),
+            (@"^\/",                                  TokenType.DIVIDE),
+            (@"^\*",                                  TokenType.MULTIPLY),
+            (@"^\=",                                  TokenType.ASSIGN),
+            (@"^\!",                                  TokenType.NOT),
             (@"^\.\.",                                TokenType.DOUBLE_DOT),
             (@"^\'",                                  TokenType.APOSTROPHE),
             (@"^\""",                                 TokenType.QUOTE),

@@ -1,8 +1,10 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
-    class WhileLoop : Instr
+    public class WhileLoop : Instr, IPrettyPrintable
     {
         public ExprNode Condition;
         public Block Block;
@@ -22,7 +24,8 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             try
             {
                 condition = parser.TryConsumer(ExprNode.Consume);
-            } catch (ParserError ex)
+            } 
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -35,7 +38,8 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             try
             {
                 parsedInstr = parser.TryConsumer(InstrNode.Consume);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -48,9 +52,14 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             return new WhileLoop(condition, resultBlock);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"WhileInstr(condition: {Condition.Value.Pretty()}, block: {Block.Pretty()})";
+            var sb = new StringBuilder("WhileLoopInstr");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Condition: {Condition.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Block: {Block.Pretty(level + 1)}");
+
+            return sb.ToString();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions
 {
-    class NativeArray : Expr
+    public class NativeArray : Expr, IPrettyPrintable
     {
         public ExprNode[] Elements;
 
@@ -22,18 +24,9 @@ namespace LazenLang.Parsing.Ast.Expressions
             return new NativeArray(elements);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyElements = "";
-
-            for (int i = 0; i < Elements.Count(); i++)
-            {
-                ExprNode node = Elements[i];
-                prettyElements += node.Pretty();
-                if (i != Elements.Count() - 1) prettyElements += ", ";
-            }
-
-            return $"Array [{prettyElements}]";
+            return "NativeArray: " + Display.Utils.PrettyArray(Elements, level);
         }
     }
 }

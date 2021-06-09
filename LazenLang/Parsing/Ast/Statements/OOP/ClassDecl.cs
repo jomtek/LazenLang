@@ -1,9 +1,11 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.OOP
 {
-    class ClassDecl : Instr
+    public class ClassDecl : Instr, IPrettyPrintable
     {
         public bool PublicAccess { get; }
         public bool Abstract { get; }
@@ -28,7 +30,8 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             try
             {
                 parser.Eat(TokenInfo.TokenType.ABSTRACT);
-            } catch (ParserError)
+            }
+            catch (ParserError)
             {
                 abstract_ = false;
             }
@@ -42,7 +45,8 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             try
             {
                 name = parser.TryConsumer(Identifier.Consume);
-            } catch (ParserError)
+            }
+            catch (ParserError)
             {
                 throw new ParserError(
                     new ExpectedElementException("Expected identifier after CLASS token"),
@@ -55,11 +59,12 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             try
             {
                 block = parser.TryConsumer((Parser p) => Block.Consume(p, true, false, true));
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
-                    new ExpectedElementException("Expected block for while instruction"),
+                    new ExpectedElementException("Expected block for class declaration"),
                     parser.Cursor
                 );
             }
@@ -67,10 +72,17 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             return new ClassDecl(publicAccess, abstract_, name, typevars, block);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyAccess = PublicAccess ? "public" : "private";
-            return $"ClassDecl(access: {prettyAccess}, abstract: {Abstract}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, block: {Block.Pretty()})";
+            var sb = new StringBuilder("ClassDecl");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"PublicAccess: {PublicAccess}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"IsAbstract: {Abstract}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Typevars: {Display.Utils.PrettyArray(Typevars.Sequence, level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Block.Pretty(level + 1)}");
+
+            return sb.ToString();
         }
     }
 }

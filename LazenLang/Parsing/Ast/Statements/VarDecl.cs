@@ -2,6 +2,7 @@
 using LazenLang.Parsing.Ast.Expressions;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Types;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-    class VarDecl : Instr
+    public class VarDecl : Instr, IPrettyPrintable
     {
         public bool Mutable { get; }
         public bool PublicAccess { get; }
@@ -140,14 +141,18 @@ namespace LazenLang.Parsing.Ast.Statements
             return new VarDecl(mutable, publicAccess, static_, name, type, value);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyType = "none", prettyValue = "none";
-            string prettyAccess = PublicAccess ? "public" : "private";
-            if (Type != null) prettyType = Type.Pretty();
-            if (Value != null) prettyValue = Value.Value.Pretty();
-
-            return $"VarDecl(mutable: {Mutable}, access: {prettyAccess}, static: {Static}, name: {Name.Pretty()}, type: {prettyType}, value: {prettyValue})";
+            var sb = new StringBuilder("VarDecl");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Mutable: {Mutable}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Static: {Static}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Public Access: {PublicAccess}");
+            if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level + 1)}");
+            if (Value != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Value: {Value.Pretty(level + 1)}");
+            
+            return sb.ToString();
         }
     }
 }

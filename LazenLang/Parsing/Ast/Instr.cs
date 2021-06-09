@@ -3,21 +3,22 @@ using LazenLang.Parsing.Ast.Statements;
 using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.Loops;
 using LazenLang.Parsing.Ast.Statements.OOP;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast
 {
-    abstract class Instr
+    public abstract class Instr : IPrettyPrintable
     {
-        public virtual string Pretty()
+        public virtual string Pretty(int level)
         {
-            return "Instr";
+            return Display.Utils.Indent(level) + "Instr";
         }
     }
 
-    class InstrNode
+    public class InstrNode : IPrettyPrintable
     {
         public Instr Value;
         public CodePosition Position;
@@ -26,18 +27,6 @@ namespace LazenLang.Parsing.Ast
         {
             Value = instruction;
             Position = position;
-        }
-
-        public static string PrettyMultiple(InstrNode[] instructions)
-        {
-            string result = "{";
-            for (int i = 0; i < instructions.Length; i++)
-            {
-                Instr instr = instructions[i].Value;
-                result += instr.Pretty();
-                if (i < instructions.Length - 1) result += ", ";
-            }
-            return result + "}";
         }
 
         public static InstrNode Consume(Parser parser)
@@ -89,6 +78,11 @@ namespace LazenLang.Parsing.Ast
                 throw new ParserError(new FailedConsumer(), parser.Cursor);
             
             return new InstrNode(instr, oldCursor);
+        }
+
+        public string Pretty(int level)
+        {
+            return "InstrNode: " + Value.Pretty(level);
         }
     }
 }

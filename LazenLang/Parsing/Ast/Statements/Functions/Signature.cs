@@ -2,10 +2,12 @@
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Types;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Functions
 {
-    class Signature
+    public class Signature : IPrettyPrintable
     {
         public bool PublicAccess { get; }
         public bool Static { get; }
@@ -81,23 +83,18 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             return new Signature(publicAccess, static_, name, typevars, domain, codomain);
         }
 
-        public string Pretty()
+        public string Pretty(int level)
         {
-            string prettyAccess = PublicAccess ? "public" : "private";
-            string prettyDomain = "";
-            string prettyCodomain = "none";
+            var sb = new StringBuilder("Signature");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Static: {Static}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Public Access: {PublicAccess}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Typevars: {Display.Utils.PrettyArray(Typevars.Sequence, level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Domain: {Display.Utils.PrettyArray(Domain, level + 1)}");
+            if (Codomain != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Codomain: {Codomain.Pretty(level + 1)}");
 
-            for (int i = 0; i < Domain.Count(); i++)
-            {
-                Param param = Domain[i];
-                prettyDomain += param.Pretty();
-                if (i != Domain.Count() - 1) prettyDomain += ", ";
-            }
-
-            if (Codomain != null)
-                prettyCodomain = Codomain.Pretty();
-
-            return $"Signature(access: {prettyAccess}, static: {Static}, name: {Name.Pretty()}, typevars: {Typevars.Pretty()}, domain: {{{prettyDomain}}}, codomain: {prettyCodomain})";
+            return sb.ToString();
         }
     }
 }

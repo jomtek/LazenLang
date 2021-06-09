@@ -4,10 +4,11 @@ using System.Linq;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.OOP;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-    class Block : Instr
+    public class Block : Instr, IPrettyPrintable
     {
         public InstrNode[] Instructions { get; }
 
@@ -130,9 +131,9 @@ namespace LazenLang.Parsing.Ast.Statements
             return new Block(statements);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"Block({InstrNode.PrettyMultiple(Instructions)})";
+            return "Block: " + Display.Utils.PrettyArray(Instructions, level);
         }
     }
 }

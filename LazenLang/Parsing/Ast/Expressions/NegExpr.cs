@@ -1,11 +1,10 @@
 ﻿using LazenLang.Lexing;
-using System;
+using LazenLang.Parsing.Display;
 using System.Collections.Generic;
-using System.Text;
 
-namespace LazenLang.Parsing.Ast.Expressions
+namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class NegExpr : Expr
+    public class NegExpr : Expr, IPrettyPrintable
     {
         public Expr Value;
 
@@ -16,27 +15,36 @@ namespace LazenLang.Parsing.Ast.Expressions
 
         public static Expr Consume(Parser parser)
         {
-            parser.Eat(TokenInfo.TokenType.NEG);
-
-            ExprNode expression;
-
+            Token prefix = parser.TryManyEats(new TokenInfo.TokenType[] { TokenInfo.TokenType.PLUS, TokenInfo.TokenType.MINUS });
+         
+            Expr expression;
             try
             {
-                expression = parser.TryConsumer(ExprNode.Consume);
-            } catch
+                expression = parser.TryConsumer(ExprNode.Consume).Value;
+            }
+            catch (ParserError ex)
             {
+                if (!ex.IsExceptionFictive())
+                    throw ex;
                 throw new ParserError(
-                    new ExpectedElementException("Expected expression after NEG token"),
+                    new ExpectedElementException("Expected expression after PLUS or MINUS prefix"),
                     parser.Cursor
                 );
             }
 
-            return new NegExpr(expression.Value);
+            if (prefix.Type == TokenInfo.TokenType.MINUS)
+            {
+                return new NegExpr(expression);
+            }
+            else
+            {
+                return expression;
+            }
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"NegExpr({Value.Pretty()})";
+            return $"NegExpr: {Value.Pretty(level)}";
         }
     }
 }

@@ -5,7 +5,9 @@ using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
 using LazenLang.Parsing.Ast;
+using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Statements;
+using LazenLang.Parsing.Display;
 using LazenLang.Typechecking;
 
 namespace LazenLang
@@ -34,21 +36,26 @@ namespace LazenLang
                 if (!(ex.Content is NoTokenLeft))
                 {
                     string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
-                    string prettyPrintedContent = PrettyPrinter.PrettyExceptions.PrettyContent(ex.Content);
+                    string prettyPrintedContent = PrettyExceptions.PrettyContent(ex.Content);
                     Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
                 }
                 return;
             }
 
+            Console.WriteLine("\n\n");
+            Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));
+
             //TopLevelChecker typechecker = new TopLevelChecker(ast);
             //typechecker.Typecheck();
 
             //stopwatch.Stop();
-            
+
             /*foreach (InstrNode instr in ast.Instructions)
             {
                 Console.WriteLine(instr.Value.Pretty());
             }*/
+
+            //Console.WriteLine(IPrettyPrintable.PrettyBlock(ast, 0));
 
 	    // IR compiler.
 

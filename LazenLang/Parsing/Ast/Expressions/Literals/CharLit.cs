@@ -1,11 +1,12 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class CharLit : Literal
+    public class CharLit : Literal, IPrettyPrintable
     {
         public char Value;
 
@@ -26,9 +27,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new CharLit(literal[0]);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"CharLit('{Value}')";
+            return $"CharLit: \'{Value}\'";
         }
     }
 }

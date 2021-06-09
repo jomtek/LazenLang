@@ -1,9 +1,10 @@
 ﻿using System;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class IntegerLit : Literal
+    public class IntegerLit : Literal, IPrettyPrintable
     {
         public int Value;
 
@@ -18,9 +19,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new IntegerLit(Convert.ToInt32(literal));
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"IntegerLit({Value})";
+            return $"IntegerLit: {Value}";
         }
     }
 }

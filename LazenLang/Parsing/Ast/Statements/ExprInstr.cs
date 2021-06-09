@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LazenLang.Parsing.Display;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-    class ExprInstr : Instr
+    public class ExprInstr : Instr, IPrettyPrintable
     {
         public Expr Expression { get; }
 
@@ -19,9 +20,9 @@ namespace LazenLang.Parsing.Ast.Statements
             return new ExprInstr(expression);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"ExprInstr({Expression.Pretty()})";
+            return $"ExprInstr: {Expression.Pretty(level)}";
         }
     }
 }

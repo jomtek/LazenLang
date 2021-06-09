@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Text;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions.OOP
 {
-    class AttributeAccess : Expr
+    // TODO: Is this consumer really worth the cost ?
+    public class AttributeAccess : Expr, IPrettyPrintable
     {
         public Expr Left;
         public Expr Right;
@@ -14,9 +17,14 @@ namespace LazenLang.Parsing.Ast.Expressions.OOP
             Right = right;
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"AttributeAccess(left: {Left.Pretty()}, right: {Right.Pretty()})";
+            var sb = new StringBuilder("AttributeAccess");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Left: {Left.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Right: {Right.Pretty(level)}");
+
+            return sb.ToString();
         }
     }
 }

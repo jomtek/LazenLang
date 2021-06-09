@@ -54,18 +54,6 @@ namespace LazenLang.Parsing
                 return new Block(new InstrNode[] { instr });
         }
 
-        public static string PrettyArgs(ExprNode[] args)
-        {
-            string result = "";
-            for (int i = 0; i < args.Count(); i++)
-            {
-                ExprNode node = args[i];
-                result += node.Pretty();
-                if (i != args.Count() - 1) result += ", ";
-            }
-            return $"{{{result}}}";
-        }
-
         public static bool ParseAccessModifier(Parser parser) {
             bool publicAccess = false;
 

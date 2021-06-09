@@ -1,10 +1,12 @@
 ﻿using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Lexing;
 using System.Linq;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.OOP
 {
-    class ConstructorDecl : Instr
+    public class ConstructorDecl : Instr, IPrettyPrintable
     {
         public Param[] Domain;
         public Block Block;
@@ -29,7 +31,8 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             try
             {
                 block = parser.TryConsumer((Parser p) => Block.Consume(p));
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -41,18 +44,14 @@ namespace LazenLang.Parsing.Ast.Statements.OOP
             return new ConstructorDecl(domain, block);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string prettyDomain = "";
+            var sb = new StringBuilder("ConstructorDecl");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Domain: {Display.Utils.PrettyArray(Domain, level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Block.Pretty(level + 1)}"); 
 
-            for (int i = 0; i < Domain.Count(); i++)
-            {
-                Param param = Domain[i];
-                prettyDomain += param.Pretty();
-                if (i != Domain.Count() - 1) prettyDomain += ", ";
-            }
-
-            return $"ConstructorDecl(domain: {{{prettyDomain}}}, block: {Block.Pretty()})";
+            return sb.ToString();
         }
     }
 }

@@ -5,13 +5,13 @@ using System.Text;
 
 namespace LazenLang.Typechecking
 {
-    abstract class TypeDesc
+    public abstract class TypeDesc
     { }
 
-    abstract class AtomType : TypeDesc
+    public abstract class AtomType : TypeDesc
     { }
 
-    class NameType : TypeDesc
+    public class NameType : TypeDesc
     {
         public Identifier Name;
         public NameType(Identifier name)
@@ -20,7 +20,7 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class TypeApp : TypeDesc
+    public class TypeApp : TypeDesc
     {
         public NameType BaseType { get; }
         public TypeDesc[] Generics { get; }
@@ -31,7 +31,7 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class ArrayType : TypeDesc
+    public class ArrayType : TypeDesc
     {
         public TypeDesc ElementsType { get; }
         public ArrayType(TypeDesc elementsType)
@@ -40,7 +40,7 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class FuncType : TypeDesc
+    public class FuncType : TypeDesc
     {
         public TypeDesc[] Domain { get; }
         public TypeDesc Codomain { get; }
@@ -51,7 +51,7 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class TypeVariable : TypeDesc
+    public class TypeVariable : TypeDesc
     {
         public int Num { get; }
         public TypeVariable(int num)
@@ -60,14 +60,10 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class NullType : TypeDesc
+    public class NullType : TypeDesc
     {}
 
-    // Experimental --
-    class Namespace : TypeDesc
-    {}
-
-    class Class : TypeDesc
+    public class Class : TypeDesc
     {
         public Identifier[] GenericParameters { get; }
         public Class(Identifier[] genericParameters)
@@ -76,10 +72,10 @@ namespace LazenLang.Typechecking
         }
     }
 
-    class BoolType : AtomType {}
-    class CharType : AtomType {}
-    class DoubleType : AtomType {}
-    class IntType : AtomType {}
-    class StringType : AtomType {}
-    class VoidType : AtomType {}
+    public class BoolType : AtomType {}
+    public class CharType : AtomType {}
+    public class DoubleType : AtomType {}
+    public class IntType : AtomType {}
+    public class StringType : AtomType {}
+    public class VoidType : AtomType {}
 }

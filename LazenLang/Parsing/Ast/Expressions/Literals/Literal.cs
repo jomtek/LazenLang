@@ -3,7 +3,7 @@ using LazenLang.Lexing;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    abstract class Literal : Expr
+    public abstract class Literal : Expr
     {
         public static Literal Consume(Parser parser)
         {

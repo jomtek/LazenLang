@@ -1,6 +1,6 @@
 ﻿namespace LazenLang.Lexing
 {
-    struct CodePosition
+    public struct CodePosition
     {
         public int Line { get; set; }
         public int Column { get; set; }
@@ -17,7 +17,7 @@
         }
     }
 
-    class Token
+    public class Token
     {
         public string Value { get; set;  }
         public TokenInfo.TokenType Type { get; set; }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
-    class ForLoop : Instr
+    public class ForLoop : Instr, IPrettyPrintable
     {
         public Identifier Id;
         public ExprNode Array;
@@ -29,7 +30,8 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             try
             {
                 id = parser.TryConsumer(Identifier.Consume);
-            } catch (ParserError)
+            }
+            catch (ParserError)
             {
                 throw new ParserError(
                     new ExpectedTokenException(TokenInfo.TokenType.IDENTIFIER),
@@ -42,7 +44,8 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             try
             {
                 array = parser.TryConsumer(ExprNode.Consume);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -55,7 +58,8 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             try
             {
                 parsedInstr = parser.TryConsumer(InstrNode.Consume);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -68,9 +72,15 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
             return new ForLoop(id, array, block);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"ForLoop(id: {Id.Pretty()}, array: {Array.Pretty()}, block: {Block.Pretty()})";
+            var sb = new StringBuilder("ForLoopInstr");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Id: {Id.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Iterate over: {Array.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Block: {Block.Pretty(level + 1)}");
+
+            return sb.ToString();
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Expressions.OOP;
+using LazenLang.Parsing.Display;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements
 {
-    class VarMutation : Instr
+    public class VarMutation : Instr, IPrettyPrintable
     {
         public Expr BaseVariable;
         public TokenInfo.TokenType MutationOp;
@@ -61,9 +63,17 @@ namespace LazenLang.Parsing.Ast.Statements
             return new VarMutation(mutationOp, baseVariable, newValue);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"VarMutation(op: {MutationOp}, basevar: {BaseVariable.Pretty()}, newvalue: {NewValue.Pretty()})";
+            // TODO: why is base variable not an identifier ?
+
+            var sb = new StringBuilder("Variable Mutation");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Operator: {MutationOp}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Base Variable: {BaseVariable.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"New Value: {NewValue.Pretty(level)}");     
+
+            return sb.ToString();      
         }
     }
 }

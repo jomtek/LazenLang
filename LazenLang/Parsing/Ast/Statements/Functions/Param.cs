@@ -1,10 +1,12 @@
 ﻿using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Types;
 using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
+using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Functions
 {
-    class Param
+    public class Param : IPrettyPrintable
     {
         public Identifier Name;
         public TypeNode Type;
@@ -26,7 +28,8 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             try
             {
                 parser.Eat(TokenInfo.TokenType.COLON);
-            } catch (ParserError)
+            }
+            catch (ParserError)
             {
                 colon = false;
             }
@@ -49,11 +52,14 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
             return new Param(name, type);
         }
 
-        public string Pretty()
+        public string Pretty(int level)
         {
-            string prettyType = "none";
-            if (Type != null) prettyType = Type.Pretty();
-            return $"Param({Name.Pretty()}: {prettyType})";
+            var sb = new StringBuilder("Param");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level)}");
+            if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level)}");
+
+            return sb.ToString();
         }
     }
 }

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using LazenLang.Parsing.Ast.Statements;
 using System.Linq;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions
 {
-    class IfInstr : Expr
+    public class IfInstr : Expr, IPrettyPrintable
     {
         public ExprNode Condition;
         public Block MainBranch;
@@ -33,7 +34,8 @@ namespace LazenLang.Parsing.Ast.Expressions
             try
             {
                 baseCondition = parser.TryConsumer(ExprNode.Consume);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -48,7 +50,8 @@ namespace LazenLang.Parsing.Ast.Expressions
             try
             {
                 mainInstr = parser.TryConsumer(InstrNode.Consume);
-            } catch (ParserError ex)
+            }
+            catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
@@ -82,7 +85,8 @@ namespace LazenLang.Parsing.Ast.Expressions
                 try
                 {
                     parser.Eat(TokenInfo.TokenType.ELIF);
-                } catch (ParserError)
+                }
+                catch (ParserError)
                 {
                     break;
                 }
@@ -136,7 +140,8 @@ namespace LazenLang.Parsing.Ast.Expressions
             try
             {
                 parser.Eat(TokenInfo.TokenType.ELSE);
-            } catch (ParserError)
+            }
+            catch (ParserError)
             {
                 isThereElse = false;
             }
@@ -191,18 +196,18 @@ namespace LazenLang.Parsing.Ast.Expressions
             return new IfInstr(baseCondition, mainBranch, elseBranch);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            string mainBranchPretty = "none";
-            string elseBranchPretty = "none";
+            var sb = new StringBuilder("IfInstr");
+            sb.AppendLine();
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Condition: {Condition.Pretty(level + 1)}");
 
             if (MainBranch != null)
-                mainBranchPretty = MainBranch.Pretty();
-
+                sb.AppendLine(Display.Utils.Indent(level + 1) + $"Main Branch: {MainBranch.Pretty(level + 1)}");
             if (ElseBranch != null)
-                elseBranchPretty = ElseBranch.Pretty();
+                sb.AppendLine(Display.Utils.Indent(level + 1) + $"Else Branch: {ElseBranch.Pretty(level + 1)}");
 
-            return $"IfInstr(condition: {Condition.Pretty()}, main: {mainBranchPretty}, else: {elseBranchPretty})";
+            return sb.ToString();
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using LazenLang.Parsing;
-using System;
+﻿using System;
 
-namespace LazenLang.PrettyPrinter
+namespace LazenLang.Parsing.Display
 {
     class PrettyExceptions
     {

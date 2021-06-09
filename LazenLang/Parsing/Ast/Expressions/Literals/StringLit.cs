@@ -1,8 +1,9 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class StringLit : Literal
+    public class StringLit : Literal, IPrettyPrintable
     {
         public string Value;
         
@@ -17,9 +18,9 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new StringLit(literal);
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
-            return $"StringLit(\"{Value}\")";
+            return $"StringLit: \"{Value}\"";
         }
     }
 }

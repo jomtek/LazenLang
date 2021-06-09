@@ -1,11 +1,12 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Literals
 {
-    class BooleanLit : Literal
+    public class BooleanLit : Literal, IPrettyPrintable
     {
         public bool Value;
 
@@ -20,10 +21,10 @@ namespace LazenLang.Parsing.Ast.Expressions.Literals
             return new BooleanLit(Convert.ToBoolean(value));
         }
 
-        public override string Pretty()
+        public override string Pretty(int level)
         {
             string literal = Value ? "true" : "false";
-            return $"BooleanLit({literal})";
+            return $"BooleanLit: {literal}";
         }
     }
 }
