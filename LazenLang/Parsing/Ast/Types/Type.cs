@@ -55,7 +55,7 @@ namespace LazenLang.Parsing.Ast.Types
 
         public string Pretty(int level)
         {
-            // TODO (why +1?)
+            // TODO (why +2?)
             return "TypeNode: " + Type.Pretty(level + 1);
         }
     }

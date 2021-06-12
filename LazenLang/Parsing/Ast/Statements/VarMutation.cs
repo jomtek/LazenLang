@@ -70,8 +70,8 @@ namespace LazenLang.Parsing.Ast.Statements
             var sb = new StringBuilder("Variable Mutation");
             sb.AppendLine();
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Operator: {MutationOp}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Base Variable: {BaseVariable.Pretty(level)}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"New Value: {NewValue.Pretty(level)}");     
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Base Variable: {BaseVariable.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"New Value: {NewValue.Pretty(level + 1)}");     
 
             return sb.ToString();      
         }

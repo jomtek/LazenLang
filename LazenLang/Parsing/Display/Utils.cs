@@ -9,7 +9,7 @@ namespace LazenLang.Parsing.Display
     {
         public static string Indent(int level)
         {
-            return String.Concat(Enumerable.Repeat("|    ", level));
+            return String.Concat(Enumerable.Repeat("|     ", level));
         }
 
         public static string PrettyArray(IPrettyPrintable[] list, int level)

@@ -1,5 +1,9 @@
-class Human
+class Program
 {
-	func Test<T>(a: List<T>) {}
-	
+	static func Main()
+	{
+		var etienne = new Humain()
+		etienne.Nom = "Etienne"
+		print(new Humain().Nom)
+	}
 }

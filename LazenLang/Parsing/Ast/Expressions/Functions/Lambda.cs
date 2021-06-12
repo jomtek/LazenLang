@@ -51,7 +51,7 @@ namespace LazenLang.Parsing.Ast.Expressions
             var sb = new StringBuilder("Lambda");
             sb.AppendLine();
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Domain: {Display.Utils.PrettyArray(Domain, level + 1)}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Return Value: {ReturnValue.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Return Value: {ReturnValue.Pretty(level + 1)}");
 
             return sb.ToString();
         }

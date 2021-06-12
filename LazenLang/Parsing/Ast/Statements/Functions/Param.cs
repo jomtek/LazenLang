@@ -56,8 +56,8 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
         {
             var sb = new StringBuilder("Param");
             sb.AppendLine();
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level)}");
-            if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
+            if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level + 1)}");
 
             return sb.ToString();
         }

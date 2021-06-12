@@ -51,7 +51,7 @@ namespace LazenLang.Parsing.Ast.Expressions.OOP
         {
             var sb = new StringBuilder("Instanciation");
             sb.AppendLine();
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Class Name: {ClassName.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Class Name: {ClassName.Pretty(level + 1)}");
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Generic Arguments: {Display.Utils.PrettyArray(GenericArgs, level + 1)}");
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Arguments: {Display.Utils.PrettyArray(Arguments, level + 1)}");
 

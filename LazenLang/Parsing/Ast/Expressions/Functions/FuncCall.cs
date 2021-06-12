@@ -55,7 +55,7 @@ namespace LazenLang.Parsing.Ast.Expressions
         {
             var sb = new StringBuilder("FuncCall");
             sb.AppendLine();
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Generic Arguments: " + Display.Utils.PrettyArray(GenericArgs, level + 1));
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Arguments: " + Display.Utils.PrettyArray(Arguments, level + 1));
 

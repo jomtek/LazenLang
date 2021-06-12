@@ -21,8 +21,8 @@ namespace LazenLang.Parsing.Ast.Expressions.OOP
         {
             var sb = new StringBuilder("AttributeAccess");
             sb.AppendLine();
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Left: {Left.Pretty(level)}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Right: {Right.Pretty(level)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Left: {Left.Pretty(level + 1)}");
+            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Right: {Right.Pretty(level + 1)}");
 
             return sb.ToString();
         }
