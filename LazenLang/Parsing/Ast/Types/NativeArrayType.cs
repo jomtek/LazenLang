@@ -1,9 +1,10 @@
 ﻿using LazenLang.Lexing;
+using LazenLang.Parsing.Display;
 using LazenLang.Typechecking;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    class NativeArrayType : TypeDesc
+    class NativeArrayType
     {
         public static ArrayType Consume(Parser parser)
         {

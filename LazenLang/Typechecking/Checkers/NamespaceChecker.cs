@@ -35,7 +35,7 @@ namespace LazenLang.Typechecking
                 if (instruction is ClassDecl)
                 {
                     ClassDecl decl = (ClassDecl)instruction;
-                    env.AddEntry(decl.Name, new Class(decl.Typevars.Sequence), node.Position);
+                    //env.AddEntry(decl.Name, new Class(decl.Typevars.Sequence), node.Position);
 
                 }
             }

@@ -44,6 +44,7 @@ namespace LazenLang.Typechecking.Tools
             }
         }
 
+        /*
         private static TypeDesc ResolveType(Instanciation instanciation, Environment env, CodePosition position)
         {
             env.LookupId(instanciation.ClassName, position);
@@ -71,6 +72,8 @@ namespace LazenLang.Typechecking.Tools
                 return new TypeApp(new NameType(instanciation.ClassName), generics.ToArray());
             }
         }
+        */
+
 
         private static TypeDesc ResolveType(IfInstr ifinstr, Environment env, CodePosition position)
         {
@@ -80,6 +83,7 @@ namespace LazenLang.Typechecking.Tools
             TypeDesc mainBranchType;
             TypeDesc elseBranchType;
 
+            /*
             if (!(conditionType is BoolType))
             {
                 throw new TypecheckerError(
@@ -87,6 +91,7 @@ namespace LazenLang.Typechecking.Tools
                     ifinstr.Condition.Position
                 );
             }
+            */
 
             RegularChecker mainChecker = new RegularChecker(ifinstr.MainBranch, env);
             RegularChecker elseChecker = new RegularChecker(ifinstr.ElseBranch, env);
@@ -167,22 +172,25 @@ namespace LazenLang.Typechecking.Tools
         {
             Expr value = expr.Value;
 
+            /*
             if (value is BooleanLit)    return new BoolType();
             if (value is CharLit)       return new CharType();
             if (value is DoubleLit)     return new DoubleType();
             if (value is IntegerLit)    return new IntType();
             if (value is StringLit)     return new StringType();
+            */
 
             if (value is NullExpr)      return new NullType();
             if (value is Identifier)    return env.LookupId((Identifier)value, position);
 
             if (value is NativeArray)   return ResolveType((NativeArray)value, env, position);
-            if (value is Instanciation) return ResolveType((Instanciation)value, env, position);
+            // TODO
+            //if (value is Instanciation) return ResolveType((Instanciation)value, env, position);
 
             if (value is IfInstr)       return ResolveType((IfInstr)value, env, position);
             if (value is FuncCall)      return ResolveType((FuncCall)value, env, position);
 
-            return new VoidType();
+            //return new VoidType();
             throw new NotImplementedException();
         }
     }

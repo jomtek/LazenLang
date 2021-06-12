@@ -20,7 +20,7 @@ namespace LazenLang.Parsing.Display
             }
             else
             {
-                var sb = new StringBuilder("Array");
+                var sb = new StringBuilder($"Array <{list[0].GetType().Name}>");
                 sb.AppendLine();
                 foreach (var elem in list)
                 {

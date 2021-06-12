@@ -14,7 +14,8 @@
             INTERFACE,
 
             // Atom types
-            BOOL, CHAR, DOUBLE, INT, STRING, VOID,
+            // (TODO)
+            // BOOL, CHAR, DOUBLE, INT, STRING, VOID,
 
             // Operators
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS, PLUS, MINUS,
@@ -55,12 +56,14 @@
             (@"^static(?![a-zA-Z_0-9])",              TokenType.STATIC),
             (@"^abstract(?![a-zA-Z_0-9])",            TokenType.ABSTRACT),
             (@"^constructor(?![a-zA-Z_0-9])",         TokenType.CONSTRUCTOR),
+            /*
             (@"^Bool(?![a-zA-Z_0-9])",                TokenType.BOOL),
             (@"^Char(?![a-zA-Z_0-9])",                TokenType.CHAR),
             (@"^Double(?![a-zA-Z_0-9])",              TokenType.DOUBLE),
             (@"^Int(?![a-zA-Z_0-9])",                 TokenType.INT),
             (@"^String(?![a-zA-Z_0-9])",              TokenType.STRING),
             (@"^Void(?![a-zA-Z_0-9])",                TokenType.VOID),
+            */
             (@"^null(?![a-zA-Z_0-9])",                TokenType.NULL),
             (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
         };

@@ -5,6 +5,8 @@ namespace LazenLang.Parsing.Ast.Types.AtomTypes
 {
     abstract class AtomTypeC
     {
+        // TODO
+        /*
         public static AtomType Consume(Parser parser)
         {
             AtomType atomType = null;
@@ -50,5 +52,6 @@ namespace LazenLang.Parsing.Ast.Types.AtomTypes
 
             return atomType;
         }
+        */
     }
 }

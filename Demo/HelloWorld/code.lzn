@@ -1,7 +1,5 @@
-class Program
+class Human
 {
-	static func Main(args: [String]) -> Int
-	{
-		println("Hello, world!")
-	}
+	func Test<T>(a: List<T>) {}
+	
 }

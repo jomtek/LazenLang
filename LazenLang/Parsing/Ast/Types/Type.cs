@@ -42,7 +42,8 @@ namespace LazenLang.Parsing.Ast.Types
                     break;
 
                 default:
-                    type = parser.TryConsumer(AtomTypeC.Consume);
+                    // TODO
+                    //type = parser.TryConsumer(AtomTypeC.Consume);
                     break;
             }
 
@@ -54,7 +55,8 @@ namespace LazenLang.Parsing.Ast.Types
 
         public string Pretty(int level)
         {
-            return "TypeNode: " + Type.GetType().Name;
+            // TODO (why +1?)
+            return "TypeNode: " + Type.Pretty(level + 1);
         }
     }
 }
