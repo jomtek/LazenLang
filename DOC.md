@@ -1,3 +1,4 @@
+
 # **Lazen Documentation**
 
 Lazen is an imperative, object-oriented, statically-typed and type-inferred programming language, which offers higher-order functions and more. This language is meant to be learned in a matter of hours.
@@ -17,7 +18,7 @@ Note: This documentation is very incomplete and is still in work.
  10. Classes
  11. Type casting
  12. Exceptions
- 
+
 ## **1. Essential types**
 Lazen has various essential types (which are either built-in and defined or implemented in Lazen's *standard library*).
 
@@ -68,7 +69,7 @@ Variables are surely one of the most used features in an imperative programming 
  1. `var baz: T = expr`
  2. `const baz: T = expr`
  Where T represents the (inferable) type of the variable
- 
+
 - Constants cannot be re-defined
 - You should indicate at least the type or the value of the variable
 - If no value is indicated, a new instance is created using the default constructor of the specified type
@@ -76,9 +77,16 @@ Variables are surely one of the most used features in an imperative programming 
 ## 4. String interpolation
 String interpolation is a useful feature which can be used for string concatenation, pretty-printing, and more.
 
-It deals with any type of expression, as long as it finds a (public) `ToString` method, knowing that almost all essential Lazen types implement this method.
+It deals with any type of expression, as long as the expression is an instance of a class implementing the `IShowable` interface, defined as:
 
-**Usage:** `$(expr)` where `expr` stands for every expr under the condition mentionned above
+    interface IShowable
+    {
+    ​	func ToString() -> String
+    }
+
+Hence, a public `ToString` method should be available
+
+**Usage:** `$(expr)` (with `expr: T` where `T : IShowable`)
 **Examples**
 
     var baz = "world"
@@ -86,15 +94,15 @@ It deals with any type of expression, as long as it finds a (public) `ToString` 
     "Hello, $(baz) !" // "Hello, world !"
     "Result: $(caz + 5)" // "Result: 7"
 
-## 5. Functions, overloading & genericity
+## 5. Functions and genericity
 Lazen has higher-order functions which can be overloaded.
 The syntax for function declaration is very intuitive:
- 
+
 In the following example, `foo` takes one argument named `arg`, of type `Bool`, and returns a value of type `Int`. 
 
     func foo(arg: Bool) -> Int
     {
-	    return 0
+        return 0
     }
 
  - Functions always return something
@@ -103,23 +111,16 @@ In the following example, `foo` takes one argument named `arg`, of type `Bool`, 
 	 - Usage: `func foo() = expr`
 
 **Overloading**
-In the following example, `foo` is being overloaded
-
-    func foo(x: Int) = "Integer !"
-    func foo(x: String) = "String !"
-    
-    foo(5) // "Integer !"
-    foo("a") // "String !"
- 
+WIP
 
 **Genericity**
 Functions can hold multiple type variables
 
     func reverse<T>(x: List<T>) -> List<T>
     {
-	    List<T> result
-	    for i in range(x.Len(), 0) result.Add(x[i])
-	    result
+        var result: List<T>
+        for i in range(x.Len(), 0) result.Add(x[i])
+        result
     }
 Note: when no `return` statement is found on a function's body, the last expression (in this case : `result`) is chosen to be the return type
 
@@ -209,11 +210,11 @@ A class is implemented this way - here, a simple class with a constructor, initi
 
     class MyClass
     {
-	    var Number: Int
-	    constructor(number)
-		{
-			this Number = number
-		}
+        var Number: Int
+        constructor(number)
+    	{
+    		this Number = number
+    	}
     }
 
 Notes
@@ -234,18 +235,18 @@ Classes can hold type variables. And the syntax is pretty much intuitive.
 
     class MyClass2<T>
     {
-	    var Object: T
-		constructor(object)
-		{
-			this Object = object
-		}
+        var Object: T
+    	constructor(object)
+    	{
+    		this Object = object
+    	}
     }
 
 **Initialization**
 You may want to intialize a new object from your class. Do it the following way.
 
     var myObject: MyClass2<string> = new MyClass2("hello")
-    
+
 Note that between the parentheses stand the arguments passed to the class' constructor.
 
 **Member access**
