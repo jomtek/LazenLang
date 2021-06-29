@@ -1,0 +1,4 @@
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.csproj.AssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.AssemblyInfoInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.AssemblyInfo.cs
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.csproj.CoreCompileInputs.cache

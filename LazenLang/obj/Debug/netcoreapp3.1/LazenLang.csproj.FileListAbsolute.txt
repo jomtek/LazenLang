@@ -1,4 +1,3 @@
-C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.csprojAssemblyReference.cache
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.AssemblyInfoInputs.cache
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.AssemblyInfo.cs
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.csproj.CoreCompileInputs.cache
@@ -11,3 +10,7 @@ C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Debug\netcoreapp3.1\LazenLa
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.dll
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.pdb
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.genruntimeconfig.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Debug\netcoreapp3.1\Lexing.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Debug\netcoreapp3.1\Lexing.pdb
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.csproj.AssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Debug\netcoreapp3.1\LazenLang.csproj.CopyComplete

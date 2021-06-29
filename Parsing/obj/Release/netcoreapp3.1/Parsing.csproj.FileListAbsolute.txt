@@ -1,0 +1,12 @@
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.AssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.AssemblyInfoInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.AssemblyInfo.cs
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.CoreCompileInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.deps.json
+C:\Users\jomtek360\Documents\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.dll
+C:\Users\jomtek360\Documents\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.pdb
+C:\Users\jomtek360\Documents\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.dll
+C:\Users\jomtek360\Documents\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.pdb
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.CopyComplete
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.dll
+C:\Users\jomtek360\Documents\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.pdb

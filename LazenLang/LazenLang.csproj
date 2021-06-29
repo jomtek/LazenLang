@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Parsing\Consumers\**" />
-    <EmbeddedResource Remove="Parsing\Consumers\**" />
-    <None Remove="Parsing\Consumers\**" />
+    <ProjectReference Include="..\Lexing\Lexing.csproj" />
+    <ProjectReference Include="..\Parsing\Parsing.csproj" />
+    <ProjectReference Include="..\Typechecking\Typechecking.csproj" />
   </ItemGroup>
 
 </Project>

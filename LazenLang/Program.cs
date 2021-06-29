@@ -4,11 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
-using LazenLang.Parsing.Ast;
-using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Ast.Statements;
-using LazenLang.Parsing.Display;
 using LazenLang.Typechecking;
+using Parsing.Errors;
 
 namespace LazenLang
 {
@@ -36,7 +34,7 @@ namespace LazenLang
                 if (!(ex.Content is NoTokenLeft))
                 {
                     string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
-                    string prettyPrintedContent = PrettyExceptions.PrettyContent(ex.Content);
+                    string prettyPrintedContent = Parsing.Display.PrettyExceptions.PrettyContent(ex.Content);
                     Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
                 }
                 return;

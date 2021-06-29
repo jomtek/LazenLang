@@ -1,0 +1,4 @@
+C:\Users\jomtek360\Documents\LazenLang\Typechecking\obj\Release\netcoreapp3.1\Typechecking.csproj.AssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\Typechecking\obj\Release\netcoreapp3.1\Typechecking.AssemblyInfoInputs.cache
+C:\Users\jomtek360\Documents\LazenLang\Typechecking\obj\Release\netcoreapp3.1\Typechecking.AssemblyInfo.cs
+C:\Users\jomtek360\Documents\LazenLang\Typechecking\obj\Release\netcoreapp3.1\Typechecking.csproj.CoreCompileInputs.cache

@@ -1,9 +1,21 @@
-class Program
+/*
+[arg..5]
+interface Test<T> : Baz, Bamboozle
+class Test : Baz, Bamboozle
+func foo<T: Number>(arg: T, arg2: T) -> T
+*/
+
+/*
+interface Test<T>
 {
-	static func Main()
+	func foo(arg: Int)
+	var Salut: Int
+}
+*/
+class Program<T>
+{	
+	static func Main(args: [String]) -> Int
 	{
-		var etienne = new Humain()
-		etienne.Nom = "Etienne"
-		print(new Humain().Nom)
+		println("Hello, world!")
 	}
 }

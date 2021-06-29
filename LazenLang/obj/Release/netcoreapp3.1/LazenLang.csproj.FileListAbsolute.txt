@@ -10,4 +10,7 @@ C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\Lazen
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.dll
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.pdb
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.genruntimeconfig.cache
-C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.csprojAssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.csproj.AssemblyReference.cache
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Lexing.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Lexing.pdb
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.csproj.CopyComplete
