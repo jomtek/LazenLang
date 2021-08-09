@@ -15,7 +15,7 @@ Note: This documentation is very incomplete and is still in work.
  7. Blocks
  8. Flow-of-control statements
  9. Modules
- 10. Classes
+ 10. OOP (classes and stuff)
  11. Type casting
  12. Exceptions
 
@@ -35,10 +35,10 @@ Lazen has a native type describing an array
  - Example of an array of `Int`
 	 - `[1, 2, 3]` 
  - Example of a method taking an array of `Int` as parameter
-	-  `func foo([Int] arr) {}`
+	-  `func foo(arr: [Int]) {}`
 
 Note: Arrays are immutable. Lists aren't.
-Hint: With `arr: [T]`, initialize a new `List<T>` using `new List(arr)`
+Hint: With `arr: [T]`, you can initialize a new `List<T>` using `new List(arr)`
 
 **Other essential types**
 
@@ -60,7 +60,7 @@ Note: both `Int` and `Double` types inherit from the `Number` class
  - `expr && expr` finds out if both operands are `true`
  - `expr || expr` finds out if at least one operand is `true`
  - `!expr`, finds `true` if expr is `false`, vice-versa
- - `if (expr) expr else expr` the famous ternary operator
+ - `if expr expr else expr` the famous ternary operator
 
 ## 3. Variables & constants
 Variables are surely one of the most used features in an imperative programming language. Lazen believes their type should be consistent. Obviously, they can be mutable or constant.
@@ -70,21 +70,19 @@ Variables are surely one of the most used features in an imperative programming 
  2. `const baz: T = expr`
  Where T represents the (inferable) type of the variable
 
-- Constants cannot be re-defined
+- Constants cannot be re-defined (never have I imagined I would write such a thing on my keyboard pssss)
 - You should indicate at least the type or the value of the variable
 - If no value is indicated, a new instance is created using the default constructor of the specified type
 
 ## 4. String interpolation
 String interpolation is a useful feature which can be used for string concatenation, pretty-printing, and more.
 
-It deals with any type of expression, as long as the expression is an instance of a class implementing the `IShowable` interface, defined as:
+It deals with any type of expression, as long as the expression itself is an instance of a class implementing the `IShowable` interface, defined as:
 
     interface IShowable
-    {
-    ​	func ToString() -> String
-    }
+    func ToString() -> String
 
-Hence, a public `ToString` method should be available
+Hence, a public `ToString` method should be available to use
 
 **Usage:** `$(expr)` (with `expr: T` where `T : IShowable`)
 **Examples**
