@@ -169,8 +169,8 @@ Tip: use the `range` function for a "classical" a to b iteration
 	 - `continue`
 
 ## 9. Modules
-A Lazen project is constitued of at least one module represented by a simple folder. Think of it as a namespace. 
-Modules are loaded statically
+A Lazen project is constitued of at least one module represented by a simple folder. Think of it as a namespace.<br>
+Modules are loaded statically.
 
 A folder contains
  - Sub-folders which are associated with sub-modules or sub-namespaces
@@ -180,18 +180,14 @@ Thus, a valid Hello World program looks like below
 
 ![Hello World project tree](https://i.imgur.com/16cy5um.png)
 
-Contents of `code.lzn` :
+Contents of `Program.lzn` (todo: change the file name in the screenshot):
 
-    class Program
-    {
-    	static func Main(args: [String])
-    	{
-    		println("Hello world!")
-    		0
-    	}
-    }
-
-Notice how the file name `code` has absolutely nothing to do with its contents.
+    	class Program
+	static func Main(args: [String])
+	{
+		println("Hello world!")
+		0
+	}
 
 Notes
 - Public functions are marked PascalCase
@@ -204,23 +200,23 @@ In order to access objects from a specific distant namespace - in this example, 
     Math.Abs(x, y)
 
 ## 10. Classes
-A class is a useful structure which stands behind each Lazen type. Like in all programming languages, it can be instantiated. Classes' members can be either public or private - they're public by default and that is a reason why the `public` keyword does not exist in Lazen.
+A class is a useful structure which stands behind each Lazen type. Like in all programming languages, it can be instantiated. Class members can be either public or private - they're public by default and that is a reason why the `public` keyword does not exist in Lazen.
 
-A class is implemented this way - here, a simple class with a constructor, initializing the `Number` public integer
+A class is implemented the way shown below - here, a simple class with a constructor, initializing the `Number` public integer.<br>
+As you can see, the class declaration is not a block itself. The reason why is the way modules are organized in Lazen. One file, one class.
 
-    class MyClass
-    {
+    	class MyClass
+
         var Number: Int
         constructor(number)
     	{
     		this Number = number
     	}
-    }
 
 Notes
 
  - Constructors are introduced using the `constructor` keyword, and can be overloaded
- - Anywhere in the class, the usage of the `this` keyword helps the compiler figure out which object is being referred to
+ - Anywhere in the class, the use of the `this` keyword helps the compiler figure out which object is being referred to
 
 **Private members**
 A class can have private members, which are only accessible inside the scope if the concerned class.
@@ -233,19 +229,18 @@ Just add the `static` keyword before any variable or function declaration.
 **Generic classes**
 Classes can hold type variables. And the syntax is pretty much intuitive.
 
-    class MyClass2<T>
-    {
+    	class MyClass<T>
+	
         var Object: T
     	constructor(object)
     	{
     		this Object = object
     	}
-    }
 
 **Initialization**
 You may want to intialize a new object from your class. Do it the following way.
 
-    var myObject: MyClass2<string> = new MyClass2("hello")
+    var myObject: MyClass<string> = new MyClass("hello")
 
 Note that between the parentheses stand the arguments passed to the class' constructor.
 
