@@ -83,7 +83,8 @@ namespace LazenLang.Parsing
             try
             {
                 return consumer(this);
-            } catch (ParserError ex)
+            } 
+            catch (ParserError ex)
             {
                 LookAheadIndex = oldIndex;
                 throw ex;
@@ -99,7 +100,8 @@ namespace LazenLang.Parsing
                 try
                 {
                     return TryConsumer(consumer);
-                } catch (ParserError ex)
+                }
+                catch (ParserError ex)
                 {
                     if (ex.IsExceptionFictive())
                     {

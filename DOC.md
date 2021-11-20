@@ -1,4 +1,5 @@
 
+  
 # **Lazen Documentation**
 
 Lazen is an imperative, object-oriented, statically-typed and type-inferred programming language, which offers higher-order functions and more. This language is meant to be learned in a matter of hours.
@@ -15,9 +16,10 @@ Note: This documentation is very incomplete and is still in work.
  7. Blocks
  8. Flow-of-control statements
  9. Modules
- 10.1 OOP (classes: basics and genericity)
- 10.2 OOP (classes: how to code safe and organized)
- 10.3 OOP (interfaces and their use)
+ 10. Classes 
+	 1. OOP (basics and genericity)
+	 2. OOP (inheritance)
+	 3. OOP (interfaces and their use)
  11. Type casting
  12. Exceptions
 
@@ -183,7 +185,7 @@ Thus, a valid Hello World program looks like below
 
 Contents of `Program.lzn` (todo: change the file name in the screenshot):
 
-    	class Program
+    class Program
 	static func Main(args: [String])
 	{
 		println("Hello world!")
@@ -207,10 +209,9 @@ A class is a useful structure which stands behind each Lazen type. Like in all p
 A class is implemented the way shown below - here, a simple class with a constructor, initializing its `Number` public member.<br>
 
     	class MyClass
-
+    	
         var Number: Int
-        constructor 
-	(number)
+        constructor (number)
     	{
     		this Number = number
     	}
@@ -247,13 +248,13 @@ Note that between the parentheses stand the arguments passed to the class' const
 ### Genericity
 Classes can hold type variables. And hold your breath because the syntax is pretty much intuitive.
 
-    	class ContainerClass<T>
-	
-        var Object: T
-    	constructor (object)
-    	{
-    		this Object = object
-    	}
+    class ContainerClass<T>
+    
+    var Object: T
+    constructor (object)
+    {
+	    this Object = object
+    }
 
 ## 10.2 OOP (classes: how to code safe and organized)
 
@@ -264,14 +265,14 @@ Interfaces are represented by a suite of semi-abstract function signatures as we
 ```
 interface Human
 {
-	var Age: Int behaves { get }
+	var Age: Int
 	func Eat() -> Void
 }
 ```
 
 Notes:
 - In "member signatures", a behavior needs to be defined
-- 
+- Access modifiers are not necessary in interfaces
 
 ## 11. Type casting
 

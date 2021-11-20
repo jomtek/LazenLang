@@ -5,7 +5,6 @@ using System.IO;
 using LazenLang.Lexing;
 using LazenLang.Parsing;
 using LazenLang.Parsing.Ast.Statements;
-using LazenLang.Typechecking;
 using Parsing.Errors;
 
 namespace LazenLang
