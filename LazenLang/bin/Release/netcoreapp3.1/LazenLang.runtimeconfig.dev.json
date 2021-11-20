@@ -3,6 +3,7 @@
     "additionalProbingPaths": [
       "C:\\Users\\jomtek360\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\jomtek360\\.nuget\\packages",
+      "C:\\Program Files (x86)\\ComponentOne\\WPF Edition\\bin\\v5",
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
       "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet"
     ]

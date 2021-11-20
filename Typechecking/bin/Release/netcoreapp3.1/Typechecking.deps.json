@@ -6,14 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "LazenLang/1.0.0": {
+      "Typechecking/1.0.0": {
         "dependencies": {
-          "Lexing": "1.0.0",
-          "Parsing": "1.0.0",
-          "Typechecking": "1.0.0"
+          "Parsing": "1.0.0"
         },
         "runtime": {
-          "LazenLang.dll": {}
+          "Typechecking.dll": {}
         }
       },
       "Lexing/1.0.0": {
@@ -28,19 +26,11 @@
         "runtime": {
           "Parsing.dll": {}
         }
-      },
-      "Typechecking/1.0.0": {
-        "dependencies": {
-          "Parsing": "1.0.0"
-        },
-        "runtime": {
-          "Typechecking.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "LazenLang/1.0.0": {
+    "Typechecking/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -51,11 +41,6 @@
       "sha512": ""
     },
     "Parsing/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Typechecking/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

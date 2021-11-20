@@ -14,3 +14,7 @@ C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\Lazen
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Lexing.dll
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Lexing.pdb
 C:\Users\jomtek360\Documents\LazenLang\LazenLang\obj\Release\netcoreapp3.1\LazenLang.csproj.CopyComplete
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Parsing.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Typechecking.dll
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Parsing.pdb
+C:\Users\jomtek360\Documents\LazenLang\LazenLang\bin\Release\netcoreapp3.1\Typechecking.pdb

@@ -1,0 +1,66 @@
+class Program
+
+private const MEM_SPACE: Int = 1200
+
+constructor(args: [String])
+{
+	code = args[0]
+	memory = [0] * MEM_SPACE
+	pointer = 0
+	loop_depth = 0; loop_stack = new [Int]
+
+	i = 0
+	while i < code.Length
+	{
+		if pointer < 0 or pointer > MEM_SPACE - 1
+		{
+			print($"Pointer exception (pointer:{pointer})")
+			break
+		}
+		elif memory[pointer] < 0
+		{
+			print($"Memory exception (pointer={pointer}, value={memory[pointer]})")
+			break
+		}
+
+		if   code[i] == '>' pointer++
+		elif code[i] == '<' pointer--
+		elif code[i] == '+' memory[pointer]++
+		elif code[i] == '-' memory[pointer]--
+		elif code[i] == '.' printr(chr(memory[pointer]))
+		elif code[i] == ',' memory[pointer] = Int cast input()
+		elif code[i] == '['
+		{
+			loop_depth++
+			loop_stack.Add(i+1)
+		}
+		elif code[i] == ']'
+		{
+			if loop_depth > 0
+				if memory[pointer] == 0
+				{
+					loop_depth--
+					loop_stack.Pop()
+				}
+				else
+				{
+					i -= i - loop_stack[-1]
+				}
+			else
+			{
+				print($"Unexpected character (i={i})")
+				break
+			}	
+		}
+		else
+		{
+			print($"Unrecognized character (i={i})")
+			break
+		}
+
+		i++
+	}
+
+	if loop_depth > 0
+		print("Unclosed brackets...")
+}
