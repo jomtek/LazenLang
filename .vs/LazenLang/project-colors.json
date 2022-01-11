@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f126ff04-93d1-4417-8261-3346e341c0c6": {
+      "ProjectGuid": "f126ff04-93d1-4417-8261-3346e341c0c6",
+      "DisplayName": "Parsing",
+      "ColorIndex": 0
+    },
+    "abf2e764-3f84-48b4-a5f1-a29c1e2b312f": {
+      "ProjectGuid": "abf2e764-3f84-48b4-a5f1-a29c1e2b312f",
+      "DisplayName": "Lexing",
+      "ColorIndex": 1
+    },
+    "5be8d698-4ec6-486a-937b-1e922f69a1d3": {
+      "ProjectGuid": "5be8d698-4ec6-486a-937b-1e922f69a1d3",
+      "DisplayName": "LazenLang",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

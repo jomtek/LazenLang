@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static LazenLang.Lexing.TokenInfo;
 
 namespace LazenLang.Parsing.Ast
 {
@@ -51,7 +52,7 @@ namespace LazenLang.Parsing.Ast
         private static Expr ParseParenthesisExpr(Parser parser)
         {
             Token leftParenthesis = parser.Eat(TokenInfo.TokenType.L_PAREN);
-            Expr expr = parser.TryConsumer(Consume).Value;
+            Expr expr = parser.TryConsumer((p) => Consume(p)).Value;
             
             try
             {
@@ -74,17 +75,19 @@ namespace LazenLang.Parsing.Ast
             return parser.TryManyEats(_operators);
         }
 
-        private static Expr ParseOperand(Parser parser)
+        private static Expr ParseOperand(Parser parser, bool excludeSlicingAndIndexing)
         {
             Expr operand = null;
 
             switch (parser.LookAhead().Type)
             {
                 case TokenInfo.TokenType.IDENTIFIER:
-                    operand = parser.TryManyConsumers(new Func<Parser, Expr>[]
+                    operand = parser.TryManyConsumers(new (bool, Func<Parser, Expr>)[]
                     {
-                    FuncCall.Consume,
-                    Literal.Consume
+                        (true, FuncCall.Consume),
+                        //(!excludeSlicingAndIndexing, ArrayIndexing.Consume),
+                        //(!excludeSlicingAndIndexing, ArraySlicing.Consume),
+                        (true, Literal.Consume),
                     });
                     break;
 
@@ -136,7 +139,8 @@ namespace LazenLang.Parsing.Ast
             return operand;
         }
 
-        private static Expr ParseBinOpSeq(Parser parser, bool uniOpPrivilege = false)
+
+        private static Expr ParseBinOpSeq(Parser parser, bool excludeSlicingAndIndexing)
         {
             var operands = new List<Expr>();
             var operators = new List<Token>();
@@ -145,10 +149,57 @@ namespace LazenLang.Parsing.Ast
             {
                 try
                 {
-                    operands.Add(ParseOperand(parser));
-                    if (uniOpPrivilege) break;
+                    Expr operand = ParseOperand(parser, excludeSlicingAndIndexing);
+
+                    // Manage indexing (i.e. a[b][c]) and slicing (i.e. a[c:d]) using continuous folding
+                    ArraySlicing slicing = null;
+                    while (parser.LookAhead().Type == TokenType.L_BRACKET)
+                    {
+                        ExprNode beginning = null;
+                        ExprNode ending = null;
+                        ExprNode step = null;
+                        bool isIndexing = true;
+
+                        parser.Eat(TokenType.L_BRACKET);
+
+                        // list[  a <-here  :c:d]
+                        if (parser.LookAhead().Type != TokenType.COLON)
+                            beginning = parser.TryConsumer(ExprNode.Consume);
+                        
+                        if (parser.LookAhead().Type == TokenType.COLON)
+                        {
+                            isIndexing = false;
+
+                            // list[a  : <-here  b:c]
+                            parser.Eat(TokenType.COLON);
+
+                            // list[a:  b <-here  :c]
+                            if (parser.LookAhead().Type != TokenType.R_BRACKET &&
+                                parser.LookAhead().Type != TokenType.COLON)
+                                ending = parser.TryConsumer(ExprNode.Consume);
+
+                            // list[a:b  : <-here  c]
+                            if (parser.LookAhead().Type == TokenType.COLON)
+                            {
+                                parser.Eat(TokenType.COLON);
+
+                                // list[a:b:  c <-here  ]
+                                if (parser.LookAhead().Type != TokenType.R_BRACKET)
+                                {
+                                    step = parser.TryConsumer(ExprNode.Consume);
+                                }
+                            }
+                        }
+
+                        slicing = new ArraySlicing(slicing == null ? operand : slicing, beginning, ending, step, isIndexing);
+                        parser.Eat(TokenType.R_BRACKET, false);
+                    }
+
+                    operands.Add(slicing == null ? operand : slicing);
+
                     operators.Add(ParseOperator(parser));
-                } catch (ParserError ex)
+                }
+                catch (ParserError ex)
                 {
                     if (!ex.IsExceptionFictive())
                         throw ex;
@@ -180,9 +231,14 @@ namespace LazenLang.Parsing.Ast
 
         public static ExprNode Consume(Parser parser)
         {
+            return Consume(parser, false);
+        }
+
+        public static ExprNode Consume(Parser parser, bool excludeSlicingAndIndexing)
+        {
             CodePosition oldCursor = parser.Cursor;
             return new ExprNode(
-                parser.TryConsumer((Parser p) => ParseBinOpSeq(p)),
+                parser.TryConsumer((Parser p) => ParseBinOpSeq(p, excludeSlicingAndIndexing)),
                 oldCursor
             );
         }

@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "B9DXvWXhHlAbPOH7wOsjGX2YRTAHIWA0q8vZRScnl7EMoXsBsWHqL8eUajGLatC+3aYGMDjcIkh3Zu8f0Dsmaw==",
+  "dgSpecHash": "3pgmSaceYeHu9S4ewDObwnUvU0QWGSUFoVtZcZQfkeMR9VhqJ1rf7ZBrPYsPUd7L91inpdDrvglxirME8Q3kYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jomtek360\\Documents\\LazenLang\\Typechecking\\Typechecking.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\jomte\\Documents\\Projects\\LazenLang\\Typechecking\\Typechecking.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }

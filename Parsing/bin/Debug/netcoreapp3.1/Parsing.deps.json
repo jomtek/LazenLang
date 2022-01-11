@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Parsing/1.0.0": {
+        "dependencies": {
+          "Lexing": "1.0.0"
+        },
+        "runtime": {
+          "Parsing.dll": {}
+        }
+      },
+      "Lexing/1.0.0": {
+        "runtime": {
+          "Lexing.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Parsing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Lexing/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

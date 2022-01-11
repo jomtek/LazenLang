@@ -29,7 +29,7 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
         public override string Pretty(int level)
         {
-            var sb = new StringBuilder("FuncDecl");
+            var sb = new StringBuilder("FunctionDecl");
             sb.AppendLine();
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Signature.Pretty(level + 1)}");
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"{Block.Pretty(level + 1)}");

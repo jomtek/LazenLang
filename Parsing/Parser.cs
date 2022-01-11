@@ -116,5 +116,36 @@ namespace LazenLang.Parsing
 
             throw lastError;
         }
+
+        // Tries many consumers, each with its condition
+        public T TryManyConsumers<T>((bool, Func<Parser, T>)[] entries)
+        {
+            ParserError lastError = null;
+
+            foreach (var entry in entries)
+            {
+                if (!entry.Item1)
+                    continue;
+
+                Func<Parser, T> consumer = entry.Item2;
+                try
+                {
+                    return TryConsumer(consumer);
+                }
+                catch (ParserError ex)
+                {
+                    if (ex.IsExceptionFictive())
+                    {
+                        lastError = ex;
+                    }
+                    else
+                    {
+                        throw ex;
+                    }
+                }
+            }
+
+            throw lastError;
+        }
     }
 }

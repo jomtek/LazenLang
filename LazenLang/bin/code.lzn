@@ -1,6 +1,6 @@
 class Program
 {
-	static func Main([string] args)
+	static function Main(args)
 	{
 		println("Hello world!")
 	}
