@@ -44,7 +44,6 @@ namespace LazenLang.Parsing.Algorithms
                 [TokenInfo.TokenType.LESS_EQ] = 3,
                 [TokenInfo.TokenType.EQ] = 2,
                 [TokenInfo.TokenType.NOT_EQ] = 2,
-                [TokenInfo.TokenType.IN] = 2,
                 [TokenInfo.TokenType.BOOLEAN_AND] = 1,
                 [TokenInfo.TokenType.BOOLEAN_OR] = 1
             };

@@ -1,0 +1,34 @@
+class Hello {
+
+
+
+
+
+
+    hello = 5;
+    c: Int = hello;
+}
+
+/*
+a = 5;
+print("hello");
+class Hello {
+    func Hello(self: Hello) {
+        print("So the goal is to build something");    
+    }
+}
+
+
+b: Int = 5;
+c: Bool = false;
+
+if (a+b == c) {
+    print("hello");
+    print("hey");       
+}
+else {
+    print("hey");
+}
+
+
+*/

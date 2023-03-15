@@ -1,0 +1,4 @@
+class Hello
+constructor() {
+	print("hello")
+}

@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3pgmSaceYeHu9S4ewDObwnUvU0QWGSUFoVtZcZQfkeMR9VhqJ1rf7ZBrPYsPUd7L91inpdDrvglxirME8Q3kYw==",
+  "dgSpecHash": "dqfqBzvwLdBEcBVuuat5V1w6mog6DltU25Yixljgb9OrVPGlg2R2o9eVXulDv4x0GWMA08DfyRggUT0v9oJKxw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jomte\\Documents\\Projects\\LazenLang\\Typechecking\\Typechecking.csproj",
+  "projectFilePath": "/home/puel/RiderProjects/LazenLang/Typechecking/Typechecking.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+    "/home/puel/.nuget/packages/microsoft.netcore.app.ref/3.1.0/microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "/home/puel/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.10/microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
   ],
   "logs": []
 }

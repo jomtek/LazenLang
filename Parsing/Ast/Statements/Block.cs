@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Statements.Functions;
 using LazenLang.Parsing.Ast.Statements.OOP;
@@ -18,7 +17,7 @@ namespace LazenLang.Parsing.Ast.Statements
             Instructions = instructions;
         }
 
-        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevel, bool intoClass, bool intoInterface)
+        private static InstrNode[] ParseStatementSeq(Parser parser, bool topLevel, bool intoClass)
         {
             var statements = new List<InstrNode>();
             bool isLastEOL = true;
@@ -26,7 +25,7 @@ namespace LazenLang.Parsing.Ast.Statements
             while (true)
             {
                 InstrNode statement = null;
-                bool eolFailed = false;
+                var eolFailed = false;
 
                 try
                 {
@@ -61,31 +60,19 @@ namespace LazenLang.Parsing.Ast.Statements
 
                     try
                     {
-                        if (topLevel)
+                        if (intoClass)
                         {
                             statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer(ClassDecl.Consume), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer(InterfaceDecl.Consume), p.Cursor)
-                            });
-                        }
-                        else if (intoClass)
-                        {
-                            statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => FuncDecl.Consume(p)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer(ConstructorDecl.Consume), p.Cursor)
-                            });
-                        }
-                        else if (intoInterface)
-                        {
-                            statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => VarDecl.Consume(p, true, false, false)), p.Cursor),
-                                (Parser p) => new InstrNode(p.TryConsumer((Parser p) => Signature.Consume(p, true, false)), p.Cursor)
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser _) => VarDecl.Consume(p)), p.Cursor),
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser _) => FuncDecl.Consume(p)), p.Cursor)
                             });
                         }
                         else
                         {
-                            statement = parser.TryConsumer(InstrNode.Consume);
+                            statement = parser.TryManyConsumers(new Func<Parser, InstrNode>[]{
+                                (Parser p) => new InstrNode(p.TryConsumer((Parser _) => ClassDecl.Consume(p)), p.Cursor),
+                                (Parser p) => p.TryConsumer((Parser _) => InstrNode.Consume(p)),
+                            });
                         }
                     }
                     catch (ParserError ex)
@@ -113,7 +100,7 @@ namespace LazenLang.Parsing.Ast.Statements
             return statements.ToArray();
         }
 
-        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false, bool intoClass = false, bool intoInterface = false)
+        public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false, bool intoClass = false)
         {
             while (true)
             {
@@ -128,15 +115,10 @@ namespace LazenLang.Parsing.Ast.Statements
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
 
-            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoClass, intoInterface));
+            InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoClass));
 
             if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
-
-            if (!intoClass)
-            {
-                //Console.WriteLine("ye");
-            }
-
+            
             return new Block(statements);
         }
 

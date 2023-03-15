@@ -1,8 +1,0 @@
-class Program
-{
-	static function Main() -> Int
-	{
-		var a = [[[1, 0]]]
-		return a[0][0][::-1]
-	}
-}

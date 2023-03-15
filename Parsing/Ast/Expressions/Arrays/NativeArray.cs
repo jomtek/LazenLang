@@ -6,7 +6,7 @@ using LazenLang.Parsing.Display;
 
 namespace LazenLang.Parsing.Ast.Expressions.Arrays
 {
-    public class NativeArray : Expr, IPrettyPrintable
+    /*public class NativeArray : Expr, IPrettyPrintable
     {
         public ExprNode[] Elements;
 
@@ -28,5 +28,5 @@ namespace LazenLang.Parsing.Ast.Expressions.Arrays
         {
             return "NativeArray: " + Display.Utils.PrettyArray(Elements, level);
         }
-    }
+    }*/
 }

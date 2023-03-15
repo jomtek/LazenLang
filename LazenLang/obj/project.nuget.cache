@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "69qkVybg4cyP67HF8fzm+KZmhCsMwbbrwO/xoXuzKH1ZpCEb7ivDV7EY3aetrGV9hUEBFWSwz/UCcq00d9Gu0A==",
+  "dgSpecHash": "ImxIyAEDjAjjxHu6s7+gFHzk6bQIfiuhA1v8qh/yBnQwOVp5h4kOLuo6tZ/PxlDePmj8V8uuN+oc3xgkoR/GMw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jomte\\Documents\\Projects\\LazenLang\\LazenLang\\LazenLang.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512",
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\jomte\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
-  ],
+  "projectFilePath": "/home/puel/RiderProjects/LazenLang/LazenLang/LazenLang.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

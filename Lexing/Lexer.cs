@@ -43,13 +43,12 @@ namespace LazenLang.Lexing
                         int matchLength = match.Length;
                         string matchValue = match.Value;
 
-                        if (tokenType != TokenInfo.TokenType.SPACE && tokenType != TokenInfo.TokenType.TAB)
+                        if (tokenType != TokenInfo.TokenType.IGNORE && tokenType != TokenInfo.TokenType.EOL)
                         {
                             if (tokenType == TokenInfo.TokenType.STRING_LIT || tokenType == TokenInfo.TokenType.CHAR_LIT)
                                 matchValue = matchValue.Substring(1).Remove(matchLength - 2);
-
-                            if (tokenType != TokenInfo.TokenType.SINGLE_LINE_COMMENT && tokenType != TokenInfo.TokenType.MULTI_LINE_COMMENT)
-                                result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
+                            
+                            result.Add(new Token(matchValue.Trim(), tokenType, new CodePosition(lineTrack, colTrack)));
                         }
 
                         if (tokenType == TokenInfo.TokenType.EOL)

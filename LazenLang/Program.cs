@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using LazenLang.Lexing;
-using LazenLang.Parsing;
-using LazenLang.Parsing.Ast.Statements;
-using Parsing.Errors;
+//using LazenLang.Parsing;
+//using LazenLang.Parsing.Ast.Statements;
+//using Parsing.Errors;
 
 namespace LazenLang
 {
@@ -15,32 +15,42 @@ namespace LazenLang
         {
             Console.WriteLine("Compiling..."); 
 
-            string code = File.ReadAllText("../../../../Demo/HelloWorld/Program.lzn");
+            string code = File.ReadAllText("program.lzn");
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
             Token[] tokens = new Lexer(code).Tokens;
-            Parser parser = new Parser(tokens);
+            foreach (Token tok in tokens)
+            {
+                Console.WriteLine(tok.ToString());
+            }
+            /*Parser parser = new Parser(tokens);
 
-            Block ast;
+            Block ast = null;
             try
             {
                 ast = Block.Consume(parser, false, true);
             }
             catch (ParserError ex)
             {
-                if (!(ex.Content is NoTokenLeft))
+                if (ex.Content is NoTokenLeft == false)
                 {
                     string prettyPrintedPos = $"{ex.Position.Line}:{ex.Position.Column}";
                     string prettyPrintedContent = Parsing.Display.PrettyExceptions.PrettyContent(ex.Content);
-                    Console.WriteLine($"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
+                    Console.WriteLine(
+                        $"error: {prettyPrintedPos}: {ex.Content.GetType().Name}: {prettyPrintedContent}");
+                    return;
                 }
-                return;
             }
 
-            Console.WriteLine("\n\n");
-            Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));
+            if (ast == null)
+            {
+                return;
+            }
+            
+            Console.WriteLine("PrettyPrinting:\n\n");
+            Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));*/
 
             //TopLevelChecker typechecker = new TopLevelChecker(ast);
             //typechecker.Typecheck();

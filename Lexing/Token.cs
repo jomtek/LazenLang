@@ -32,13 +32,7 @@
 
         public override string ToString()
         {
-            if (Type != TokenInfo.TokenType.EOL)
-            {
-                return $"{Type} - {Pos.Line}: {Pos.Column} - value: {Value}";
-            } else
-            {
-                return "EOL";
-            }
+            return $"{Type} - {Pos.Line}: {Pos.Column} - value: {Value}";
         }
     }
 }

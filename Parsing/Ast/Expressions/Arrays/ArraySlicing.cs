@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LazenLang.Parsing.Ast.Expressions.Arrays
 {
-    public class ArraySlicing : Expr, IPrettyPrintable
+    /*public class ArraySlicing : Expr, IPrettyPrintable
     {
         public Expr Expr { get; }
         public ExprNode Beginning { get; }
@@ -38,5 +38,5 @@ namespace LazenLang.Parsing.Ast.Expressions.Arrays
 
             return sb.ToString();
         }
-    }
+    }*/
 }

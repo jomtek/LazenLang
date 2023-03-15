@@ -35,7 +35,6 @@ namespace LazenLang.Parsing.Ast
             TokenInfo.TokenType.NOT_EQ,
             TokenInfo.TokenType.BOOLEAN_AND,
             TokenInfo.TokenType.BOOLEAN_OR,
-            TokenInfo.TokenType.IN,
             TokenInfo.TokenType.GREATER,
             TokenInfo.TokenType.LESS,
             TokenInfo.TokenType.PLUS,
@@ -44,7 +43,6 @@ namespace LazenLang.Parsing.Ast
             TokenInfo.TokenType.MULTIPLY,
             TokenInfo.TokenType.POWER,
             TokenInfo.TokenType.DOT,
-            TokenInfo.TokenType.MODULO,
             TokenInfo.TokenType.GREATER_EQ,
             TokenInfo.TokenType.LESS_EQ
         };
@@ -99,9 +97,9 @@ namespace LazenLang.Parsing.Ast
                     operand = parser.TryConsumer(Literal.Consume);
                     break;
 
-                case TokenInfo.TokenType.L_BRACKET:
+                /*case TokenInfo.TokenType.L_BRACKET:
                     operand = parser.TryConsumer(NativeArray.Consume);
-                    break;
+                    break;*/
 
                 case TokenInfo.TokenType.NOT:
                     operand = parser.TryConsumer(NotExpr.Consume);
@@ -116,17 +114,9 @@ namespace LazenLang.Parsing.Ast
                     operand = parser.TryConsumer(IfInstr.Consume);
                     break;
 
-                case TokenInfo.TokenType.FUNC:
+                /*case TokenInfo.TokenType.FUNC:
                     operand = parser.TryConsumer(Lambda.Consume);
-                    break;
-
-                case TokenInfo.TokenType.NEW:
-                    operand = parser.TryConsumer(Instanciation.Consume);
-                    break;
-
-                case TokenInfo.TokenType.THIS:
-                    operand = parser.TryConsumer(This.Consume);
-                    break;
+                    break;*/
 
                 case TokenInfo.TokenType.L_PAREN:
                     operand = parser.TryConsumer(ParseParenthesisExpr);
@@ -151,6 +141,7 @@ namespace LazenLang.Parsing.Ast
                 {
                     Expr operand = ParseOperand(parser, excludeSlicingAndIndexing);
 
+                    /*
                     // Manage indexing (i.e. a[b][c]) and slicing (i.e. a[c:d]) using continuous folding
                     ArraySlicing slicing = null;
                     while (parser.LookAhead().Type == TokenType.L_BRACKET)
@@ -194,9 +185,9 @@ namespace LazenLang.Parsing.Ast
                         slicing = new ArraySlicing(slicing == null ? operand : slicing, beginning, ending, step, isIndexing);
                         parser.Eat(TokenType.R_BRACKET, false);
                     }
-
-                    operands.Add(slicing == null ? operand : slicing);
-
+*/
+                    
+                    operands.Add(operand); // operands.Add(slicing == null ? operand : slicing);
                     operators.Add(ParseOperator(parser));
                 }
                 catch (ParserError ex)
