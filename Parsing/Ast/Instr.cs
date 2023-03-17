@@ -34,7 +34,6 @@ namespace LazenLang.Parsing.Ast
             Instr instr;
             switch (parser.LookAhead().Type)
             {
-                case TokenInfo.TokenType.EOL:
                 case TokenInfo.TokenType.L_CURLY_BRACKET:
                     instr = parser.TryConsumer((Parser p) => Block.Consume(p));
                     break;
@@ -46,12 +45,7 @@ namespace LazenLang.Parsing.Ast
                 case TokenInfo.TokenType.FOR:
                     instr = parser.TryConsumer(ForLoop.Consume);
                     break;
-
-                case TokenInfo.TokenType.CONST:
-                case TokenInfo.TokenType.VAR:
-                    instr = parser.TryConsumer((Parser p) => VarDecl.Consume(p));
-                    break;
-
+                
                 case TokenInfo.TokenType.RETURN:
                     instr = parser.TryConsumer(ReturnInstr.Consume);
                     break;
@@ -66,7 +60,7 @@ namespace LazenLang.Parsing.Ast
 
                 default:
                     instr = parser.TryManyConsumers(new Func<Parser, Instr>[] {
-                        VarMutation.Consume,
+                        (Parser p) => VarDecl.Consume(p),
                         ExprInstr.Consume
                     });
                     break;

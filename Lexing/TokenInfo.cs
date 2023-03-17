@@ -19,8 +19,12 @@
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS,
             // +  -      /       *         ^      %       !    >=          <=
             PLUS, MINUS, DIVIDE, MULTIPLY, POWER, MODULO, NOT, GREATER_EQ, LESS_EQ,
-            // +=    -=        /=         *=           ^=        %=         ..
-            PLUS_EQ, MINUS_EQ, DIVIDE_EQ, MULTIPLY_EQ, POWER_EQ, MODULO_EQ, DOUBLE_DOT,
+            
+            // ..
+            DOUBLE_DOT,
+            
+            // +=      -=        /=         *=           ^=        %=        
+            //PLUS_EQ, MINUS_EQ, DIVIDE_EQ, MULTIPLY_EQ, POWER_EQ, MODULO_EQ,
 
             // Other
             EOL, IGNORE, OTHER
@@ -65,12 +69,12 @@
             (@"^\:",                                  TokenType.COLON),
             (@"^\%",                                  TokenType.MODULO),
             (@"^\^",                                  TokenType.POWER),
-            (@"^\+\=",                                TokenType.PLUS_EQ),
+            /*(@"^\+\=",                                TokenType.PLUS_EQ),
             (@"^\-\=",                                TokenType.MINUS_EQ),
             (@"^\/\=",                                TokenType.DIVIDE_EQ),
             (@"^\*\=",                                TokenType.MULTIPLY_EQ),
             (@"^\^\=",                                TokenType.POWER_EQ),
-            (@"^\%\=",                                TokenType.MODULO_EQ),
+            (@"^\%\=",                                TokenType.MODULO_EQ),*/
             (@"^\+",                                  TokenType.PLUS),
             (@"^\-",                                  TokenType.MINUS),
             (@"^\|\|",                                TokenType.BOOLEAN_OR),

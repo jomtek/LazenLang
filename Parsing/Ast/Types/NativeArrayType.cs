@@ -5,7 +5,7 @@ using Parsing.Errors;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    public class NativeArrayType : TypeDesc, IPrettyPrintable
+    /*public class NativeArrayType : TypeDesc, IPrettyPrintable
     {
         public TypeDesc Type;
 
@@ -41,5 +41,5 @@ namespace LazenLang.Parsing.Ast.Types
         {
             return "NativeArrayType: " + Type.Pretty(level);
         }
-    }
+    }*/
 }

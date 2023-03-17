@@ -30,7 +30,7 @@ namespace LazenLang.Parsing.Ast
             Position = position;
         }
 
-        private readonly static TokenInfo.TokenType[] _operators = {
+        private static readonly TokenInfo.TokenType[] _operators = {
             TokenInfo.TokenType.EQ,
             TokenInfo.TokenType.NOT_EQ,
             TokenInfo.TokenType.BOOLEAN_AND,
@@ -50,7 +50,7 @@ namespace LazenLang.Parsing.Ast
         private static Expr ParseParenthesisExpr(Parser parser)
         {
             Token leftParenthesis = parser.Eat(TokenInfo.TokenType.L_PAREN);
-            Expr expr = parser.TryConsumer((p) => Consume(p)).Value;
+            Expr expr = parser.TryConsumer(Consume).Value;
             
             try
             {

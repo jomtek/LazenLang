@@ -17,8 +17,6 @@ namespace LazenLang.Parsing.Display
                     return x.Message;
                 case InvalidElementException x:
                     return x.Message;
-                case BannedIdentifier x:
-                    return $"`{x.Value}`";
                 case InvalidDoubleLit x:
                     return $"'{x.Value}'";
                 case InvalidCharLit x:

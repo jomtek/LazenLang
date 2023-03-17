@@ -60,16 +60,7 @@ namespace Parsing.Errors
             Message = message;
         }
     }
-
-    public class BannedIdentifier : IParserErrorContent
-    {
-        public string Value { get; }
-        public BannedIdentifier(string value)
-        {
-            Value = value;
-        }
-    }
-
+    
     public class InvalidDoubleLit : IParserErrorContent
     {
         public string Value { get; }

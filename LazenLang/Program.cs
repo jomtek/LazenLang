@@ -25,6 +25,7 @@ namespace LazenLang
             {
                 Console.WriteLine(tok.ToString());
             }
+            
             /*Parser parser = new Parser(tokens);
 
             Block ast = null;

@@ -9,7 +9,7 @@ using Parsing.Errors;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    public class FuncType : TypeDesc, IPrettyPrintable
+    /*public class FuncType : TypeDesc, IPrettyPrintable
     {
         public TypeDescNode[] Domain;
         public TypeDescNode Codomain;
@@ -65,5 +65,5 @@ namespace LazenLang.Parsing.Ast.Types
 
             return sb.ToString();
         }
-    }
+    }*/
 }

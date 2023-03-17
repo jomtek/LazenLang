@@ -9,7 +9,7 @@ using Parsing.Errors;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    public class TypeApp : TypeDesc, IPrettyPrintable
+    /*public class TypeApp : TypeDesc, IPrettyPrintable
     {
         public NameType BaseType;
         public TypeDescNode[] Generics;
@@ -61,5 +61,5 @@ namespace LazenLang.Parsing.Ast.Types
 
             return sb.ToString();
         }
-    }
+    }*/
 }

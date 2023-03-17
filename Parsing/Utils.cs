@@ -56,37 +56,7 @@ namespace LazenLang.Parsing
                 return new Block(new InstrNode[] { instr });
         }
 
-        public static bool ParseAccessModifier(Parser parser) {
-            bool publicAccess = false;
-
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.PRIVATE);
-            }
-            catch (ParserError)
-            {
-                publicAccess = true;
-            }
-            
-            return publicAccess;
-        }
-
-        public static bool ParseStatic(Parser parser)
-        {
-            bool static_ = true;
-            
-            try
-            {
-                parser.Eat(TokenInfo.TokenType.STATIC);
-            } catch (ParserError)
-            {
-                static_ = false;
-            }
-
-            return static_;
-        }
-
-        public static TypeDescNode[] ParseGenerics(Parser parser)
+        /*public static TypeDescNode[] ParseGenerics(Parser parser)
         {
             TypeDescNode[] genericArgs = new TypeDescNode[0];
 
@@ -131,6 +101,6 @@ namespace LazenLang.Parsing
             }
 
             return genericArgs;
-        }
+        }*/
     }
 }

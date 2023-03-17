@@ -11,7 +11,7 @@ namespace LazenLang.Parsing
     {
         private Token[] Tokens { get; set; }
         private int LookAheadIndex { get; set; }
-        public CodePosition Cursor { get; set; }
+        public CodePosition Cursor { get; private set; }
 
         public Parser(Token[] tokens)
         {
@@ -60,6 +60,9 @@ namespace LazenLang.Parsing
 
         public Token TryManyEats(TokenInfo.TokenType[] tokenTypes)
         {
+            if (tokenTypes.Length == 0)
+                throw new ArgumentException("Token types list is empty");
+            
             ParserError lastError = null;
 
             foreach (TokenInfo.TokenType tokType in tokenTypes)
@@ -72,27 +75,31 @@ namespace LazenLang.Parsing
                     lastError = ex;
                 }
             }
-
-            throw lastError;
+            
+            // lastError is never null
+            throw lastError!;
         }
 
         public T TryConsumer<T>(Func<Parser, T> consumer)
         {
-            int oldIndex = LookAheadIndex;
+            var oldIndex = LookAheadIndex;
 
             try
             {
                 return consumer(this);
             } 
-            catch (ParserError ex)
+            catch (ParserError)
             {
                 LookAheadIndex = oldIndex;
-                throw ex;
+                throw;
             }
         }
 
         public T TryManyConsumers<T>(Func<Parser, T>[] consumers)
         {
+            if (consumers.Length == 0)
+                throw new ArgumentException("Consumers list is empty");
+
             ParserError lastError = null;
 
             foreach (var consumer in consumers)
@@ -109,17 +116,21 @@ namespace LazenLang.Parsing
                     }
                     else
                     {
-                        throw ex;
+                        throw;
                     }
                 }
             }
 
-            throw lastError;
+            // lastError is never null
+            throw lastError!;
         }
 
-        // Tries many consumers, each with its condition
+        // Tries many consumers, each one with its condition
         public T TryManyConsumers<T>((bool, Func<Parser, T>)[] entries)
         {
+            if (entries.Length == 0)
+                throw new ArgumentException("No entries provided");
+
             ParserError lastError = null;
 
             foreach (var entry in entries)
@@ -140,12 +151,13 @@ namespace LazenLang.Parsing
                     }
                     else
                     {
-                        throw ex;
+                        throw;
                     }
                 }
             }
 
-            throw lastError;
+            // lastError is never null
+            throw lastError!;
         }
     }
 }

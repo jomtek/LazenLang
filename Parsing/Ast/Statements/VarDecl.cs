@@ -14,55 +14,24 @@ namespace LazenLang.Parsing.Ast.Statements
 {
     public class VarDecl : Instr, IPrettyPrintable
     {
-        public bool Mutable { get; }
-        public bool PublicAccess { get; }
-        public bool Static { get;  }
         public Identifier Name { get; }
         public TypeDescNode Type { get; set; }
         public ExprNode Value { get; }
 
-        public VarDecl(bool mutable, bool publicAccess, bool static_, Identifier name, TypeDescNode type, ExprNode value)
+        public VarDecl(Identifier name, TypeDescNode type, ExprNode value)
         {
-            Mutable = mutable;
-            PublicAccess = publicAccess;
-            Static = static_;
             Name = name;
             Type = type;
             Value = value;
         }
 
-        public static VarDecl Consume(Parser parser, bool allowAccessModifier = true, bool allowStatic = true, bool allowValue = true)
+        public static VarDecl Consume(Parser parser, bool allowValue = true)
         {
-            bool mutable = true;
-            bool publicAccess = true;
-            bool static_ = false;
             Identifier name = null;
             TypeDescNode type = null;
             ExprNode value = null;
-
-            if (allowAccessModifier) publicAccess = Utils.ParseAccessModifier(parser);
-            if (allowStatic) static_ = Utils.ParseStatic(parser);
             
-            Token varOrConstToken = parser.TryManyEats(new TokenInfo.TokenType[]
-            {
-                TokenInfo.TokenType.VAR,
-                TokenInfo.TokenType.CONST
-            });
-
-            if (varOrConstToken.Type == TokenInfo.TokenType.CONST)
-                mutable = false;
-
-            try
-            {
-                name = parser.TryConsumer(Identifier.Consume);
-            }
-            catch (ParserError)
-            {
-                throw new ParserError(
-                    new ExpectedTokenException(TokenInfo.TokenType.IDENTIFIER),
-                    parser.Cursor
-                );
-            }
+            name = parser.TryConsumer(Identifier.Consume);
 
             bool colon = true;
             Token colonTok = null;
@@ -119,7 +88,7 @@ namespace LazenLang.Parsing.Ast.Statements
                     }
                     catch (ParserError ex)
                     {
-                        if (!ex.IsExceptionFictive()) throw ex;
+                        if (!ex.IsExceptionFictive()) throw;
                         throw new ParserError(
                             new ExpectedElementException("Expected expression after ASSIGN token"),
                             assignTok.Pos
@@ -128,25 +97,7 @@ namespace LazenLang.Parsing.Ast.Statements
                 }
             }
 
-            if (value == null)
-            {
-                if (type == null)
-                {
-                    throw new ParserError(
-                        new ExpectedElementException("Expected either type name or value in variable declaration"),
-                        parser.Cursor
-                    );
-                }
-                else if (!mutable)
-                {
-                    throw new ParserError(
-                       new InvalidElementException("Please specify a value for your constant"),
-                       parser.Cursor
-                    );
-                }
-            }
-
-            return new VarDecl(mutable, publicAccess, static_, name, type, value);
+            return new VarDecl(name, type, value);
         }
 
         public override string Pretty(int level)
@@ -154,9 +105,6 @@ namespace LazenLang.Parsing.Ast.Statements
             var sb = new StringBuilder("VarDecl");
             sb.AppendLine();
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Mutable: {Mutable}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Static: {Static}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Public Access: {PublicAccess}");
             if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level + 1)}");
             if (Value != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Value: {Value.Pretty(level + 1)}");
             

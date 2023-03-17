@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace LazenLang.Parsing.Ast
 {
-    public class TypevarSeq
+    /*public class TypevarSeq
     {
         public Identifier[] Sequence;
         public TypevarSeq(Identifier[] typevars)
@@ -55,5 +55,5 @@ namespace LazenLang.Parsing.Ast
 
             return new TypevarSeq(typevars);
         }
-    }
+    }*/
 }
