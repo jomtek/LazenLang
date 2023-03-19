@@ -23,3 +23,16 @@ C:\Users\jomte\Documents\Projects\LazenLang\Parsing\bin\Release\netcoreapp3.1\Pa
 C:\Users\jomte\Documents\Projects\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.dll
 C:\Users\jomte\Documents\Projects\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.pdb
 C:\Users\jomte\Documents\Projects\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.CopyComplete
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.deps.json
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.dll
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Release\netcoreapp3.1\Parsing.pdb
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.dll
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Release\netcoreapp3.1\Lexing.pdb
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.AssemblyReference.cache
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.AssemblyInfoInputs.cache
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.AssemblyInfo.cs
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.CoreCompileInputs.cache
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.csproj.CopyComplete
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.dll
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Release\netcoreapp3.1\Parsing.pdb

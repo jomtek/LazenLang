@@ -1,7 +1,0 @@
-class Program
-{
-	static function Main(args)
-	{
-		println("Hello world!")
-	}
-}

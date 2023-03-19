@@ -12,7 +12,7 @@
             INTEGER_LIT, DOUBLE_LIT, STRING_LIT, CHAR_LIT, BOOLEAN_LIT,
 
             // Keywords    
-            IN, FOR, RETURN, IF, ELSE, WHILE, BREAK, CONTINUE, FUNC, CLASS,
+            IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC, CLASS,
 
             // Operators
             // =    ==  !=      &&           ||          >        <
@@ -37,6 +37,7 @@
             (@"^return(?![a-zA-Z_0-9])",              TokenType.RETURN),
             (@"^if(?![a-zA-Z_0-9])",                  TokenType.IF),
             (@"^else(?![a-zA-Z_0-9])",                TokenType.ELSE),
+            (@"^elif(?![a-zA-Z_0-9])",                TokenType.ELSE),
             (@"^while(?![a-zA-Z_0-9])",               TokenType.WHILE),
             (@"^break(?![a-zA-Z_0-9])",               TokenType.BREAK),
             (@"^continue(?![a-zA-Z_0-9])",            TokenType.CONTINUE),
@@ -69,12 +70,6 @@
             (@"^\:",                                  TokenType.COLON),
             (@"^\%",                                  TokenType.MODULO),
             (@"^\^",                                  TokenType.POWER),
-            /*(@"^\+\=",                                TokenType.PLUS_EQ),
-            (@"^\-\=",                                TokenType.MINUS_EQ),
-            (@"^\/\=",                                TokenType.DIVIDE_EQ),
-            (@"^\*\=",                                TokenType.MULTIPLY_EQ),
-            (@"^\^\=",                                TokenType.POWER_EQ),
-            (@"^\%\=",                                TokenType.MODULO_EQ),*/
             (@"^\+",                                  TokenType.PLUS),
             (@"^\-",                                  TokenType.MINUS),
             (@"^\|\|",                                TokenType.BOOLEAN_OR),
@@ -92,6 +87,7 @@
             (@"^\.\.",                                TokenType.DOUBLE_DOT),
             (@"^\'",                                  TokenType.APOSTROPHE),
             (@"^\""",                                 TokenType.QUOTE),
+            (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
             (@"^.",                                   TokenType.OTHER),
         };
     }

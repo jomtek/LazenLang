@@ -33,67 +33,36 @@ namespace LazenLang.Parsing.Ast.Statements
             
             name = parser.TryConsumer(Identifier.Consume);
 
-            bool colon = true;
-            Token colonTok = null;
+            Token colonTok = parser.Eat(TokenInfo.TokenType.COLON);
+
             try
             {
-                colonTok = parser.Eat(TokenInfo.TokenType.COLON);
+                type = parser.TryConsumer(TypeDescNode.Consume);
             }
-            catch (ParserError)
+            catch (ParserError ex)
             {
-                colon = false;
-            }
-
-            if (colon)
-            {
-                try
-                {
-                    type = parser.TryConsumer(TypeDescNode.Consume);
-                }
-                catch (ParserError ex)
-                {
-                    if (!ex.IsExceptionFictive()) throw ex;
-                    throw new ParserError(
-                        new ExpectedElementException("Expected type after COLON token"),
-                        colonTok.Pos
-                    );
-                }
+                if (!ex.IsExceptionFictive()) throw ex;
+                throw new ParserError(
+                    new ExpectedElementException("Expected type after COLON token"),
+                    colonTok.Pos
+                );
             }
 
             if (allowValue)
             {
-                bool assign = true;
-                Token assignTok = null;
+                Token assignTok = parser.Eat(TokenInfo.TokenType.ASSIGN);
+
                 try
                 {
-                    assignTok = parser.Eat(TokenInfo.TokenType.ASSIGN);
+                    value = parser.TryConsumer(ExprNode.Consume);
                 }
-                catch (ParserError)
+                catch (ParserError ex)
                 {
-                    if (!colon)
-                    {
-                        throw new ParserError(
-                            new ExpectedElementException("Expected either type name or value in variable declaration"),
-                            parser.Cursor
-                        );
-                    }
-                    assign = false;
-                }
-
-                if (assign)
-                {
-                    try
-                    {
-                        value = parser.TryConsumer(ExprNode.Consume);
-                    }
-                    catch (ParserError ex)
-                    {
-                        if (!ex.IsExceptionFictive()) throw;
-                        throw new ParserError(
-                            new ExpectedElementException("Expected expression after ASSIGN token"),
-                            assignTok.Pos
-                        );
-                    }
+                    if (!ex.IsExceptionFictive()) throw;
+                    throw new ParserError(
+                        new ExpectedElementException("Expected expression after ASSIGN token"),
+                        assignTok.Pos
+                    );
                 }
             }
 

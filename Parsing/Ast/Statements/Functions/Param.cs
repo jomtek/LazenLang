@@ -26,31 +26,21 @@ namespace LazenLang.Parsing.Ast.Statements.Functions
 
             name = parser.TryConsumer(Identifier.Consume);
 
-            bool colon = true;
+            parser.Eat(TokenInfo.TokenType.COLON);
+
             try
             {
-                parser.Eat(TokenInfo.TokenType.COLON);
+                type = parser.TryConsumer(TypeDescNode.Consume);
             }
-            catch (ParserError)
+            catch (ParserError ex)
             {
-                colon = false;
+                if (!ex.IsExceptionFictive()) throw ex;
+                throw new ParserError(
+                    new ExpectedElementException("Expected type after COLON token"),
+                    parser.Cursor
+                );
             }
 
-            if (colon)
-            {
-                try
-                {
-                    type = parser.TryConsumer(TypeDescNode.Consume);
-                }
-                catch (ParserError ex)
-                {
-                    if (!ex.IsExceptionFictive()) throw ex;
-                    throw new ParserError(
-                        new ExpectedElementException("Expected type after COLON token"),
-                        parser.Cursor
-                    );
-                }
-            }
             return new Param(name, type);
         }
 

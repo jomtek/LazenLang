@@ -44,7 +44,9 @@ namespace LazenLang.Parsing.Ast.Statements
                 catch (ParserError ex)
                 {
                     if (!ex.IsExceptionFictive()) throw ex;
-                    if (parser.LookAhead().Type != TokenInfo.TokenType.R_CURLY_BRACKET)
+                    if (
+                        !(ex.Content is NoTokenLeft) && 
+                        parser.LookAhead().Type != TokenInfo.TokenType.R_CURLY_BRACKET)
                     {
                         throw new ParserError(
                             new UnexpectedTokenException(parser.LookAhead().Type),
@@ -54,6 +56,9 @@ namespace LazenLang.Parsing.Ast.Statements
                     break;
                 }
 
+                if (parser.LookBefore().Type != TokenInfo.TokenType.R_CURLY_BRACKET)
+                    parser.Eat(TokenInfo.TokenType.SEMI_COLON, facultative: false);
+
                 statements.Add(statement);
             }
 
@@ -62,22 +67,11 @@ namespace LazenLang.Parsing.Ast.Statements
 
         public static Block Consume(Parser parser, bool curlyBrackets = true, bool topLevel = false, bool intoClass = false)
         {
-            while (true)
-            {
-                try
-                {
-                    parser.Eat(TokenInfo.TokenType.EOL);
-                } catch (ParserError)
-                {
-                    break;
-                }
-            }
-
-            if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET);
+            if (curlyBrackets) parser.Eat(TokenInfo.TokenType.L_CURLY_BRACKET, false);
 
             InstrNode[] statements = parser.TryConsumer((Parser p) => ParseStatementSeq(parser, topLevel, intoClass));
 
-            if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET);
+            if (curlyBrackets) parser.Eat(TokenInfo.TokenType.R_CURLY_BRACKET, false);
             
             return new Block(statements);
         }

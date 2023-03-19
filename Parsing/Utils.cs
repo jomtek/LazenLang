@@ -16,7 +16,10 @@ namespace LazenLang.Parsing
 {
     static class Utils
     {
-        public static T[] ParseSequence<T>(Parser parser, Func<Parser, T> consumer, TokenInfo.TokenType delimiter = TokenInfo.TokenType.COMMA)
+        public static T[] ParseSequence<T>(
+            Parser parser,
+            Func<Parser, T> consumer,
+            TokenInfo.TokenType delimiter = TokenInfo.TokenType.COMMA)
         {
             var sequence = new List<T>();
             bool lastlyEaten = false;

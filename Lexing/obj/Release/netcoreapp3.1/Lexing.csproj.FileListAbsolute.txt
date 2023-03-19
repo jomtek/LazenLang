@@ -16,3 +16,13 @@ C:\Users\jomte\Documents\Projects\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lex
 C:\Users\jomte\Documents\Projects\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.csproj.CoreCompileInputs.cache
 C:\Users\jomte\Documents\Projects\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.dll
 C:\Users\jomte\Documents\Projects\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.pdb
+C:\Users\puel\source\repos\LazenLang\Lexing\bin\Release\netcoreapp3.1\Lexing.deps.json
+C:\Users\puel\source\repos\LazenLang\Lexing\bin\Release\netcoreapp3.1\Lexing.dll
+C:\Users\puel\source\repos\LazenLang\Lexing\bin\Release\netcoreapp3.1\Lexing.pdb
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.csproj.AssemblyReference.cache
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.AssemblyInfoInputs.cache
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.AssemblyInfo.cs
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.csproj.CoreCompileInputs.cache
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.dll
+C:\Users\puel\source\repos\LazenLang\Lexing\obj\Release\netcoreapp3.1\Lexing.pdb

@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\LazenLang",
+    "\\Lexing",
+    "\\Parsing",
+    "\\Parsing\\Ast",
+    "\\Parsing\\Ast\\Statements",
+    "\\Parsing\\Ast\\Statements\\Functions",
+    "\\Parsing\\Ast\\Statements\\Loops",
+    "\\Parsing\\Ast\\Types"
+  ],
+  "PreviewInSolutionExplorer": false
+}

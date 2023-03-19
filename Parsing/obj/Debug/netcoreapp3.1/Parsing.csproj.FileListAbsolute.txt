@@ -28,3 +28,16 @@ C:/Users/jomte/Documents/Projects/LazenLang/Parsing/obj/Debug/netcoreapp3.1/Pars
 /home/puel/RiderProjects/LazenLang/Parsing/obj/Debug/netcoreapp3.1/Parsing.csproj.CopyComplete
 /home/puel/RiderProjects/LazenLang/Parsing/obj/Debug/netcoreapp3.1/Parsing.dll
 /home/puel/RiderProjects/LazenLang/Parsing/obj/Debug/netcoreapp3.1/Parsing.pdb
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.csproj.AssemblyReference.cache
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.AssemblyInfoInputs.cache
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.AssemblyInfo.cs
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.csproj.CoreCompileInputs.cache
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.dll
+C:\Users\puel\Source\Repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.pdb
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Debug\netcoreapp3.1\Parsing.deps.json
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Debug\netcoreapp3.1\Parsing.dll
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Debug\netcoreapp3.1\Parsing.pdb
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Debug\netcoreapp3.1\Lexing.dll
+C:\Users\puel\source\repos\LazenLang\Parsing\bin\Debug\netcoreapp3.1\Lexing.pdb
+C:\Users\puel\source\repos\LazenLang\Parsing\obj\Debug\netcoreapp3.1\Parsing.csproj.CopyComplete

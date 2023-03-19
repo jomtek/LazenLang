@@ -65,38 +65,40 @@
     ]
   },
   "packageFolders": {
-    "/home/puel/.nuget/packages/": {}
+    "C:\\Users\\puel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/puel/RiderProjects/LazenLang/LazenLang/LazenLang.csproj",
+      "projectUniqueName": "C:\\Users\\puel\\source\\repos\\LazenLang\\LazenLang\\LazenLang.csproj",
       "projectName": "LazenLang",
-      "projectPath": "/home/puel/RiderProjects/LazenLang/LazenLang/LazenLang.csproj",
-      "packagesPath": "/home/puel/.nuget/packages/",
-      "outputPath": "/home/puel/RiderProjects/LazenLang/LazenLang/obj/",
+      "projectPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\LazenLang\\LazenLang.csproj",
+      "packagesPath": "C:\\Users\\puel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\puel\\Source\\Repos\\LazenLang\\LazenLang\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/puel/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\puel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/puel/RiderProjects/LazenLang/Lexing/Lexing.csproj": {
-              "projectPath": "/home/puel/RiderProjects/LazenLang/Lexing/Lexing.csproj"
+            "C:\\Users\\puel\\source\\repos\\LazenLang\\Lexing\\Lexing.csproj": {
+              "projectPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\Lexing\\Lexing.csproj"
             },
-            "/home/puel/RiderProjects/LazenLang/Parsing/Parsing.csproj": {
-              "projectPath": "/home/puel/RiderProjects/LazenLang/Parsing/Parsing.csproj"
+            "C:\\Users\\puel\\source\\repos\\LazenLang\\Parsing\\Parsing.csproj": {
+              "projectPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\Parsing\\Parsing.csproj"
             },
-            "/home/puel/RiderProjects/LazenLang/Typechecking/Typechecking.csproj": {
-              "projectPath": "/home/puel/RiderProjects/LazenLang/Typechecking/Typechecking.csproj"
+            "C:\\Users\\puel\\source\\repos\\LazenLang\\Typechecking\\Typechecking.csproj": {
+              "projectPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\Typechecking\\Typechecking.csproj"
             }
           }
         }
@@ -126,7 +128,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/puel/.dotnet/sdk/6.0.406/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

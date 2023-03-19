@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using LazenLang.Lexing;
+using LazenLang.Parsing;
+using LazenLang.Parsing.Ast.Statements;
+using Parsing.Errors;
 //using LazenLang.Parsing;
 //using LazenLang.Parsing.Ast.Statements;
 //using Parsing.Errors;
@@ -15,19 +18,21 @@ namespace LazenLang
         {
             Console.WriteLine("Compiling..."); 
 
-            string code = File.ReadAllText("program.lzn");
+            string code = File.ReadAllText("../../program.lzn");
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
             Token[] tokens = new Lexer(code).Tokens;
-            foreach (Token tok in tokens)
-            {
-                Console.WriteLine(tok.ToString());
-            }
-            
-            /*Parser parser = new Parser(tokens);
 
+            /*
+            foreach (var token in tokens) {
+                Console.WriteLine(  token.ToString());
+            }
+            */
+
+            Parser parser = new Parser(tokens);
+            
             Block ast = null;
             try
             {
@@ -45,14 +50,11 @@ namespace LazenLang
                 }
             }
 
-            if (ast == null)
-            {
-                return;
-            }
-            
             Console.WriteLine("PrettyPrinting:\n\n");
-            Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));*/
+            Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));
 
+
+            /*
             //TopLevelChecker typechecker = new TopLevelChecker(ast);
             //typechecker.Typecheck();
 
@@ -65,7 +67,7 @@ namespace LazenLang
 
             //Console.WriteLine(IPrettyPrintable.PrettyBlock(ast, 0));
 
-	    // IR compiler.
+            // IR compiler.
 
             Console.WriteLine("Elapsed " + stopwatch.ElapsedMilliseconds + "ms");
         }

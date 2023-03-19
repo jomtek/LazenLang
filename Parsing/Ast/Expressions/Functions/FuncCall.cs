@@ -15,24 +15,20 @@ namespace LazenLang.Parsing.Ast.Expressions
     public class FuncCall : Expr, IPrettyPrintable
     {
         public Identifier Name { get; }
-        public TypeDescNode[] Generics { get; }
         public ExprNode[] Arguments { get; }
 
-        public FuncCall(Identifier name, TypeDescNode[] generics, ExprNode[] arguments)
+        public FuncCall(Identifier name, ExprNode[] arguments)
         {
             Name = name;
-            Generics = generics;
             Arguments = arguments;
         }
 
         public static FuncCall Consume(Parser parser)
         {
             Identifier name = null;
-            TypeDescNode[] genericArgs = new TypeDescNode[0]; // TODO: question this
             ExprNode[] arguments = new ExprNode[0];
 
             name = parser.TryConsumer(Identifier.Consume);
-            genericArgs = Utils.ParseGenerics(parser);
 
             parser.Eat(TokenInfo.TokenType.L_PAREN);
 
@@ -50,7 +46,7 @@ namespace LazenLang.Parsing.Ast.Expressions
                 );
             }
 
-            return new FuncCall(name, genericArgs, arguments);
+            return new FuncCall(name, arguments);
         }
 
         public override string Pretty(int level)
@@ -58,7 +54,6 @@ namespace LazenLang.Parsing.Ast.Expressions
             var sb = new StringBuilder("FuncCall");
             sb.AppendLine();
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
-            sb.AppendLine(Display.Utils.Indent(level + 1) + $"Generics: " + Display.Utils.PrettyArray(Generics, level + 1));
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Arguments: " + Display.Utils.PrettyArray(Arguments, level + 1));
 
             return sb.ToString();

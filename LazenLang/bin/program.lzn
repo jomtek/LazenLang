@@ -1,0 +1,12 @@
+class Hello {
+    hello: Bool = 5;
+    c: Int = hello;
+
+    func __init__(self: Hello): Int {
+        for x in range(12) {
+            print("hello, world !");
+        }
+    }
+}
+
+print(1+1*2);

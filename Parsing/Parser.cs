@@ -27,6 +27,13 @@ namespace LazenLang.Parsing
             return Tokens[LookAheadIndex];
         }
 
+        public Token LookBefore()
+        {
+            if (LookAheadIndex == 0)
+                throw new ParserError(new NoTokenLeft(), Cursor);
+            return Tokens[LookAheadIndex - 1];
+        }
+
         public bool AreTokensRemaining()
         {
             return LookAheadIndex < Tokens.Count();
