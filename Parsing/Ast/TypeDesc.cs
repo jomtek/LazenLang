@@ -33,6 +33,7 @@ namespace Parsing.Ast
             type = parser.LookAhead().Type switch
             {
                 //TokenInfo.TokenType.L_BRACKET => parser.TryConsumer(NativeArrayType.Consume),
+                TokenInfo.TokenType.FUNC_TYPE => parser.TryConsumer(FuncType.Consume),
                 TokenInfo.TokenType.IDENTIFIER => parser.TryManyConsumers(new Func<Parser, TypeDesc>[] {
                         //TypeApp.Consume,
                         NameType.Consume

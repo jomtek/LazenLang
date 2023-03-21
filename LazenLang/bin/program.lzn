@@ -1,12 +1,23 @@
-class Hello {
+a: Int = 5;
+b: Func(Int): Bool = a;
+c = a;
+
+/*class Hello {
     hello: Bool = 5;
     c: Int = hello;
 
     func __init__(self: Hello): Int {
-        for x in range(12) {
+        for x: Int in range(12) {
             print("hello, world !");
         }
     }
-}
+}*/
 
-print(1+1*2);
+// cohérence entre le type d'une variable et sa valeur
+    // création d'un écosystème de variables, classes et signatures
+        // vérification de l'existence des objets dans le contexte
+        // maintien des types (shadowing avec changement de type = interdit)
+        // 
+// fonctions:
+    // cohérence entre le type de retour de la fonction et son type de retour explicité
+    // appels: cohérence avec la signature de la fonction

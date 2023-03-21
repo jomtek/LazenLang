@@ -10,9 +10,9 @@ namespace LazenLang.Parsing.Ast.Types
 {
     public class NameType : TypeDesc, IPrettyPrintable
     {
-        public Identifier Name;
+        public String Name;
 
-        public NameType(Identifier name)
+        public NameType(String name)
         {
             Name = name;
         }
@@ -20,12 +20,12 @@ namespace LazenLang.Parsing.Ast.Types
         public static NameType Consume(Parser parser)
         {
             Identifier name = parser.TryConsumer(Identifier.Consume);
-            return new NameType(name);
+            return new NameType(name.Value);
         }
 
         public override string Pretty(int level)
         {
-            return "NameType: " + Name.Pretty(level);
+            return "NameType: " + Name;
         }
     }
 }

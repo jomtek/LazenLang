@@ -9,12 +9,12 @@ using Parsing.Errors;
 
 namespace LazenLang.Parsing.Ast.Types
 {
-    /*public class FuncType : TypeDesc, IPrettyPrintable
+    public class FuncType : TypeDesc, IPrettyPrintable
     {
-        public TypeDescNode[] Domain;
-        public TypeDescNode Codomain;
+        public TypeDesc[] Domain;
+        public TypeDesc Codomain;
 
-        public FuncType(TypeDescNode[] domain, TypeDescNode codomain)
+        public FuncType(TypeDesc[] domain, TypeDesc codomain)
         {
             Domain = domain;
             Codomain = codomain;
@@ -25,10 +25,10 @@ namespace LazenLang.Parsing.Ast.Types
             parser.Eat(TokenInfo.TokenType.FUNC_TYPE);
             parser.Eat(TokenInfo.TokenType.L_PAREN, false);
 
-            TypeDescNode[] domain;
-            TypeDescNode codomain;
+            TypeDesc[] domain;
+            TypeDesc codomain;
 
-            domain = Utils.ParseSequence(parser, (Parser p) => TypeDescNode.Consume(p));
+            domain = Utils.ParseSequence(parser, (Parser p) => TypeDescNode.Consume(p).Value);
             if (domain.Length == 0)
             {
                 throw new ParserError(
@@ -38,17 +38,17 @@ namespace LazenLang.Parsing.Ast.Types
             }
 
             parser.Eat(TokenInfo.TokenType.R_PAREN, false);
-            parser.Eat(TokenInfo.TokenType.BIG_ARROW, false);
+            parser.Eat(TokenInfo.TokenType.COLON, false);
 
             try
             {
-                codomain = parser.TryConsumer(TypeDescNode.Consume);
+                codomain = parser.TryConsumer(TypeDescNode.Consume).Value;
             }
             catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
                 throw new ParserError(
-                    new ExpectedElementException("Expected type after BIG_ARROW token"),
+                    new ExpectedElementException("Expected type after COLON token"),
                     parser.Cursor
                 );
             }
@@ -65,5 +65,5 @@ namespace LazenLang.Parsing.Ast.Types
 
             return sb.ToString();
         }
-    }*/
+    }
 }

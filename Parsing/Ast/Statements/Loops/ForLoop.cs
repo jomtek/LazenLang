@@ -5,16 +5,17 @@ using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Lexing;
 using LazenLang.Parsing.Display;
 using Parsing.Errors;
+using LazenLang.Parsing.Ast.Statements.Functions;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
     public class ForLoop : Instr, IPrettyPrintable
     {
-        public Identifier Id;
+        public Param Id;
         public ExprNode Array;
         public Block Block;
 
-        public ForLoop(Identifier id, ExprNode array, Block block)
+        public ForLoop(Param id, ExprNode array, Block block)
         {
             Id = id;
             Array = array;
@@ -24,18 +25,18 @@ namespace LazenLang.Parsing.Ast.Statements.Loops
         public static ForLoop Consume(Parser parser)
         {
             parser.Eat(TokenInfo.TokenType.FOR);
-            Identifier id;
+            Param id;
             ExprNode array;
             Block block;
 
             try
             {
-                id = parser.TryConsumer(Identifier.Consume);
+                id = parser.TryConsumer(Param.Consume);
             }
             catch (ParserError)
             {
                 throw new ParserError(
-                    new ExpectedTokenException(TokenInfo.TokenType.IDENTIFIER),
+                    new ExpectedElementException("Expected typed identifier, such as `i: Int`"),
                     parser.Cursor
                 );
             }

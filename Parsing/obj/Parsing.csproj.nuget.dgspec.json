@@ -11,7 +11,7 @@
         "projectName": "Lexing",
         "projectPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\Lexing\\Lexing.csproj",
         "packagesPath": "C:\\Users\\puel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\puel\\Source\\Repos\\LazenLang\\Lexing\\obj\\",
+        "outputPath": "C:\\Users\\puel\\source\\repos\\LazenLang\\Lexing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\puel\\AppData\\Roaming\\NuGet\\NuGet.Config",

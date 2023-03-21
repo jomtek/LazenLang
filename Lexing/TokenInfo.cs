@@ -14,6 +14,9 @@
             // Keywords    
             IN, FOR, RETURN, IF, ELSE, ELIF, WHILE, BREAK, CONTINUE, FUNC, CLASS,
 
+            // 'Func' type : example Func(Int, Int): Bool
+            FUNC_TYPE,
+
             // Operators
             // =    ==  !=      &&           ||          >        <
             ASSIGN, EQ, NOT_EQ, BOOLEAN_AND, BOOLEAN_OR, GREATER, LESS,
@@ -43,6 +46,7 @@
             (@"^continue(?![a-zA-Z_0-9])",            TokenType.CONTINUE),
             (@"^in(?![a-zA-Z_0-9])",                  TokenType.IN),
             (@"^func(?![a-zA-Z_0-9])",                TokenType.FUNC),
+            (@"^Func(?![a-zA-Z_0-9])",                TokenType.FUNC_TYPE),
             (@"^class(?![a-zA-Z_0-9])",               TokenType.CLASS),
             (@"^(?![0-9])[0-9_a-zA-Z\u00C0-\u017F]+", TokenType.IDENTIFIER),
         };

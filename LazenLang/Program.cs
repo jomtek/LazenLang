@@ -6,6 +6,7 @@ using LazenLang.Lexing;
 using LazenLang.Parsing;
 using LazenLang.Parsing.Ast.Statements;
 using Parsing.Errors;
+using Typechecking;
 //using LazenLang.Parsing;
 //using LazenLang.Parsing.Ast.Statements;
 //using Parsing.Errors;
@@ -50,9 +51,18 @@ namespace LazenLang
                 }
             }
 
-            Console.WriteLine("PrettyPrinting:\n\n");
+            if (ast == null)
+            {
+                Console.WriteLine(
+                        $"error: no AST deducted.\n(?) Tip: Did you forget semicolons ?");
+                return;
+            }
+
+            Console.WriteLine();
             Console.WriteLine(Parsing.Display.Utils.PostProcessResult(ast.Pretty(0)));
 
+            var tc = new BlockTypeChecker(ast, new LocalContext());
+            tc.Check();
 
             /*
             //TopLevelChecker typechecker = new TopLevelChecker(ast);

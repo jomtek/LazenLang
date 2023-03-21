@@ -57,7 +57,20 @@ namespace LazenLang.Parsing.Ast.Statements
                 }
 
                 if (parser.LookBefore().Type != TokenInfo.TokenType.R_CURLY_BRACKET)
-                    parser.Eat(TokenInfo.TokenType.SEMI_COLON, facultative: false);
+                {
+                    try
+                    {
+                        parser.Eat(TokenInfo.TokenType.SEMI_COLON);
+                    }
+                    catch (ParserError)
+                    {
+                        throw new ParserError(
+                            new UnexpectedTokenException(parser.LookAhead().Type),
+                            parser.Cursor
+                        );
+                    }
+
+                }
 
                 statements.Add(statement);
             }

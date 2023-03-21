@@ -1,13 +1,8 @@
 ﻿using LazenLang.Lexing;
-using LazenLang.Parsing.Ast.Expressions;
 using LazenLang.Parsing.Ast.Expressions.Literals;
-using LazenLang.Parsing.Ast.Types;
 using LazenLang.Parsing.Display;
 using Parsing.Ast;
 using Parsing.Errors;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements
@@ -30,22 +25,35 @@ namespace LazenLang.Parsing.Ast.Statements
             Identifier name = null;
             TypeDescNode type = null;
             ExprNode value = null;
-            
+
             name = parser.TryConsumer(Identifier.Consume);
 
-            Token colonTok = parser.Eat(TokenInfo.TokenType.COLON);
 
+            Token colonTok = null;
             try
             {
-                type = parser.TryConsumer(TypeDescNode.Consume);
+                colonTok = parser.Eat(TokenInfo.TokenType.COLON);
             }
             catch (ParserError ex)
             {
                 if (!ex.IsExceptionFictive()) throw ex;
-                throw new ParserError(
-                    new ExpectedElementException("Expected type after COLON token"),
-                    colonTok.Pos
-                );
+            }
+
+
+            if (colonTok != null)
+            {
+                try
+                {
+                    type = parser.TryConsumer(TypeDescNode.Consume);
+                }
+                catch (ParserError ex)
+                {
+                    if (!ex.IsExceptionFictive()) throw ex;
+                    throw new ParserError(
+                        new ExpectedElementException("Expected type after COLON token"),
+                        colonTok.Pos
+                    );
+                }
             }
 
             if (allowValue)
@@ -76,7 +84,7 @@ namespace LazenLang.Parsing.Ast.Statements
             sb.AppendLine(Display.Utils.Indent(level + 1) + $"Name: {Name.Pretty(level + 1)}");
             if (Type != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Type: {Type.Pretty(level + 1)}");
             if (Value != null) sb.AppendLine(Display.Utils.Indent(level + 1) + $"Value: {Value.Pretty(level + 1)}");
-            
+
             return sb.ToString();
         }
     }
