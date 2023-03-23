@@ -1,6 +1,11 @@
 a: Int = 5;
-b: Func(Int): Bool = a;
-c = a;
+b: Int = a+1;
+
+func test(a: String, be: Int): Int {
+    return test(a, be) + test("a", 1);
+}
+
+
 
 /*class Hello {
     hello: Bool = 5;
@@ -12,6 +17,8 @@ c = a;
         }
     }
 }*/
+
+// check if a type exists (!!!)
 
 // cohérence entre le type d'une variable et sa valeur
     // création d'un écosystème de variables, classes et signatures

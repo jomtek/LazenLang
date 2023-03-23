@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Typechecking
 {
-    public static class TypeDisplayer
+    internal static class TypeDisplayer
     {
         // This class displays TypeDesc instances in a natural, readable way
         public static string Pretty(TypeDesc typeDesc)

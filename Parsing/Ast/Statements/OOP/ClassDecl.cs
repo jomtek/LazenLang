@@ -1,15 +1,16 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Ast.Expressions.Literals;
 using LazenLang.Parsing.Display;
+using Parsing.Ast;
 using Parsing.Errors;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.OOP
 {
-    public class ClassDecl : Instr, IPrettyPrintable
+    public class ClassDecl : Instr, IPrettyPrintable, ICreatesSingleBlock
     {
         public Identifier Name;
-        public Block Block;
+        public Block Block { get; set; }
 
         public ClassDecl(Identifier name, Block block)
         {

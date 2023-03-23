@@ -1,14 +1,15 @@
 ﻿using LazenLang.Parsing.Display;
+using Parsing.Ast;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Functions
 {
-    public class FuncDecl : Instr, IPrettyPrintable
+    public class FuncDecl : Instr, IPrettyPrintable, ICreatesSingleBlock
     {
         public Signature Signature;
-        public Block Block;
+        public Block Block { get; set; }
 
         public FuncDecl(Signature signature, Block block)
         {

@@ -1,14 +1,15 @@
 ﻿using LazenLang.Lexing;
 using LazenLang.Parsing.Display;
+using Parsing.Ast;
 using Parsing.Errors;
 using System.Text;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
-    public class WhileLoop : Instr, IPrettyPrintable
+    public class WhileLoop : Instr, IPrettyPrintable, ICreatesSingleBlock
     {
         public ExprNode Condition;
-        public Block Block;
+        public Block Block { get; set; }
 
         public WhileLoop(ExprNode condition, Block block)
         {

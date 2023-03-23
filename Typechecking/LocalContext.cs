@@ -1,7 +1,5 @@
 ﻿using LazenLang.Lexing;
-using LazenLang.Parsing.Ast.Types;
 using Parsing.Ast;
-using System;
 using System.Collections.Generic;
 using Typechecking.Errors;
 
@@ -9,19 +7,27 @@ namespace Typechecking
 {
     public class LocalContext
     {
-        private Dictionary<string, TypeDesc> _context;
+        public Dictionary<string, TypeDesc> Context { get; private set; }
 
-        public LocalContext()
+        // For function contexts
+        public TypeDesc CurrentCodomain;
+
+        public LocalContext(bool init = true, TypeDesc currentCodomain = null)
         {
-            _context = new Dictionary<string, TypeDesc>()
+            CurrentCodomain = currentCodomain;
+
+            if (init)
             {
-                // Prelude
-            };
+                Context = new Dictionary<string, TypeDesc>()
+                {
+                    // TODO: Prelude
+                };
+            }
         }
 
         public bool Exists(string name)
         {
-            return _context.ContainsKey(name);
+            return Context.ContainsKey(name);
         }
 
         public void AssertExists(string name, CodePosition pos)
@@ -30,22 +36,34 @@ namespace Typechecking
                 throw new TypeCheckerError(new UnknownName(name), pos);
         }
 
-        public void Add(string name, TypeDesc desc, CodePosition pos)
+        public void Add(string name, TypeDesc desc, CodePosition pos, bool overrideCtx = false)
         {
             if (Exists(name))
             {
-                throw new TypeCheckerError(new NameShadowing(name), pos);
+                if (overrideCtx)
+                    Context[name] = desc;
+                else
+                    throw new TypeCheckerError(new NameShadowing(name), pos);
             }
             else
             {
-                _context.Add(name, desc);
+                Context.Add(name, desc);
             }
         }
 
         // You should assert that the name exists before using this method
         public TypeDesc GetTypeUnsafe(string name)
         {
-            return _context[name];
+            return Context[name];
+        }
+
+        public static LocalContext CopyFrom(LocalContext context)
+        {
+            // No need for a deep copy
+            return new LocalContext(false, context.CurrentCodomain)
+            {
+                Context = new Dictionary<string, TypeDesc>(context.Context)
+            };
         }
     }
 }

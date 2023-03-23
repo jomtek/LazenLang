@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Typechecking
 {
-    public static class TypeComparator
+    internal static class TypeComparator
     {
         // This class compares two TypeDesc instances together
         public static bool Compare(TypeDesc a, TypeDesc b)

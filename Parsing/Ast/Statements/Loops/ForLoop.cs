@@ -6,14 +6,15 @@ using LazenLang.Lexing;
 using LazenLang.Parsing.Display;
 using Parsing.Errors;
 using LazenLang.Parsing.Ast.Statements.Functions;
+using Parsing.Ast;
 
 namespace LazenLang.Parsing.Ast.Statements.Loops
 {
-    public class ForLoop : Instr, IPrettyPrintable
+    public class ForLoop : Instr, IPrettyPrintable, ICreatesSingleBlock
     {
         public Param Id;
         public ExprNode Array;
-        public Block Block;
+        public Block Block { get; set; }
 
         public ForLoop(Param id, ExprNode array, Block block)
         {
